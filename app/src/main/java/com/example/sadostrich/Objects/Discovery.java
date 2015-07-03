@@ -1,8 +1,9 @@
 package com.example.sadostrich.Objects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Class that will be inherited and that represents any one of the user's discoveries
@@ -11,31 +12,26 @@ import java.util.GregorianCalendar;
  */
 public class Discovery {
     private Date date;
-    private String scientificName, commonName, description, story, imageUrl;
+	private String commonName, scientificName, description, story, imageUrl;
+	private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Discovery() {
-        Calendar c = new GregorianCalendar();
-        c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        date = c.getTime();
-
-        scientificName = commonName = description = story = imageUrl = "";
-    }
+		date = getCurrentDate();
+		commonName = scientificName = description = story = imageUrl = "";
+	}
 
     /**
      * Sets the variables according to the parameters
      *
-     * @param date           date
-     * @param scientificName scientific name
-     * @param commonName     common name
+	 * @param commonName     common name
+	 * @param scientificName scientific name
      * @param description    description
      * @param story          story
      * @param imageUrl       image url
-     */
-    public Discovery(Date date, String scientificName, String commonName, String description, String story, String imageUrl) {
-        this.date = date;
-        this.scientificName = scientificName;
+	 */
+	public Discovery(String commonName, String scientificName, String description, String story, String imageUrl) {
+		date = getCurrentDate();
+		this.scientificName = scientificName;
         this.commonName = commonName;
         this.description = description;
         this.story = story;
@@ -43,7 +39,26 @@ public class Discovery {
     }
 
     /**
-     * Returns the date the discovery was made
+	 * Sets the variables according to the parameters
+	 *
+	 * @param date           date
+	 * @param commonName     common name
+	 * @param scientificName scientific name
+	 * @param description    description
+	 * @param story          story
+	 * @param imageUrl       image url
+	 */
+	public Discovery(Date date, String commonName, String scientificName, String description, String story, String imageUrl) {
+		this.date = date;
+		this.scientificName = scientificName;
+		this.commonName = commonName;
+		this.description = description;
+		this.story = story;
+		this.imageUrl = imageUrl;
+	}
+
+	/**
+	 * Returns the date the discovery was made
      *
      * @return date
      */
@@ -59,6 +74,15 @@ public class Discovery {
     public void setDate(Date date) {
         this.date = date;
     }
+
+	public String getDateAsString() {
+		return dateFormat.format(date);
+	}
+
+	public Date getCurrentDate() {
+		Calendar cal = Calendar.getInstance();
+		return cal.getTime(); //2014/08/06 16:00:22
+	}
 
     /**
      * Returns the discovery's scientific name

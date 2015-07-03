@@ -2,6 +2,7 @@
 <resources>
 
     <style name="AppTheme" parent="android:Theme.Material">
+        <item name="android:colorBackground">@android:color/black</item>
         <!-- Main theme colors -->
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
