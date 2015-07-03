@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2">
+
+    <item
+        jar="/Users/jacewardell/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false" revision="23.0.0 rc2" sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-bf1460efd913a31a6b0c6717056fc9b2ea9e8ca3.jar" />
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.2.0/jars/classes.jar"
+        jumboMode="false" revision="23.0.0 rc2" sha1="9aa93835393824b436f366120c9ba8a0260ce75d">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/pre-dexed/debug/classes-d54cc0b4097f0aa46fcbfd1a7b77ae0fa8d7de60.jar" />
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false" revision="23.0.0 rc2" sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-2e4301777d1a9d02b5fe0f3dcc056c4e73e0888f.jar" />
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false" revision="23.0.0 rc2" sha1="79a5b6d9fbab3b5fb4c6f86a1ed7a17722fd937b">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-921f73dc72c4e856468be564aba0a7eefb5133c5.jar" />
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false" revision="23.0.0 rc2" sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMan&apos;sSkyJournal/app/build/intermediates/pre-dexed/debug/classes-ba4a70e0ea2b77169466267407d2c8698387f80f.jar" />
+    </item>
+
+</items>
