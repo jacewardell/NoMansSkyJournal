@@ -11,11 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sadostrich.Data.DiscoveryRecyclerAdapter;
-import com.example.sadostrich.Objects.Discovery;
+import com.example.sadostrich.Models.Planet;
 import com.example.sadostrich.nomansskyjournal.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +28,8 @@ public class PlanetFragment extends Fragment {
 	private RecyclerView recyclerView;
 	private DiscoveryRecyclerAdapter discoveryRecyclerAdapter;
 	private LinearLayoutManager layoutManager;
+    private static final String EXTRA = "planet_fragment_extra";
+    private ArrayList<Planet> allPlanets;
 
 	private OnFragmentInteractionListener mListener;
 
@@ -38,10 +39,13 @@ public class PlanetFragment extends Fragment {
 	 *
 	 * @return A new instance of fragment PlanetFragment.
 	 */
-	public static PlanetFragment newInstance() {
-		PlanetFragment fragment = new PlanetFragment();
-		return fragment;
-	}
+    public static PlanetFragment newInstance(ArrayList<Planet> planets) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA, planets);
+        PlanetFragment planetFragment = new PlanetFragment();
+        planetFragment.setArguments(bundle);
+        return planetFragment;
+    }
 
 	public PlanetFragment() {
 		// Required empty public constructor
@@ -50,7 +54,12 @@ public class PlanetFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	}
+
+        allPlanets = (ArrayList<Planet>) getArguments().getSerializable(getString(R.string.planet_fragment_extra));
+        if (allPlanets == null) {
+            allPlanets = new ArrayList<>();
+        }
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,16 +71,16 @@ public class PlanetFragment extends Fragment {
 		layoutManager = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(layoutManager);
 
-		List<Discovery> discoveries = new ArrayList<Discovery>();
-		discoveries.add(new Discovery("Common NameCommon NameCommon NameCommon NameCommon NameCommon NameCommon Name", "Scientific Name", "Green and" +
-				"red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red" +
-				"lizardGreen and red lizardGreen and red lizardGreen and red lizard", "I was walking on planet and found animal", "image"));
-		discoveries.add(new Discovery("Common Name2", "Scientific Name2", "Green and red lizard2", "I was walking on planet and found animal2", "image2"));
-		discoveries.add(new Discovery("Common Name3", "Scientific Name3", "Green and red lizard3", "I was walking on planet and found animal3", "image3"));
-		discoveries.add(new Discovery("Common Name4", "Scientific Name4", "Green and red lizard4", "I was walking on planet and found animal4", "image4"));
+//		List<Discovery> discoveries = new ArrayList<Discovery>();
+//		discoveries.add(new Discovery("Common NameCommon NameCommon NameCommon NameCommon NameCommon NameCommon Name", "Scientific Name", "Green and" +
+//				"red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red" +
+//				"lizardGreen and red lizardGreen and red lizardGreen and red lizard", "I was walking on planet and found animal", "image"));
+//		discoveries.add(new Discovery("Common Name2", "Scientific Name2", "Green and red lizard2", "I was walking on planet and found animal2", "image2"));
+//		discoveries.add(new Discovery("Common Name3", "Scientific Name3", "Green and red lizard3", "I was walking on planet and found animal3", "image3"));
+//		discoveries.add(new Discovery("Common Name4", "Scientific Name4", "Green and red lizard4", "I was walking on planet and found animal4", "image4"));
 
-		discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(discoveries);
-		recyclerView.setAdapter(discoveryRecyclerAdapter);
+        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(allPlanets);
+        recyclerView.setAdapter(discoveryRecyclerAdapter);
 
 		return rootView;
 	}
@@ -99,8 +108,14 @@ public class PlanetFragment extends Fragment {
 		mListener = null;
 	}
 
-	/**
-	 * This interface must be implemented by activities that contain this
+    public void updateDataSet(ArrayList<Planet> allPlanets) {
+        this.allPlanets = allPlanets;
+        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(allPlanets);
+        recyclerView.setAdapter(discoveryRecyclerAdapter);
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
 	 * fragment to allow an interaction in this fragment to be communicated
 	 * to the activity and potentially other fragments contained in that
 	 * activity.

@@ -1,4 +1,4 @@
-package com.example.sadostrich.Objects;
+package com.example.sadostrich.Models;
 
 import java.util.Date;
 
@@ -20,15 +20,15 @@ public class Plant extends Discovery {
      * Creates a Planet using the parameters
      *
      * @param date           date
-     * @param scientificName scientific name
      * @param commonName     common name
+     * @param scientificName scientific name
      * @param description    description
      * @param story          story
      * @param imageUrl       image url
      * @param planetName     planet name
      */
-    public Plant(Date date, String scientificName, String commonName, String description, String story, String imageUrl, String planetName) {
-        super(date, scientificName, commonName, description, story, imageUrl);
+    public Plant(Date date, String commonName, String scientificName, String description, String story, String imageUrl, String planetName) {
+        super(date, commonName, scientificName, description, story, imageUrl);
         this.planetName = planetName;
     }
 

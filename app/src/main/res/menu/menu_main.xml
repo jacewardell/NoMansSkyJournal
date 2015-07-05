@@ -6,4 +6,25 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add"
+        android:orderInCategory="0"
+        android:title="@string/add"
+        android:icon="@drawable/plus"
+        android:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/action_add_planet"
+                android:title="@string/add_planet"/>
+            <item
+                android:id="@+id/action_add_animal"
+                android:title="@string/add_animal"/>
+            <item
+                android:id="@+id/action_add_plant"
+                android:title="@string/add_plant"/>
+
+        </menu>
+    </item>
 </menu>

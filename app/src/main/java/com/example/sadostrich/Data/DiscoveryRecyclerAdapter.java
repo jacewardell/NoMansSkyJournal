@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sadostrich.Objects.Discovery;
+import com.example.sadostrich.Models.Discovery;
 import com.example.sadostrich.nomansskyjournal.R;
 
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.List;
 public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecyclerAdapter.DiscoveryViewHolder> {
 	private List<Discovery> discoveries;
 
-	public DiscoveryRecyclerAdapter(List<Discovery> discoveries) {
-		this.discoveries = discoveries;
-	}
+    public DiscoveryRecyclerAdapter(List<?> discoveries) {
+        this.discoveries = (List<Discovery>) discoveries;
+    }
 
 	public static class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 		CardView cardView;
@@ -50,8 +50,8 @@ public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecy
 	@Override
 	public void onBindViewHolder(DiscoveryViewHolder discoveryViewHolder, int position) {
 //		discoveryViewHolder.date.setText(discoveries.get(position).getCommonName());
-		discoveryViewHolder.date.setText(discoveries.get(position).getDateAsString());
-		discoveryViewHolder.commonName.setText(discoveries.get(position).getCommonName());
+        discoveryViewHolder.date.setText(discoveries.get(position).getDate());
+        discoveryViewHolder.commonName.setText(discoveries.get(position).getCommonName());
 		discoveryViewHolder.scientificName.setText(discoveries.get(position).getScientificName());
 		discoveryViewHolder.description.setText(discoveries.get(position).getDescription());
 	}
