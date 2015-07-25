@@ -1,8 +1,8 @@
 package com.example.sadostrich.Models;
 
+import com.example.sadostrich.Utils.Formatter;
+
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,7 +13,6 @@ import java.util.Date;
  */
 public class Discovery implements Serializable {
     private String date, commonName, scientificName, description, story, imageUrl;
-    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Discovery() {
 		date = getCurrentDate();
@@ -68,7 +67,7 @@ public class Discovery implements Serializable {
      * @param imageUrl       image url
      */
     public Discovery(Date date, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.date = dateFormat.format(date);
+        this.date = Formatter.dateFormat.format(date);
         this.commonName = commonName;
         this.scientificName = scientificName;
         this.description = description;
@@ -96,7 +95,7 @@ public class Discovery implements Serializable {
 
     public String getCurrentDate() {
         Calendar cal = Calendar.getInstance();
-        return dateFormat.format(cal.getTime());
+        return Formatter.dateFormat.format(cal.getTime());
     }
 
     /**

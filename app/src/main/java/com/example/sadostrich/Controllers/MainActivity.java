@@ -26,6 +26,8 @@ import com.example.sadostrich.nomansskyjournal.R;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends Activity implements PlanetFragment.OnFragmentInteractionListener, AnimalFragment.OnFragmentInteractionListener, PlantFragment.OnFragmentInteractionListener {
@@ -100,8 +102,13 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
             actionBar.addTab(actionBar.newTab().setText(sectionsPagerAdapter.getPageTitle(i)).setTabListener(tabListener));
         }
 
-        // Load database planets
-        new ReadPlanetDiscoveriesAsyncTask().execute();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Load database planets
+                new ReadPlanetDiscoveriesAsyncTask().execute();
+            }
+        }, 1000);
     }
 
     @Override
@@ -214,7 +221,7 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
             // Gets the data repository in write mode
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-            // Define a projection that specifies which columns from teh database youw ill actually use after this query
+            // Define a projection that specifies which columns from the database you will actually use after this query
             String[] projection = {DiscoveriesContract.PlanetsTable._ID, DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_DATE, DiscoveriesContract
                     .PlanetsTable.COLUMN_NAME_PLANET_COMMON_NAME, DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_SCIENTIFIC_NAME, DiscoveriesContract
                     .PlanetsTable.COLUMN_NAME_PLANET_DESCRIPTION, DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_STORY, DiscoveriesContract
@@ -226,6 +233,7 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
 
             Cursor cursor = db.query(DiscoveriesContract.PlanetsTable.PLANET_TABLE_NAME, projection, null, null, null, null, sortOrder);
 
+            // Iterate through all the results and create each  planet accordingly
             while (cursor.moveToNext()) {
                 allPlanets.add(new Planet(cursor.getString(cursor.getColumnIndexOrThrow(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_DATE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_COMMON_NAME)), cursor
@@ -238,6 +246,10 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
                         )));
             }
             cursor.close();
+
+//            for(Planet planet : allPlanets) {
+//                Log.d("MainActivity", planet.getImageUrl());
+//            }
 
             return allPlanets;
         }

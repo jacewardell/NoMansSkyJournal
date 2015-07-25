@@ -2,20 +2,12 @@
 <items version="2">
 
     <item
-        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars/classes.jar"
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.0 rc2"
-        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
         <dex
-            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-56ab2b7fa4735879ed2ddc41e5e726e09ac1da31.jar"/>
-    </item>
-    <item
-        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0 rc2"
-        sha1="9aa93835393824b436f366120c9ba8a0260ce75d">
-        <dex
-            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-0075da3137da102df9a3895981a88417bc195ee1.jar"/>
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-982ff88eea3002fb8d6316c924e603535b5a482d.jar"/>
     </item>
     <item
         jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
@@ -26,28 +18,12 @@
             dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-802b03c73f671011b7188ebbf750fbcdc7eb75ab.jar"/>
     </item>
     <item
-        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars/classes.jar"
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.0 rc2"
-        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
+        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
         <dex
-            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-bf3a0005f2efe5372e6535db566902be2322f2ca.jar"/>
-    </item>
-    <item
-        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.0 rc2"
-        sha1="79a5b6d9fbab3b5fb4c6f86a1ed7a17722fd937b">
-        <dex
-            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-2363cfdf1797fea7a907a1dd808c6ece32cf175e.jar"/>
-    </item>
-    <item
-        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0 rc2"
-        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
-        <dex
-            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-d5bc67382da1114b7a1985191d7284e4cac85f4b.jar"/>
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-56ab2b7fa4735879ed2ddc41e5e726e09ac1da31.jar"/>
     </item>
     <item
         jar="/Users/jacewardell/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
@@ -58,6 +34,22 @@
             dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-bf1460efd913a31a6b0c6717056fc9b2ea9e8ca3.jar"/>
     </item>
     <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-bf3a0005f2efe5372e6535db566902be2322f2ca.jar"/>
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="9aa93835393824b436f366120c9ba8a0260ce75d">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-0075da3137da102df9a3895981a88417bc195ee1.jar"/>
+    </item>
+    <item
         jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.0 rc2"
@@ -66,12 +58,28 @@
             dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-8a5d8d571ab0c9fcf4b5f7c6ec668aaecdbe6f44.jar"/>
     </item>
     <item
-        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.0 rc2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
         <dex
-            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-982ff88eea3002fb8d6316c924e603535b5a482d.jar"/>
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/classes-d5bc67382da1114b7a1985191d7284e4cac85f4b.jar"/>
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/libs/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-c6cc47a3f9381289bb35b045b730bbbfc81e949d.jar"/>
+    </item>
+    <item
+        jar="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="79a5b6d9fbab3b5fb4c6f86a1ed7a17722fd937b">
+        <dex
+            dex="/Users/jacewardell/Dropbox/Projects/AndroidStudioProjects/NoMansSkyJournal/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-2363cfdf1797fea7a907a1dd808c6ece32cf175e.jar"/>
     </item>
 
 </items>

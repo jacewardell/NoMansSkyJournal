@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -71,16 +72,28 @@ public class PlanetFragment extends Fragment {
 		layoutManager = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(layoutManager);
 
-//		List<Discovery> discoveries = new ArrayList<Discovery>();
-//		discoveries.add(new Discovery("Common NameCommon NameCommon NameCommon NameCommon NameCommon NameCommon Name", "Scientific Name", "Green and" +
-//				"red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red lizardGreen and red" +
-//				"lizardGreen and red lizardGreen and red lizardGreen and red lizard", "I was walking on planet and found animal", "image"));
-//		discoveries.add(new Discovery("Common Name2", "Scientific Name2", "Green and red lizard2", "I was walking on planet and found animal2", "image2"));
-//		discoveries.add(new Discovery("Common Name3", "Scientific Name3", "Green and red lizard3", "I was walking on planet and found animal3", "image3"));
-//		discoveries.add(new Discovery("Common Name4", "Scientific Name4", "Green and red lizard4", "I was walking on planet and found animal4", "image4"));
-
-        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(allPlanets);
+        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(getActivity(), allPlanets);
         recyclerView.setAdapter(discoveryRecyclerAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
 		return rootView;
 	}
@@ -110,7 +123,7 @@ public class PlanetFragment extends Fragment {
 
     public void updateDataSet(ArrayList<Planet> allPlanets) {
         this.allPlanets = allPlanets;
-        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(allPlanets);
+        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(getActivity(), allPlanets);
         recyclerView.setAdapter(discoveryRecyclerAdapter);
     }
 

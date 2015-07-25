@@ -1,5 +1,7 @@
 package com.example.sadostrich.Data;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.sadostrich.Models.Discovery;
 import com.example.sadostrich.nomansskyjournal.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,37 +22,61 @@ import java.util.List;
  * Created by jacewardell on 7/3/15.
  */
 public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecyclerAdapter.DiscoveryViewHolder> {
-	private List<Discovery> discoveries;
+    private Context context;
+    private List<Discovery> discoveries;
 
-    public DiscoveryRecyclerAdapter(List<?> discoveries) {
+    public DiscoveryRecyclerAdapter(Context context, List<?> discoveries) {
+        this.context = context;
         this.discoveries = (List<Discovery>) discoveries;
     }
 
-	public static class DiscoveryViewHolder extends RecyclerView.ViewHolder {
-		CardView cardView;
+    public static class DiscoveryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        CardView cardView;
 		ImageView image;
 		TextView date, commonName, scientificName, description;
 
-		public DiscoveryViewHolder(View itemView) {
-			super(itemView);
+        public DiscoverySelectedListener discoverySelectedListener;
+
+        public DiscoveryViewHolder(View itemView, DiscoverySelectedListener discoverySelectedListener) {
+            super(itemView);
 			cardView = (CardView) itemView.findViewById(R.id.card_cardview);
 			image = (ImageView) itemView.findViewById(R.id.card_image);
 			date = (TextView) itemView.findViewById(R.id.card_date);
 			commonName = (TextView) itemView.findViewById(R.id.card_common_name);
 			scientificName = (TextView) itemView.findViewById(R.id.card_scientific_name);
 			description = (TextView) itemView.findViewById(R.id.card_description);
-		}
-	}
+
+            this.discoverySelectedListener = discoverySelectedListener;
+            cardView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            discoverySelectedListener.discoverySelected(v, getLayoutPosition());
+        }
+
+        public static interface DiscoverySelectedListener {
+            public void discoverySelected(View caller, int position);
+        }
+    }
 
 	@Override
 	public DiscoveryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.discovery_card, parent, false);
-		return new DiscoveryViewHolder(v);
-	}
+        final DiscoveryViewHolder viewHolder = new DiscoveryViewHolder(v, new DiscoveryViewHolder.DiscoverySelectedListener() {
+            @Override
+            public void discoverySelected(View caller, int position) {
+
+            }
+        });
+
+        return viewHolder;
+    }
 
 	@Override
 	public void onBindViewHolder(DiscoveryViewHolder discoveryViewHolder, int position) {
-//		discoveryViewHolder.date.setText(discoveries.get(position).getCommonName());
+        Picasso.with(context).load(Uri.parse(discoveries.get(position).getImageUrl())).resize(80, 80).placeholder(R.mipmap.add_image).into
+                (discoveryViewHolder.image);
         discoveryViewHolder.date.setText(discoveries.get(position).getDate());
         discoveryViewHolder.commonName.setText(discoveries.get(position).getCommonName());
 		discoveryViewHolder.scientificName.setText(discoveries.get(position).getScientificName());

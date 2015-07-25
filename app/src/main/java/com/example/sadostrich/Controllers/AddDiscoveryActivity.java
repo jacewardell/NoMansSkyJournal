@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -29,6 +28,8 @@ import com.example.sadostrich.nomansskyjournal.R;
 public class AddDiscoveryActivity extends FragmentActivity {
     private Enums.DiscoveryType discoveryType = Enums.DiscoveryType.PLANET;
     private Fragment fragmentToShow = null;
+
+    private boolean editing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,9 @@ public class AddDiscoveryActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Used to insert a new discovery into the phone's database
+     */
     public class InsertNewDiscoveryAsyncTask extends AsyncTask<Discovery, Void, Boolean> {
 
         @Override
@@ -134,7 +138,6 @@ public class AddDiscoveryActivity extends FragmentActivity {
             }
 
             if (newRowId != -1) {
-                Log.d("DiscoveriesContract", "" + newRowId);
                 return true;
             }
             return false;

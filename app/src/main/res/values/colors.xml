@@ -3,12 +3,14 @@
     <!-- Theme colors-->
     <color name="primary">#D32F2F</color>
     <color name="primary_dark">#B71C1C</color>
-    <color name="accent">#00E5FF</color>
-    <color name="accent_light">#18FFFF</color>
-    <color name="accent_dark">#00B8D4</color>
-    <color name="card_background">#2B2B2B</color>
-    <!--<color name="background">#303030</color>-->
-    <!--<color name="card_background">#424242</color>-->
+    <color name="accent">#64FFDA</color>
+    <color name="accent_light">#A7FFEB</color>
+    <color name="accent_dark">#1DE9B6</color>
+    <!--<color name="card_background">#2B2B2B</color>-->
+    <color name="background">#303030</color>
+    <color name="card_background">#424242</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="dropdown">#605f61</color>
 </resources>
