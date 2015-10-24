@@ -1,5 +1,6 @@
 package com.example.sadostrich.Data;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sadostrich.Models.Discovery;
+import com.example.sadostrich.Utils.MiscUtil;
 import com.example.sadostrich.nomansskyjournal.R;
 import com.squareup.picasso.Picasso;
 
@@ -25,9 +27,13 @@ public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecy
     private Context context;
     private List<Discovery> discoveries;
 
-    public DiscoveryRecyclerAdapter(Context context, List<?> discoveries) {
+    DiscoverySelectedCallback discoverySelectedCallback;
+
+    public DiscoveryRecyclerAdapter(Activity context, List<?> discoveries) {
         this.context = context;
         this.discoveries = (List<Discovery>) discoveries;
+
+        discoverySelectedCallback = (DiscoverySelectedCallback) context;
     }
 
     public static class DiscoveryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -66,7 +72,7 @@ public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecy
         final DiscoveryViewHolder viewHolder = new DiscoveryViewHolder(v, new DiscoveryViewHolder.DiscoverySelectedListener() {
             @Override
             public void discoverySelected(View caller, int position) {
-
+                discoverySelectedCallback.discoverySelected(discoveries.get(position));
             }
         });
 
@@ -75,8 +81,15 @@ public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecy
 
 	@Override
 	public void onBindViewHolder(DiscoveryViewHolder discoveryViewHolder, int position) {
-        Picasso.with(context).load(Uri.parse(discoveries.get(position).getImageUrl())).resize(80, 80).placeholder(R.mipmap.add_image).into
-                (discoveryViewHolder.image);
+
+        Uri imageUri = MiscUtil.getImageUri(discoveries.get(position).getImageUrl());
+        if(imageUri != null) {
+            Picasso.with(context).load(imageUri).resize(80, 80).placeholder(R.mipmap.add_image).into
+                    (discoveryViewHolder.image);
+        } else {
+            Picasso.with(context).load(R.mipmap.add_image).resize(80, 80).into(discoveryViewHolder.image);
+        }
+
         discoveryViewHolder.date.setText(discoveries.get(position).getDate());
         discoveryViewHolder.commonName.setText(discoveries.get(position).getCommonName());
 		discoveryViewHolder.scientificName.setText(discoveries.get(position).getScientificName());
@@ -87,4 +100,8 @@ public class DiscoveryRecyclerAdapter extends RecyclerView.Adapter<DiscoveryRecy
 	public int getItemCount() {
 		return discoveries.size();
 	}
+
+    public interface DiscoverySelectedCallback {
+        public void discoverySelected(Discovery discovery);
+    }
 }

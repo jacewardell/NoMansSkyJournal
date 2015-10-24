@@ -26,7 +26,7 @@
     <string name="plant_fragment_extra">plant_fragment_extra</string>
 
     <string name="add">Add</string>
-    <!--<string name="title_activity_add_discovery">AddDiscoveryActivity</string>-->
+    <!--<string name="title_activity_add_discovery">DiscoveryActivity</string>-->
     <string name="title_activity_add_discovery">Add Planet</string>
 
     <!-- Hints-->
@@ -39,7 +39,9 @@
     <string name="title_activity_new">NewActivity</string>
 
     <!-- Intent names-->
-    <string name="add_discovery_type">add_discovery_type</string>
+    <string name="discovery_type">discovery_type</string>
+    <string name="discovery_add">discovery_add</string>
+    <string name="discovery">discovery</string>
 
     <!-- Fragmnet tags-->
     <string name="add_planet_fragment_tag">add_planet_fragment_tag</string>

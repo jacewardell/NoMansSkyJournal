@@ -54,7 +54,7 @@ public class Planet extends Discovery implements Serializable {
         super(addPlanetFragment.getDate(), addPlanetFragment.getCommonNameText(), addPlanetFragment.getScientificNameText(), addPlanetFragment.getDescriptionText(),
                 addPlanetFragment.getStoryText(), addPlanetFragment.getImageUrl());
         this.solarSystemName = addPlanetFragment.getSolarSystemNameText();
-        this.size = addPlanetFragment.getSizeSpinnerSelection();
+        this.size = addPlanetFragment.getSize();
         animals = new ArrayList<>();
         plants = new ArrayList<>();
     }

@@ -13,13 +13,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sadostrich.Data.DiscoveryRecyclerAdapter;
 import com.example.sadostrich.Fragments.AnimalFragment;
 import com.example.sadostrich.Fragments.PlanetFragment;
 import com.example.sadostrich.Fragments.PlantFragment;
+import com.example.sadostrich.Models.Animal;
 import com.example.sadostrich.Models.DiscoveriesContract;
+import com.example.sadostrich.Models.Discovery;
 import com.example.sadostrich.Models.Planet;
 import com.example.sadostrich.Utils.Enums;
 import com.example.sadostrich.nomansskyjournal.R;
@@ -30,7 +34,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class MainActivity extends Activity implements PlanetFragment.OnFragmentInteractionListener, AnimalFragment.OnFragmentInteractionListener, PlantFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements DiscoveryRecyclerAdapter.DiscoverySelectedCallback {
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -41,7 +45,7 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
      */
     SectionsPagerAdapter sectionsPagerAdapter;
 
-    /**
+    /**c
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager viewPager;
@@ -125,17 +129,20 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
+        Intent intent = new Intent(MainActivity.this, DiscoveryActivity.class);
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_add_planet) {
-            intent.putExtra(getString(R.string.add_discovery_type), Enums.DiscoveryType.PLANET);
+            intent.putExtra(getString(R.string.discovery_type), Enums.DiscoveryType.PLANET);
+            intent.putExtra(getString(R.string.discovery_add), true);
             startActivityForResult(intent, Enums.DiscoveryType.PLANET.ordinal());
         } else if (id == R.id.action_add_animal) {
-            intent.putExtra(getString(R.string.add_discovery_type), Enums.DiscoveryType.ANIMAL);
+            intent.putExtra(getString(R.string.discovery_type), Enums.DiscoveryType.ANIMAL);
+            intent.putExtra(getString(R.string.discovery_add), true);
             startActivityForResult(intent, Enums.DiscoveryType.ANIMAL.ordinal());
         } else if (id == R.id.action_add_plant) {
-            intent.putExtra(getString(R.string.add_discovery_type), Enums.DiscoveryType.PLANT);
+            intent.putExtra(getString(R.string.discovery_type), Enums.DiscoveryType.PLANT);
+            intent.putExtra(getString(R.string.discovery_add), true);
             startActivityForResult(intent, Enums.DiscoveryType.PLANT.ordinal());
         }
 
@@ -156,9 +163,24 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
         viewPager.setCurrentItem(requestCode);
     }
 
+    /**
+     * Callback that displays a discovery for the user to view
+     * @param discovery selected discovery
+     */
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void discoverySelected(Discovery discovery) {
+        Intent intent = new Intent(MainActivity.this, DiscoveryActivity.class);
 
+        if(discovery instanceof Planet) {
+            intent.putExtra(getString(R.string.discovery_type), Enums.DiscoveryType.PLANET);
+        } else if(discovery instanceof Animal) {
+            intent.putExtra(getString(R.string.discovery_type), Enums.DiscoveryType.ANIMAL);
+        } else {
+            intent.putExtra(getString(R.string.discovery_type), Enums.DiscoveryType.PLANT);
+        }
+        intent.putExtra(getString(R.string.discovery_add), false);
+        intent.putExtra(getString(R.string.discovery), discovery);
+        startActivity(intent);
     }
 
     /**
@@ -247,9 +269,9 @@ public class MainActivity extends Activity implements PlanetFragment.OnFragmentI
             }
             cursor.close();
 
-//            for(Planet planet : allPlanets) {
-//                Log.d("MainActivity", planet.getImageUrl());
-//            }
+            for(Planet planet : allPlanets) {
+                Log.d("MainActivity", "Image: " + planet.getImageUrl());
+            }
 
             return allPlanets;
         }

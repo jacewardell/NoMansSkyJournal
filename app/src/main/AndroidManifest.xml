@@ -17,9 +17,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.sadostrich.Controllers.AddDiscoveryActivity"
+            android:name="com.example.sadostrich.Controllers.DiscoveryActivity"
             android:label="@string/title_activity_add_discovery">
         </activity>
     </application>
 
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
 </manifest>

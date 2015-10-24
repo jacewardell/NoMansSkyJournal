@@ -5,7 +5,7 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                tools:context="com.example.sadostrich.Controllers.AddDiscoveryActivity"
+                tools:context="com.example.sadostrich.Controllers.DiscoveryActivity"
                 android:paddingTop="@dimen/activity_vertical_margin">
 
     <ImageView
@@ -16,15 +16,15 @@
         android:layout_alignTop="@+id/planet_date_button"
         android:layout_marginRight="5dp"
         android:src="@mipmap/add_image"
-        android:scaleType="center"/>
+        android:scaleType="centerCrop"/>
 
     <Button
         android:id="@+id/planet_date_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/planet_common_name_field"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/planet_common_name_field"/>
+        android:layout_alignStart="@+id/planet_common_name_field"
+        android:layout_toStartOf="@+id/planet_size_button"/>
 
     <EditText
         android:id="@+id/planet_common_name_field"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/planet_scientific_name_field"
+        android:layout_below="@+id/planet_solar_system_name_field"
         android:ems="10"
         android:hint="@string/description"
         android:inputType="textMultiLine"
@@ -77,18 +77,15 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/planet_story_field"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/planet_story_field"
+        android:layout_below="@+id/planet_scientific_name_field"
         android:hint="@string/solar_system_name"
         android:maxLines="2"/>
 
-    <Spinner
-        android:id="@+id/planet_size_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/planet_solar_system_name_field"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:spinnerMode="dialog"
-        android:background="@color/dropdown"/>
+    <Button
+        android:id="@+id/planet_size_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/planet_common_name_field"
+        android:layout_alignEnd="@+id/planet_common_name_field"/>
 
 </RelativeLayout>

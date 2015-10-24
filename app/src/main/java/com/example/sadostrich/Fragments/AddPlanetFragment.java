@@ -1,22 +1,23 @@
 package com.example.sadostrich.Fragments;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sadostrich.Utils.Enums;
 import com.example.sadostrich.Utils.Formatter;
+import com.example.sadostrich.Utils.MiscUtil;
 import com.example.sadostrich.nomansskyjournal.R;
 import com.squareup.picasso.Picasso;
 
@@ -28,9 +29,9 @@ import java.util.Date;
  */
 public class AddPlanetFragment extends Fragment {
     private ImageView imageView;
-    private Button selectDateButton;
+    private Button selectDateButton, sizeButton;
     private TextView commonNameTextView, scientificNameTextView, descriptionTextView, storyTextView, solarSystemNameTextView;
-    private Spinner sizeSpinner;
+//    private Spinner sizeSpinner;
 
     private static final int SELECT_IMAGE = 1;
 
@@ -68,6 +69,24 @@ public class AddPlanetFragment extends Fragment {
             }
         });
 
+        sizeButton = (Button) rootView.findViewById(R.id.planet_size_button);
+        sizeButton.setText("MEDIUM");
+        sizeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+                b.setTitle("Select Size");
+                final String[] types = Enums.PlanetSize.toStringArray();
+                b.setItems(types, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sizeButton.setText(types[which]);
+                    }
+                });
+                b.create().show();
+            }
+        });
+
         // Create the imageview and allow the user to choose an image from their gallery when touched
         imageView = (ImageView) rootView.findViewById(R.id.planet_imageview);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +104,8 @@ public class AddPlanetFragment extends Fragment {
         descriptionTextView = (TextView) rootView.findViewById(R.id.planet_description_field);
         storyTextView = (TextView) rootView.findViewById(R.id.planet_story_field);
         solarSystemNameTextView = (TextView) rootView.findViewById(R.id.planet_solar_system_name_field);
-        sizeSpinner = (Spinner) rootView.findViewById(R.id.planet_size_spinner);
-        sizeSpinner.setAdapter(new ArrayAdapter<Enums.PlanetSize>(getActivity(), android.R.layout.simple_spinner_item, Enums.PlanetSize.values()));
+//        sizeSpinner = (Spinner) rootView.findViewById(R.id.planet_size_spinner);
+//        sizeSpinner.setAdapter(new ArrayAdapter<Enums.PlanetSize>(getActivity(), android.R.layout.simple_spinner_item, Enums.PlanetSize.values()));
 
         return rootView;
     }
@@ -130,7 +149,7 @@ public class AddPlanetFragment extends Fragment {
         return solarSystemNameTextView.getText().toString();
     }
 
-    public Enums.PlanetSize getSizeSpinnerSelection() {
-        return (Enums.PlanetSize) sizeSpinner.getSelectedItem();
+    public Enums.PlanetSize getSize() {
+        return Enums.PlanetSize.getByFriendlyName(sizeButton.getText().toString());
     }
 }
