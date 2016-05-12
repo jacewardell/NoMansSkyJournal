@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme colors-->
     <color name="primary">#D32F2F</color>
     <color name="primary_dark">#B71C1C</color>
-    <color name="accent">#64FFDA</color>
-    <color name="accent_light">#A7FFEB</color>
-    <color name="accent_dark">#1DE9B6</color>
-    <!--<color name="card_background">#2B2B2B</color>-->
-    <color name="background">#303030</color>
-    <color name="card_background">#424242</color>
-
-    <color name="black_overlay">#66000000</color>
-
-    <color name="dropdown">#605f61</color>
+    <color name="primary_light">#FFCDD2</color>
+    <color name="text_icons">#FFFFFF</color>
+    <color name="accent">#009688</color>
+    <color name="primary_text">#212121</color>
+    <color name="seconday_text">#727272</color>
+    <color name="divider">#B6B6B6</color>
 </resources>
