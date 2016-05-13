@@ -1,5 +1,6 @@
 package com.sadostrich.nomansskyjournal.Activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -8,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -48,12 +51,14 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
      */
     private ViewPager mViewPager;
     private boolean fabExpanded = false;
+    private DrawerLayout mDrawerLayout;
     private FloatingActionButton mainFab;
     private FloatingActionButton planetFab;
     private FloatingActionButton animalFab;
     private FloatingActionButton plantFab;
-    private Toolbar toolbar;
-    private BottomTabsView bottomTabsView;
+    private Toolbar mToolbar;
+    private ActionBarDrawerToggle mDrawerToggle;
+//    private BottomTabsView bottomTabsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
 
         getViewRefs();
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -75,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
         tabLayout.setupWithViewPager(mViewPager);
 
         setupFabs();
-        setupBottomTabs();
+        setupDrawerLayout();
+//        setupBottomTabs();
 
         retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -95,11 +101,42 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
         });
     }
 
+    private void setupDrawerLayout() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                mToolbar,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
     private void getViewRefs() {
         mViewPager = (ViewPager) findViewById(R.id.container);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        bottomTabsView = (BottomTabsView) findViewById(R.id.bottom_tabs_view);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        bottomTabsView = (BottomTabsView) findViewById(R.id.bottom_tabs_view);
 
         mainFab = (FloatingActionButton) findViewById(R.id.fab);
         planetFab = (FloatingActionButton) findViewById(R.id.planet_fab);
@@ -126,8 +163,21 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
         }
     }
 
-    private void setupBottomTabs() {
-        bottomTabsView.setTabSelectedListener(this);
+//    private void setupBottomTabs() {
+//        bottomTabsView.setTabSelectedListener(this);
+//    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override

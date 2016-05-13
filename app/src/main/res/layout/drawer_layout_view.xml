@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/cardview_light_background">
+
+    <TextView
+        android:id="@+id/drawer_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
+        android:layout_marginBottom="@dimen/d16"
+        android:layout_marginRight="@dimen/d16"
+        android:layout_marginTop="@dimen/d16"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d.5"
+        android:layout_below="@+id/drawer_username"
+        android:layout_centerHorizontal="true"
+        android:background="@color/divider">
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/drawer_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameLayout"
+        android:layout_centerHorizontal="true"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="0dp"/>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d.5"
+        android:layout_below="@+id/drawer_listview"
+        android:layout_centerHorizontal="true"
+        android:background="@color/divider"/>
+</RelativeLayout>

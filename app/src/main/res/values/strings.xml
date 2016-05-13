@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">No Man\'s Sky Journal</string>
+    <string name="app_name">NMS Origins</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
@@ -25,6 +25,10 @@
     <string name="empty_discovery_placeholder">It looks like you haven\'t logged any
         {discoveries} yet. Click the bottom right button to begin your journey!</string>
     <string name="title_activity_login">Sign in</string>
+
+    <!-- Content Descriptions -->
+    <string name="drawer_open">open drawer</string>
+    <string name="drawer_close">close drawer</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

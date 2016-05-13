@@ -6,6 +6,7 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <!-- All sizes -->
+    <dimen name="d.5">0.5dp</dimen>
     <dimen name="d1">1dp</dimen>
     <dimen name="d2">2dp</dimen>
     <dimen name="d4">4dp</dimen>
