@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * <p>
  * Created by jacewardell on 5/8/16.
  */
-public class User {
+public class User implements Serializable {
     @SerializedName("_id")
     private String id;
     private String username, email;

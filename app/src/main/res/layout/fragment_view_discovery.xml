@@ -66,7 +66,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <TextView
-            android:id="@+id/view_discovery_discovery_story"
+            android:id="@+id/view_discovery_story"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/view_discovery_description"
@@ -79,7 +79,7 @@
             android:id="@+id/view_discovery_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/view_discovery_discovery_story"
+            android:layout_below="@id/view_discovery_story"
             android:text="@string/button_placeholder"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>

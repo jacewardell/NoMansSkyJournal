@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sadostrich.nomansskyjournal.Fragments.AddAnimalFragment;
+import com.sadostrich.nomansskyjournal.Fragments.AddPlanetFragment;
 import com.sadostrich.nomansskyjournal.Fragments.ViewPlanetFragment;
 import com.sadostrich.nomansskyjournal.Models.Animal;
 import com.sadostrich.nomansskyjournal.Models.DiscoveriesContract;
@@ -35,49 +37,49 @@ public class DiscoveryActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_add_discovery);
-//
-//        Intent intent = getIntent();
-//        discoveryType = (Enums.DiscoveryType) intent.getSerializableExtra(getString(R.string.discovery_type));
-//        addDiscovery = intent.getBooleanExtra(getString(R.string.discovery_add), true);
-//
-//        if (!addDiscovery) {
-//            discovery = (Discovery) intent.getSerializableExtra(getString(R.string.discovery));
-//        }
-//
-//        showFragment();
+        setContentView(R.layout.activity_add_discovery);
+
+        Intent intent = getIntent();
+        discoveryType = (Enums.DiscoveryType) intent.getSerializableExtra(getString(R.string.discovery_type));
+        addDiscovery = intent.getBooleanExtra(getString(R.string.discovery_add), true);
+
+        if (!addDiscovery) {
+            discovery = (Discovery) intent.getSerializableExtra(getString(R.string.discovery));
+        }
+
+        showFragment();
     }
 
     /**
      * Shows the current fragment based on the user-chosen discovery type
      */
     private void showFragment() {
-//        switch (discoveryType) {
-//            case PLANET:
+        switch (discoveryType) {
+            case PLANET:
 //                getActionBar().setTitle(getResources().getString(R.string.add_planet));
-//
-//                // If the user is adding a discovery
-//                if (addDiscovery) {
-//                    fragmentToShow = new com.example.sadostrich.Fragments.AddPlanetFragment();
-//                } else {
-//                    fragmentToShow = new ViewPlanetFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable(getString(R.string.discovery), discovery);
-//                    fragmentToShow.setArguments(bundle);
-//                }
-//                break;
-//            case ANIMAL:
+
+                // If the user is adding a discovery
+                if (addDiscovery) {
+                    fragmentToShow = new AddPlanetFragment();
+                } else {
+                    fragmentToShow = new ViewPlanetFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(getString(R.string.discovery), discovery);
+                    fragmentToShow.setArguments(bundle);
+                }
+                break;
+            case ANIMAL:
 //                getActionBar().setTitle(getResources().getString(R.string.add_animal));
-//                fragmentToShow = new AddAnimalFragment();
-//                break;
+                fragmentToShow = new AddAnimalFragment();
+                break;
 //            case PLANT:
 //                getActionBar().setTitle(getResources().getString(R.string.add_plant));
 //                fragmentToShow = new AddPlantFragment();
 //                break;
-//        }
-//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//
-//        transaction.replace(R.id.fragment_container, fragmentToShow).commit();
+        }
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, fragmentToShow).commit();
     }
 
     @Override
@@ -109,57 +111,5 @@ public class DiscoveryActivity extends FragmentActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Used to insert a new discovery into the phone's database
-     */
-    public class InsertNewDiscoveryAsyncTask extends AsyncTask<Discovery, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Discovery... params) {
-            return insertNewDiscovery((Discovery) params[0]);
-        }
-
-        public boolean insertNewDiscovery(Discovery discovery) {
-            long newRowId = -1;
-
-            DiscoveriesContract.PlanetsTable.DiscoveriesDbHelper dbHelper = new DiscoveriesContract.PlanetsTable.DiscoveriesDbHelper
-                    (getApplicationContext());
-            // Gets the data repository in write mode
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            if (discovery instanceof Planet) {
-                // Create a new map of values, where column names are the keys
-                ContentValues values = new ContentValues();
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_DATE, discovery.getDate());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_COMMON_NAME, discovery.getCommonName());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_SCIENTIFIC_NAME, discovery.getScientificName());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_DESCRIPTION, discovery.getDescription());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_STORY, discovery.getStory());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_IMAGE_URL, discovery.getImageUrl());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_SOLAR_SYSTEM_NAME, ((Planet) discovery).getSolarSystemName());
-                values.put(DiscoveriesContract.PlanetsTable.COLUMN_NAME_PLANET_SIZE, ((Planet) discovery).getSize().toString());
-
-                // Insert the new row, returning the primary key value of the new row
-                newRowId = db.insert(DiscoveriesContract.PlanetsTable.PLANET_TABLE_NAME, DiscoveriesContract.PlanetsTable.COLUMN_NAME_NULLABLE,
-                        values);
-            } else if (discovery instanceof Animal) {
-
-            } else {
-
-            }
-
-            if (newRowId != -1) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            setResult(discoveryType.ordinal());
-            finish();
-        }
     }
 }

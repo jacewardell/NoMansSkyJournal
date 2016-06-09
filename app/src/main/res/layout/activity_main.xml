@@ -6,13 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         tools:context=".Activities.MainActivity">
 
         <android.support.design.widget.AppBarLayout
@@ -77,8 +77,19 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/plus"/>
+
+        <com.sadostrich.nomansskyjournal.Views.AddDiscoveryCardView
+            android:id="@+id/add_discovery_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:alpha="0"/>
+
     </android.support.design.widget.CoordinatorLayout>
 
-    <include layout="@layout/drawer_layout_view"/>
+    <include
+        android:id="@+id/drawer_layout_content"
+        layout="@layout/drawer_layout_content"/>
 </android.support.v4.widget.DrawerLayout>
 

@@ -18,6 +18,20 @@
     <dimen name="d256">256dp</dimen>
     <dimen name="d512">512dp</dimen>
     <dimen name="d1024">1024dp</dimen>
+    
+    <!-- Text sizes -->
+    <dimen name="ts.5">0.5sp</dimen>
+    <dimen name="ts1">1sp</dimen>
+    <dimen name="ts2">2sp</dimen>
+    <dimen name="ts4">4sp</dimen>
+    <dimen name="ts8">8sp</dimen>
+    <dimen name="ts16">16sp</dimen>
+    <dimen name="ts32">32sp</dimen>
+    <dimen name="ts64">64sp</dimen>
+    <dimen name="ts128">128sp</dimen>
+    <dimen name="ts256">256sp</dimen>
+    <dimen name="ts512">512sp</dimen>
+    <dimen name="ts1024">1024sp</dimen>
 
     <!-- Margin/Padding Sizes-->
 

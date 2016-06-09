@@ -67,12 +67,13 @@ public class PlanetFragment extends Fragment implements AbsListView.OnItemClickL
     }
 
     // TODO: Rename and change types of parameters
-    public static PlanetFragment newInstance(String param1, String param2) {
+    public static PlanetFragment newInstance(String param1, String param2, IDiscoveryListener listener) {
         PlanetFragment fragment = new PlanetFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        fragment.setDiscoveryListener(listener);
         return fragment;
     }
 
@@ -162,7 +163,7 @@ public class PlanetFragment extends Fragment implements AbsListView.OnItemClickL
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        void onFragmentInteraction(String id);
     }
 
 }
