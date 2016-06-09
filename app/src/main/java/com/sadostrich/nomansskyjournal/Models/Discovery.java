@@ -1,5 +1,6 @@
 package com.sadostrich.nomansskyjournal.Models;
 
+import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Utils.Formatter;
 
 import java.io.Serializable;
@@ -13,11 +14,12 @@ import java.util.List;
  * Created by jacewardell on 7/2/15.
  */
 public class Discovery implements Serializable {
+    private final Enums.DiscoveryType discoveryType = Enums.DiscoveryType.PLANET;
     private User user;
     private String date, commonName, scientificName, description, story, imageUrl;
     private List<String> tags;
     private int timesFlagged;
-    
+
 
     public Discovery() {
         this.user = new User();
@@ -28,7 +30,7 @@ public class Discovery implements Serializable {
     /**
      * Sets the variables according to the parameters
      *
-     * @param user user
+     * @param user           user
      * @param commonName     common name
      * @param scientificName scientific name
      * @param description    description
@@ -48,7 +50,7 @@ public class Discovery implements Serializable {
     /**
      * Sets the variables according to the parameters
      *
-     * @param user user
+     * @param user           user
      * @param date           date
      * @param commonName     common name
      * @param scientificName scientific name
@@ -66,10 +68,11 @@ public class Discovery implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    /**s
+    /**
+     * s
      * Sets the variables according to the parameters
      *
-     * @param user user
+     * @param user           user
      * @param date           date
      * @param commonName     common name
      * @param scientificName scientific name
@@ -85,6 +88,34 @@ public class Discovery implements Serializable {
         this.description = description;
         this.story = story;
         this.imageUrl = imageUrl;
+    }
+
+    public Enums.DiscoveryType getDiscoveryType() {
+        return discoveryType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public int getTimesFlagged() {
+        return timesFlagged;
+    }
+
+    public void setTimesFlagged(int timesFlagged) {
+        this.timesFlagged = timesFlagged;
     }
 
     /**

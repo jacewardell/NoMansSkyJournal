@@ -29,9 +29,12 @@ public interface NMSOriginsService {
 
     String LOGIN_QUERY = "{\"username\":\"" + USERNAME + "\",\"password\":\"" + PASSWORD + "\",\"remember\":false}";
 
-    String FIND_DISCOVERIES_QUERY = "{\"query\":{\"type\":{\"$in\":[\"system\",\"planet\",\"animal\",\"ship\",\"flora\",\"structure\",\"station\"," +
-            "\"star\",\"item\",\"system\"]},\"_images\":{\"$exists\":true,\"$not\":{\"$size\":0}}},\"model\":\"discovery\",\"limit\":6," +
-            "\"page\":" + PAGE_NUM + ",\"sort\":{\"score\":-1},\"populate\":[\"_discoveredBy\",\"_images\",\"_parent\",\"_image\"]}";
+//    String FIND_DISCOVERIES_QUERY = "{\"query\":{\"type\":{\"$in\":[\"system\",\"planet\",\"animal\",\"ship\",\"flora\",\"structure\",\"station\"," +
+//            "\"star\",\"item\",\"system\"]},\"_images\":{\"$exists\":true,\"$not\":{\"$size\":0}}},\"model\":\"discovery\",\"limit\":6," +
+//            "\"page\":" + PAGE_NUM + ",\"sort\":{\"score\":-1},\"populate\":[\"_discoveredBy\",\"_images\",\"_parent\",\"_image\"]}";
+
+
+    String FIND_DISCOVERIES_QUERY = "{\"query\":{\"_images\":{\"$exists\":true,\"$not\":{\"$size\":0}}},\"model\":\"discovery\",\"limit\":5,\"sort\":{\"createdAt\":-1},\"populate\":[\"_discoveredBy\",\"_images\",\"_parent\",\"_image\"]}";
 
     @POST("auth/login")
     @Headers({
@@ -48,5 +51,18 @@ public interface NMSOriginsService {
     Call<Authentication> login(@Body String loginQuery);
 
     @POST("crud/discovery/find")
+    @Headers({
+            "Cookie:nmsexplorer=s%3AA6JQyalSmPWthwbCjPGp8rXPenOEHin0.hFdjjYLvkIMnDoD8%2FZPtq8gESsYXZQa9wF2YcI7HDLg;" +
+                    "__unam=dd1ddf7-1548ec2d1ae-4ca325cf-11",
+            "Origin:https://www.nmsorigins.com",
+            "Accept-Encoding:gzip, deflate, br",
+            "Accept-Language:en-US,en;q=0.8,de;q=0.6",
+            "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
+            "Content-Type:application/json;charset=UTF-8",
+            "Accept:application/json, text/plain, */*",
+            "Cache-Control:max-age=0",
+            "Referer:https://www.nmsorigins.com/",
+            "Connection:keep-alive"
+    })
     Call<List<Discovery>> findDiscoveries(@Body String findDiscoveriesQuery);
 }

@@ -1,6 +1,5 @@
 package com.sadostrich.nomansskyjournal.Fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sadostrich.nomansskyjournal.Models.Planet;
+import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by jacewardell on 7/25/15.
@@ -19,7 +17,7 @@ public class ViewPlanetFragment extends android.app.Fragment {
     private ImageView imageView;
     private TextView commonName, scientificName, solarSystemName, description, story;
 
-    private Planet discovery;
+    private Discovery discovery;
 
     public ViewPlanetFragment() {
     }
@@ -28,7 +26,7 @@ public class ViewPlanetFragment extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            discovery = (Planet) getArguments().get(getResources().getString(R.string.extra_discovery));
+            discovery = (Discovery) getArguments().get(getResources().getString(R.string.extra_discovery));
         }
     }
 
@@ -42,7 +40,7 @@ public class ViewPlanetFragment extends android.app.Fragment {
         scientificName = (TextView) rootView.findViewById(R.id.view_discovery_scientific_name);
         solarSystemName = (TextView) rootView.findViewById(R.id.view_discovery_solar_system_name);
         description = (TextView) rootView.findViewById(R.id.view_discovery_description);
-        story = (TextView) rootView.findViewById(R.id.view_discovery_discovery_story);
+        story = (TextView) rootView.findViewById(R.id.view_discovery_story);
 
 
 //        Uri imageUri = MiscUtil.getImageUri(discovery.getImageUrl());
@@ -54,7 +52,7 @@ public class ViewPlanetFragment extends android.app.Fragment {
 //        }
         commonName.setText(discovery.getCommonName());
         scientificName.setText(discovery.getScientificName());
-        solarSystemName.setText(discovery.getSolarSystemName());
+//        solarSystemName.setText(discovery.getSolarSystemName());
         description.setText(discovery.getDescription());
         story.setText(discovery.getStory());
 
