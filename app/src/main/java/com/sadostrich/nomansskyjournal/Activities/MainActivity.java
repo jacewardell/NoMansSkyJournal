@@ -52,15 +52,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements
 		PlanetFragment.OnFragmentInteractionListener, BottomTabsView.ITabSelectedListener,
-		View.OnClickListener, IDiscoveryListener,
-		AdapterView.OnItemClickListener {
+		View.OnClickListener, IDiscoveryListener, AdapterView.OnItemClickListener {
 
 	private static final String TAG = "MainActivity";
 	Retrofit retrofit;
 	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
-	 * sections. We use a {@link FragmentPagerAdapter} derivative, which will keep every loaded
-	 * fragment in memory. If this becomes too memory intensive, it may be best to switch to a
+	 * The {@link android.support.v4.view.PagerAdapter} that will provide
+	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
+	 * derivative, which will keep every loaded fragment in memory. If this
+	 * becomes too memory intensive, it may be best to switch to a
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -71,10 +71,9 @@ public class MainActivity extends AppCompatActivity implements
 	private boolean fabExpanded = false;
 	private DrawerLayout drawerLayout;
 	private ListView drawerListView;
-	//	private AddDiscoveryCardView addDiscoveryCardView;
+	// private AddDiscoveryCardView addDiscoveryCardView;
 	private FloatingActionButton mainFab, solarSystemFab, planetFab, animalFab, plantFab,
-			structureFab,
-			toolFab, shipFab;
+			structureFab, toolFab, shipFab;
 	private Toolbar toolbar;
 	private ActionBarDrawerToggle drawerToggle;
 	private ImageView drawerUserAvatar;
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private double circleRadius;
 	private Point screenCenter;
-	//    private BottomTabsView bottomTabsView;
+	// private BottomTabsView bottomTabsView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements
 		setSupportActionBar(toolbar);
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
-
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),
+				this);
 
 		// Set up the ViewPager with the sections adapter.
 		viewPager.setAdapter(mSectionsPagerAdapter);
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements
 
 		setupFabs();
 		setupDrawerLayout();
-		//        setupBottomTabs();
+		// setupBottomTabs();
 
 		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 		// set your desired log level
@@ -115,19 +114,18 @@ public class MainActivity extends AppCompatActivity implements
 		OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 		// add your other interceptors …
 		// add logging as last interceptor
-		httpClient.addInterceptor(logging);  // <-- this is the important line!
+		httpClient.addInterceptor(logging); // <-- this is the important line!
 
 		retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL)
 				.addConverterFactory(GsonConverterFactory.create()).build();
 		NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
 
-		Call<List<Discovery>> findDiscoveriesCall =
-				nmsOriginsService.findDiscoveries(NMSOriginsServiceHelper
-														  .getDiscoveriesBodyHashMap());
+		Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
+				.findDiscoveries(NMSOriginsServiceHelper.getDiscoveriesBodyHashMap());
 		findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
 			@Override
-			public void onResponse(Call<List<Discovery>> call, Response<List<Discovery>>
-					response) {
+			public void onResponse(Call<List<Discovery>> call,
+					Response<List<Discovery>> response) {
 				Log.e(TAG, "response");
 				showProgressBar(View.INVISIBLE);
 			}
@@ -160,30 +158,31 @@ public class MainActivity extends AppCompatActivity implements
 		}
 
 		if (Authentication.isValidUserAvatar(Authentication.getInstance())) {
-			Picasso.with(getApplicationContext()).load(Authentication.getInstance().getAvatar()
-															   .getSmall())
+			Picasso.with(getApplicationContext())
+					.load(Authentication.getInstance().getAvatar().getSmall())
 					.into(drawerUserAvatar);
 		}
 
-		drawerToggle = new ActionBarDrawerToggle(
-				this,                  /* host Activity */
-				drawerLayout,         /* DrawerLayout object */
-				toolbar,  /* nav drawer icon to replace 'Up' caret */
-				R.string.drawer_open,  /* "open drawer" description */
-				R.string.drawer_close  /* "close drawer" description */
+		drawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
+				drawerLayout, /* DrawerLayout object */
+				toolbar, /* nav drawer icon to replace 'Up' caret */
+				R.string.drawer_open, /* "open drawer" description */
+				R.string.drawer_close /* "close drawer" description */
 		) {
 
 			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
-				//				getSupportActionBar().setTitle(getResources().getString(R.string
+				// getSupportActionBar().setTitle(getResources().getString(R.string
 				// .app_name));
 			}
 
-			/** Called when a drawer has settled in a completely closed state. */
+			/**
+			 * Called when a drawer has settled in a completely closed state.
+			 */
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
-				//				getSupportActionBar().setTitle(getResources().getString(R.string
+				// getSupportActionBar().setTitle(getResources().getString(R.string
 				// .app_name));
 			}
 		};
@@ -196,9 +195,9 @@ public class MainActivity extends AppCompatActivity implements
 		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
-	//    private void setupBottomTabs() {
-	//        bottomTabsView.setTabSelectedListener(this);
-	//    }
+	// private void setupBottomTabs() {
+	// bottomTabsView.setTabSelectedListener(this);
+	// }
 
 	private void getViewRefs() {
 		viewPager = (ViewPager) findViewById(R.id.container);
@@ -206,10 +205,11 @@ public class MainActivity extends AppCompatActivity implements
 		drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
 		drawerListView = (ListView) findViewById(R.id.drawer_listview);
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		//        bottomTabsView = (BottomTabsView) findViewById(R.id.bottom_tabs_view);
+		// bottomTabsView = (BottomTabsView)
+		// findViewById(R.id.bottom_tabs_view);
 
 		mainFab = (FloatingActionButton) findViewById(R.id.fab);
-		//		addDiscoveryCardViewz = (AddDiscoveryCardView) findViewById(R.id
+		// addDiscoveryCardViewz = (AddDiscoveryCardView) findViewById(R.id
 		// .add_discovery_card_view);
 		solarSystemFab = (FloatingActionButton) findViewById(R.id.solar_systems_fab);
 		planetFab = (FloatingActionButton) findViewById(R.id.planet_fab);
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private void setupFabs() {
 		if (mainFab != null) {
-			//			addDiscoveryCardView.setListener(this);
+			// addDiscoveryCardView.setListener(this);
 			mainFab.setOnClickListener(this);
 			planetFab.setOnClickListener(this);
 			animalFab.setOnClickListener(this);
@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
+		// noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
 			return true;
 		}
@@ -283,64 +283,62 @@ public class MainActivity extends AppCompatActivity implements
 	public void onClick(View v) {
 		fabExpanded = !fabExpanded;
 		switch (v.getId()) {
-			case R.id.fab:
-				if (fabExpanded) {
-					expandFabs();
-				} else {
-					collapseFabs();
-				}
-				break;
-
-			case R.id.solar_systems_fab:
+		case R.id.fab:
+			if (fabExpanded) {
+				expandFabs();
+			} else {
 				collapseFabs();
-				//				startAddDiscoveryActivity();
-				Toast.makeText(MainActivity.this, "solar system", Toast.LENGTH_SHORT).show();
-				break;
+			}
+			break;
 
-			case R.id.planet_fab:
+		case R.id.solar_systems_fab:
+			collapseFabs();
+			// startAddDiscoveryActivity();
+			Toast.makeText(MainActivity.this, "solar system", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.planet_fab:
+			collapseFabs();
+			Toast.makeText(MainActivity.this, "planet", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.animal_fab:
+			collapseFabs();
+			Toast.makeText(MainActivity.this, "animal", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.plant_fab:
+			collapseFabs();
+			Toast.makeText(MainActivity.this, "plant", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.structure_fab:
+			collapseFabs();
+			Toast.makeText(MainActivity.this, "structure", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.tool_fab:
+			collapseFabs();
+			Toast.makeText(MainActivity.this, "tool", Toast.LENGTH_SHORT).show();
+			break;
+
+		case R.id.ship_fab:
+			collapseFabs();
+			Toast.makeText(MainActivity.this, "ship", Toast.LENGTH_SHORT).show();
+			break;
+
+		default:
+			if (!fabExpanded) {
 				collapseFabs();
-				Toast.makeText(MainActivity.this, "planet", Toast.LENGTH_SHORT).show();
 				break;
-
-			case R.id.animal_fab:
-				collapseFabs();
-				Toast.makeText(MainActivity.this, "animal", Toast.LENGTH_SHORT).show();
-				break;
-
-			case R.id.plant_fab:
-				collapseFabs();
-				Toast.makeText(MainActivity.this, "plant", Toast.LENGTH_SHORT).show();
-				break;
-
-			case R.id.structure_fab:
-				collapseFabs();
-				Toast.makeText(MainActivity.this, "structure", Toast.LENGTH_SHORT).show();
-				break;
-
-			case R.id.tool_fab:
-				collapseFabs();
-				Toast.makeText(MainActivity.this, "tool", Toast.LENGTH_SHORT).show();
-				break;
-
-			case R.id.ship_fab:
-				collapseFabs();
-				Toast.makeText(MainActivity.this, "ship", Toast.LENGTH_SHORT).show();
-				break;
-
-
-			default:
-				if (!fabExpanded) {
-					collapseFabs();
-					break;
-				}
+			}
 		}
 	}
 
 	private void expandFabs() {
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 
-		mainFab.animate().rotation(135)
-				.setInterpolator(interpolator).start();
+		mainFab.animate().rotation(135).setInterpolator(interpolator).start();
 
 		animateFabs();
 
@@ -348,14 +346,13 @@ public class MainActivity extends AppCompatActivity implements
 	}
 
 	private void dimBackground(boolean dim) {
-		//		drawerLayout.setAlpha(dim ? (float) 0.5 : 1);
+		// drawerLayout.setAlpha(dim ? (float) 0.5 : 1);
 	}
 
 	private void collapseFabs() {
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 
-		mainFab.animate().rotation(0)
-				.setInterpolator(interpolator);
+		mainFab.animate().rotation(0).setInterpolator(interpolator);
 
 		for (FloatingActionButton subFab : subFabs) {
 			animateFab(subFab, -1);
@@ -370,40 +367,40 @@ public class MainActivity extends AppCompatActivity implements
 		int screenHeight = viewPager.getHeight();
 		circleRadius = (screenWidth * 0.40) / 2;
 
-		//		screenCenter = new Point((int) (viewPager.getX() + viewPager.getWidth() / 2),
-		//								 (int) (viewPager.getY() + viewPager.getHeight() / 2));
+		// screenCenter = new Point((int) (viewPager.getX() +
+		// viewPager.getWidth() / 2),
+		// (int) (viewPager.getY() + viewPager.getHeight() / 2));
 		screenCenter = new Point(metrics.widthPixels / 2, metrics.heightPixels / 2);
-
 
 		for (FloatingActionButton subFab : subFabs) {
 			switch (subFab.getId()) {
-				case R.id.solar_systems_fab:
-					animateFab(solarSystemFab, 5);
-					break;
+			case R.id.solar_systems_fab:
+				animateFab(solarSystemFab, 5);
+				break;
 
-				case R.id.planet_fab:
-					animateFab(planetFab, 6);
-					break;
+			case R.id.planet_fab:
+				animateFab(planetFab, 6);
+				break;
 
-				case R.id.animal_fab:
-					animateFab(animalFab, 0);
-					break;
+			case R.id.animal_fab:
+				animateFab(animalFab, 0);
+				break;
 
-				case R.id.plant_fab:
-					animateFab(plantFab, 1);
-					break;
+			case R.id.plant_fab:
+				animateFab(plantFab, 1);
+				break;
 
-				case R.id.structure_fab:
-					animateFab(structureFab, 2);
-					break;
+			case R.id.structure_fab:
+				animateFab(structureFab, 2);
+				break;
 
-				case R.id.tool_fab:
-					animateFab(toolFab, 3);
-					break;
+			case R.id.tool_fab:
+				animateFab(toolFab, 3);
+				break;
 
-				case R.id.ship_fab:
-					animateFab(shipFab, 4);
-					break;
+			case R.id.ship_fab:
+				animateFab(shipFab, 4);
+				break;
 			}
 		}
 	}
@@ -416,39 +413,41 @@ public class MainActivity extends AppCompatActivity implements
 			xPos = mainFab.getX() + mainFab.getWidth() / 6;
 			yPos = mainFab.getY() + mainFab.getHeight() / 6;
 		} else {
-			xPos = (float) (circleRadius * Math.cos((2 * Math.PI / subFabs.size()) * position)
-					+ screenCenter.x);
-			yPos = (float) (circleRadius * Math.sin((2 * Math.PI / subFabs.size()) * position)
+			xPos = (float) (circleRadius
+					* Math.cos((2 * Math.PI / subFabs.size()) * position) + screenCenter.x
+					- solarSystemFab.getWidth() / 2);
+			yPos = (float) (circleRadius
+					* Math.sin((2 * Math.PI / subFabs.size()) * position)
 					+ screenCenter.y);
 		}
 
 		fab.animate().x(xPos).y(yPos)
-				.setInterpolator(new AccelerateDecelerateInterpolator())
-				.setDuration(250).setListener(new Animator.AnimatorListener() {
-			@Override
-			public void onAnimationStart(Animator animation) {
-				if (position != -1) {
-					fab.setVisibility(View.VISIBLE);
-				}
-			}
+				.setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(250)
+				.setListener(new Animator.AnimatorListener() {
+					@Override
+					public void onAnimationStart(Animator animation) {
+						if (position != -1) {
+							fab.setVisibility(View.VISIBLE);
+						}
+					}
 
-			@Override
-			public void onAnimationEnd(Animator animation) {
-				if (position == -1) {
-					fab.setVisibility(View.GONE);
-				}
-			}
+					@Override
+					public void onAnimationEnd(Animator animation) {
+						if (position == -1) {
+							fab.setVisibility(View.GONE);
+						}
+					}
 
-			@Override
-			public void onAnimationCancel(Animator animation) {
+					@Override
+					public void onAnimationCancel(Animator animation) {
 
-			}
+					}
 
-			@Override
-			public void onAnimationRepeat(Animator animation) {
+					@Override
+					public void onAnimationRepeat(Animator animation) {
 
-			}
-		});
+					}
+				});
 	}
 
 	private void showProgressBar(int visibility) {
@@ -472,7 +471,8 @@ public class MainActivity extends AppCompatActivity implements
 	@Override
 	public void onAddPlanet() {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(getString(R.string.discovery_type), Enums.DiscoveryType.PLANET);
+		bundle.putSerializable(getString(R.string.discovery_type),
+				Enums.DiscoveryType.PLANET);
 		bundle.putBoolean(getString(R.string.discovery_add), true);
 
 		Intent intent = new Intent(MainActivity.this, DiscoveryActivity.class);
@@ -484,30 +484,29 @@ public class MainActivity extends AppCompatActivity implements
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int titleRes = R.string.community;
 		switch (position) {
-			case 0:
-				// Show the community discoveries
-				titleRes = R.string.community;
-				break;
+		case 0:
+			// Show the community discoveries
+			titleRes = R.string.community;
+			break;
 
-			case 1:
-				// Show friend's discoveries
-				titleRes = R.string.friends;
-				break;
+		case 1:
+			// Show friend's discoveries
+			titleRes = R.string.friends;
+			break;
 
-			case 2:
-				// Show your discoveries
-				titleRes = R.string.profile;
-				break;
+		case 2:
+			// Show your discoveries
+			titleRes = R.string.profile;
+			break;
 		}
 
 		drawerLayout.closeDrawers();
 		getSupportActionBar().setTitle(getResources().getString(titleRes));
 	}
 
-
 	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the
-	 * sections/tabs/pages.
+	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+	 * one of the sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		private IDiscoveryListener listener;
@@ -520,7 +519,8 @@ public class MainActivity extends AppCompatActivity implements
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class below).
+			// Return a PlaceholderFragment (defined as a static inner class
+			// below).
 			return PlanetFragment.newInstance("", "", listener);
 		}
 
@@ -533,20 +533,20 @@ public class MainActivity extends AppCompatActivity implements
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
-				case 0:
-					return getResources().getString(R.string.solar_systems);
-				case 1:
-					return getResources().getString(R.string.planets);
-				case 2:
-					return getResources().getString(R.string.animals);
-				case 3:
-					return getResources().getString(R.string.plants);
-				case 4:
-					return getResources().getString(R.string.structure);
-				case 5:
-					return getResources().getString(R.string.tool);
-				case 6:
-					return getResources().getString(R.string.ship);
+			case 0:
+				return getResources().getString(R.string.solar_systems);
+			case 1:
+				return getResources().getString(R.string.planets);
+			case 2:
+				return getResources().getString(R.string.animals);
+			case 3:
+				return getResources().getString(R.string.plants);
+			case 4:
+				return getResources().getString(R.string.structure);
+			case 5:
+				return getResources().getString(R.string.tool);
+			case 6:
+				return getResources().getString(R.string.ship);
 			}
 			return null;
 		}
