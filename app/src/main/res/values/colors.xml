@@ -8,4 +8,7 @@
     <color name="primary_text">#212121</color>
     <color name="seconday_text">#727272</color>
     <color name="divider">#B6B6B6</color>
+
+    <color name="normal_background">#FFFFFFFF</color>
+    <color name="dim_background">#80000000</color>
 </resources>

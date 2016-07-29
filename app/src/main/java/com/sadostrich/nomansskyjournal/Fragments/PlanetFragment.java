@@ -1,28 +1,21 @@
 package com.sadostrich.nomansskyjournal.Fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.sadostrich.nomansskyjournal.Adapters.DiscoveryAdapter;
-import com.sadostrich.nomansskyjournal.Bases.BaseRecyclerView;
-import com.sadostrich.nomansskyjournal.Data.DummyData;
 import com.sadostrich.nomansskyjournal.Fragments.dummy.DummyContent;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
-import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
-import com.sadostrich.nomansskyjournal.Utils.Enums;
 
 /**
  * A fragment representing a list of Items.
@@ -87,8 +80,8 @@ public class PlanetFragment extends Fragment implements AbsListView.OnItemClickL
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new DiscoveryAdapter(DummyData.generateTestDiscoveries());
-        mAdapter.setDiscoveryListener(discoveryListener);
+//        mAdapter = new DiscoveryAdapter(DummyData.generateTestDiscoveries());
+//        mAdapter.setDiscoveryListener(discoveryListener);
     }
 
     @Override

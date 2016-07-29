@@ -50,11 +50,11 @@ public class ViewPlanetFragment extends android.app.Fragment {
 //        } else {
 //            Picasso.with(getActivity()).load(R.mipmap.add_image).into(imageView);
 //        }
-        commonName.setText(discovery.getCommonName());
-        scientificName.setText(discovery.getScientificName());
+//        commonName.setText(discovery.getCommonName());
+        scientificName.setText(discovery.getName());
 //        solarSystemName.setText(discovery.getSolarSystemName());
         description.setText(discovery.getDescription());
-        story.setText(discovery.getStory());
+//        story.setText(discovery.getStory());
 
         return rootView;
     }

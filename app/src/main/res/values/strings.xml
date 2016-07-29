@@ -3,22 +3,40 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!-- Bottom tab Strings -->
+    <string name="community">Community</string>
+    <string name="friends">Friends</string>
+    <string name="profile">Profile</string>
+
     <!-- Fragment Strings -->
     <string name="solar_systems">Solar Systems</string>
     <string name="planets">Planets</string>
     <string name="animals">Animals</string>
     <string name="plants">Plants</string>
-    <string name="structure">Structure</string>
-    <string name="tool">Tool</string>
-    <string name="ship">Ship</string>
+    <string name="structures">Structures</string>
+    <string name="tools">Tools</string>
+    <string name="ships">Ships</string>
 
     <!-- Fragment Extra Strings -->
     <string name="extra_discovery">extra_discovery</string>
+    
+    <!-- App bar titles -->
+    <string name="add_solar_system">Add Solar System</string>
+    <string name="add_planet">Add Planet</string>
+    <string name="add_animal">Add Animal</string>
+    <string name="add_plant">Add Plant</string>
+    <string name="add_structure">Add Structure</string>
+    <string name="add_tool">Add Tool</string>
+    <string name="add_ship">Add Ship</string>
 
-    <!-- Bottom tab Strings -->
-    <string name="community">Community</string>
-    <string name="friends">Friends</string>
-    <string name="profile">Profile</string>
+    <!-- Discovery Type Strings -->
+    <string name="solar_system">Solar System</string>
+    <string name="planet">Planet</string>
+    <string name="animal">Animal</string>
+    <string name="plant">Plant</string>
+    <string name="structure">Structure</string>
+    <string name="tool">Tool</string>
+    <string name="ship">Ship</string>
 
     <!-- Placeholders -->
     <string name="button_placeholder">Button</string>
@@ -51,8 +69,6 @@
     <string name="discovery_type">extra_discovery_type</string>
     <string name="discovery_add">extra_discovery_add</string>
     <string name="discovery">extra_discovery</string>
-    <string name="add_planet">Add Planet</string>
-    <string name="add_animal">Add Animal</string>
 
     <!-- Menu strings -->
     <string name="settings">Settings</string>

@@ -36,9 +36,9 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder implements View
 
     public void setData(Discovery discovery) {
         this.discovery = discovery;
-        dateTextView.setText(discovery.getDate());
-        commonNameTextView.setText(discovery.getCommonName());
-        scientificNameTextView.setText(discovery.getScientificName());
+//        dateTextView.setText(discovery.getDate());
+//        commonNameTextView.setText(discovery.getCommonName());
+        scientificNameTextView.setText(discovery.getName());
         descriptionTextView.setText(discovery.getDescription());
         // TODO: get the image of the discovery
     }

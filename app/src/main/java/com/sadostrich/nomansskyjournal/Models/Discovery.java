@@ -1,6 +1,6 @@
 package com.sadostrich.nomansskyjournal.Models;
 
-import com.sadostrich.nomansskyjournal.Utils.Enums;
+import com.google.gson.annotations.SerializedName;
 import com.sadostrich.nomansskyjournal.Utils.Formatter;
 
 import java.io.Serializable;
@@ -14,17 +14,21 @@ import java.util.List;
  * Created by jacewardell on 7/2/15.
  */
 public class Discovery implements Serializable {
-    private final Enums.DiscoveryType discoveryType = Enums.DiscoveryType.PLANET;
-    private User user;
-    private String date, commonName, scientificName, description, story, imageUrl;
+	@SerializedName("_id")
+	private String id;
+	@SerializedName("_discoveredBy")
+	private User user;
+	private String type;
+	private DiscoveryProperties properties;
+    private String description, name, discoveredAt, imageUrl;
     private List<String> tags;
-    private int timesFlagged;
+    private int timesFlagged, commentCount, score, views;
 
 
     public Discovery() {
-        this.user = new User();
-        date = getCurrentDate();
-        commonName = scientificName = description = story = imageUrl = "";
+//        this.user = new User();
+//		date = getCurrentDate();
+//        commonName = name = description = story = imageUrl = "";
     }
 
     /**
@@ -32,19 +36,19 @@ public class Discovery implements Serializable {
      *
      * @param user           user
      * @param commonName     common name
-     * @param scientificName scientific name
+     * @param name scientific name
      * @param description    description
      * @param story          story
      * @param imageUrl       image url
      */
-    public Discovery(User user, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.user = user;
-        this.date = getCurrentDate();
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.description = description;
-        this.story = story;
-        this.imageUrl = imageUrl;
+    public Discovery(User user, String commonName, String name, String description, String story, String imageUrl) {
+//        this.user = user;
+//        this.date = getCurrentDate();
+//        this.commonName = commonName;
+//        this.name = name;
+//        this.description = description;
+//        this.story = story;
+//        this.imageUrl = imageUrl;
     }
 
     /**
@@ -53,19 +57,19 @@ public class Discovery implements Serializable {
      * @param user           user
      * @param date           date
      * @param commonName     common name
-     * @param scientificName scientific name
+     * @param name scientific name
      * @param description    description
      * @param story          story
      * @param imageUrl       image url
      */
-    public Discovery(User user, String date, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.user = user;
-        this.date = date;
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.description = description;
-        this.story = story;
-        this.imageUrl = imageUrl;
+    public Discovery(User user, String date, String commonName, String name, String description, String story, String imageUrl) {
+//        this.user = user;
+//        this.date = date;
+//        this.commonName = commonName;
+//        this.name = name;
+//        this.description = description;
+//        this.story = story;
+//        this.imageUrl = imageUrl;
     }
 
     /**
@@ -75,23 +79,23 @@ public class Discovery implements Serializable {
      * @param user           user
      * @param date           date
      * @param commonName     common name
-     * @param scientificName scientific name
+     * @param name scientific name
      * @param description    description
      * @param story          story
      * @param imageUrl       image url
      */
-    public Discovery(User user, Date date, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.user = user;
-        this.date = Formatter.dateFormat.format(date);
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.description = description;
-        this.story = story;
-        this.imageUrl = imageUrl;
+    public Discovery(User user, Date date, String commonName, String name, String description, String story, String imageUrl) {
+//        this.user = user;
+//        this.date = Formatter.dateFormat.format(date);
+//        this.commonName = commonName;
+//        this.name = name;
+//        this.description = description;
+//        this.story = story;
+//        this.imageUrl = imageUrl;
     }
 
-    public Enums.DiscoveryType getDiscoveryType() {
-        return discoveryType;
+    public String getType() {
+        return type;
     }
 
     public User getUser() {
@@ -123,8 +127,8 @@ public class Discovery implements Serializable {
      *
      * @return date
      */
-    public String getDate() {
-        return date;
+    public String getDiscoveredAt() {
+        return discoveredAt;
     }
 
     /**
@@ -132,8 +136,8 @@ public class Discovery implements Serializable {
      *
      * @param date discovered
      */
-    public void setDate(String date) {
-        this.date = date;
+    public void setDiscoveredAt(String date) {
+        this.discoveredAt = date;
     }
 
     private String getCurrentDate() {
@@ -144,37 +148,19 @@ public class Discovery implements Serializable {
     /**
      * Returns the discovery's scientific name
      *
-     * @return scientificName
+     * @return name
      */
-    public String getScientificName() {
-        return scientificName;
+    public String getName() {
+        return name;
     }
 
     /**
      * Sets the discovery's scientific name
      *
-     * @param scientificName assigned by game
+     * @param name assigned by game
      */
-    public void setScientificName(String scientificName) {
-        this.scientificName = scientificName;
-    }
-
-    /**
-     * Returns the user-given name
-     *
-     * @return commonName
-     */
-    public String getCommonName() {
-        return commonName;
-    }
-
-    /**
-     * Sets the user-given name,
-     *
-     * @param commonName given by user
-     */
-    public void setCommonName(String commonName) {
-        this.commonName = commonName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -193,24 +179,6 @@ public class Discovery implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * Returns the story of when the discovery was made
-     *
-     * @return story
-     */
-    public String getStory() {
-        return story;
-    }
-
-    /**
-     * Sets the story of when the discovery was made
-     *
-     * @param story when discovered
-     */
-    public void setStory(String story) {
-        this.story = story;
     }
 
     /**

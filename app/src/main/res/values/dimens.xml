@@ -12,7 +12,9 @@
     <dimen name="d4">4dp</dimen>
     <dimen name="d8">8dp</dimen>
     <dimen name="d16">16dp</dimen>
+	<dimen name="d24">24dp</dimen>
     <dimen name="d32">32dp</dimen>
+	<dimen name="d48">48dp</dimen>
     <dimen name="d64">64dp</dimen>
     <dimen name="d128">128dp</dimen>
     <dimen name="d256">256dp</dimen>
@@ -34,6 +36,7 @@
     <dimen name="ts1024">1024sp</dimen>
 
     <!-- Margin/Padding Sizes-->
+    <dimen name="mini_fab_margin">22dp</dimen>
 
     <!-- Image/Icon Sizes-->
     <dimen name="discovery_banner_height">@dimen/d128</dimen>
