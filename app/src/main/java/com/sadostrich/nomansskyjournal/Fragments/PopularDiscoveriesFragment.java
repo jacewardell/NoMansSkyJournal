@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Fragments.dummy;
+package com.sadostrich.nomansskyjournal.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,35 +10,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sadostrich.nomansskyjournal.Adapters.MyDiscoveryRecyclerViewAdapter;
 import com.sadostrich.nomansskyjournal.Data.Cache;
-import com.sadostrich.nomansskyjournal.Models.Discovery;
+import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.R;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnNewDiscoveriesFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link IDiscoveryListener}
  * interface.
  */
-public class NewDiscoveriesFragment extends Fragment {
+public class PopularDiscoveriesFragment extends Fragment {
 
 	// TODO: Customize parameter argument names
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	// TODO: Customize parameters
 	private int mColumnCount = 2;
-	private OnNewDiscoveriesFragmentInteractionListener mListener;
+	private IDiscoveryListener mListener;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
 	 * screen orientation changes).
 	 */
-	public NewDiscoveriesFragment() {
+	public PopularDiscoveriesFragment() {
 	}
 
 	// TODO: Customize parameter initialization
 	@SuppressWarnings("unused")
-	public static NewDiscoveriesFragment newInstance(int columnCount) {
-		NewDiscoveriesFragment fragment = new NewDiscoveriesFragment();
+	public static PopularDiscoveriesFragment newInstance(int columnCount) {
+		PopularDiscoveriesFragment fragment = new PopularDiscoveriesFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_COLUMN_COUNT, columnCount);
 		fragment.setArguments(args);
@@ -57,7 +58,7 @@ public class NewDiscoveriesFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_discovery_list, container, false);
+		View view = inflater.inflate(R.layout.fragment_popular_discoveries_list, container, false);
 
 		// Set the adapter
 		if (view instanceof RecyclerView) {
@@ -79,8 +80,8 @@ public class NewDiscoveriesFragment extends Fragment {
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-		if (context instanceof OnNewDiscoveriesFragmentInteractionListener) {
-			mListener = (OnNewDiscoveriesFragmentInteractionListener) context;
+		if (context instanceof IDiscoveryListener) {
+			mListener = (IDiscoveryListener) context;
 		} else {
 			throw new RuntimeException(context.toString()
 											   + " must implement OnListFragmentInteractionListener");
@@ -92,19 +93,5 @@ public class NewDiscoveriesFragment extends Fragment {
 	public void onDetach() {
 		super.onDetach();
 		mListener = null;
-	}
-
-	/**
-	 * This interface must be implemented by activities that contain this fragment to allow an
-	 * interaction in this fragment to be communicated to the activity and potentially other
-	 * fragments contained in that activity.
-	 * <p/>
-	 * See the Android Training lesson <a href= "http://developer.android
-	 * .com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 */
-	public interface OnNewDiscoveriesFragmentInteractionListener {
-		// TODO: Update argument type and name
-		void onNewDiscoveriesFragmentInteraction(Discovery item);
 	}
 }

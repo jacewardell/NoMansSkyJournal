@@ -1,10 +1,8 @@
 package com.sadostrich.nomansskyjournal.Models;
 
 import com.google.gson.annotations.SerializedName;
-import com.sadostrich.nomansskyjournal.Utils.Formatter;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +18,11 @@ public class Discovery implements Serializable {
 	private User user;
 	private String type;
 	private DiscoveryProperties properties;
-    private String description, name, discoveredAt, imageUrl;
+    private String description, name, discoveredAt;
     private List<String> tags;
     private int timesFlagged, commentCount, score, views;
+	@SerializedName("_images")
+	private DiscoveryImage image;
 
 
     public Discovery() {
@@ -94,108 +94,107 @@ public class Discovery implements Serializable {
 //        this.imageUrl = imageUrl;
     }
 
-    public String getType() {
-        return type;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public List<String> getTags() {
-        return tags;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public int getTimesFlagged() {
-        return timesFlagged;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setTimesFlagged(int timesFlagged) {
-        this.timesFlagged = timesFlagged;
-    }
+	public DiscoveryProperties getProperties() {
+		return properties;
+	}
 
-    /**
-     * Returns the date the discovery was made
-     *
-     * @return date
-     */
-    public String getDiscoveredAt() {
-        return discoveredAt;
-    }
+	public void setProperties(DiscoveryProperties properties) {
+		this.properties = properties;
+	}
 
-    /**
-     * Sets the date the discovery was made
-     *
-     * @param date discovered
-     */
-    public void setDiscoveredAt(String date) {
-        this.discoveredAt = date;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    private String getCurrentDate() {
-        Calendar cal = Calendar.getInstance();
-        return Formatter.dateFormat.format(cal.getTime());
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    /**
-     * Returns the discovery's scientific name
-     *
-     * @return name
-     */
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Sets the discovery's scientific name
-     *
-     * @param name assigned by game
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * Returns the discovery's description
-     *
-     * @return description
-     */
-    public String getDescription() {
-        return description;
-    }
+	public String getDiscoveredAt() {
+		return discoveredAt;
+	}
 
-    /**
-     * Sets the discovery's description
-     *
-     * @param description of discovery
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDiscoveredAt(String discoveredAt) {
+		this.discoveredAt = discoveredAt;
+	}
 
-    /**
-     * Returns the url of the discovery's image
-     *
-     * @return imageUrl
-     */
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public List<String> getTags() {
+		return tags;
+	}
 
-    /**
-     * Sets the url of the discovery's image
-     *
-     * @param imageUrl of discovery
-     */
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public int getTimesFlagged() {
+		return timesFlagged;
+	}
+
+	public void setTimesFlagged(int timesFlagged) {
+		this.timesFlagged = timesFlagged;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
+	public DiscoveryImage getImage() {
+		return image;
+	}
+
+	public void setImage(DiscoveryImage image) {
+		this.image = image;
+	}
 }

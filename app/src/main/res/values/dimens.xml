@@ -40,7 +40,7 @@
 
 	<!-- Image/Icon Sizes-->
 	<dimen name="discovery_banner_height">@dimen/d128</dimen>
-	<dimen name="login_banner_height">@dimen/d128</dimen>
+	<dimen name="login_banner_height">@dimen/d64</dimen>
 
 	<!-- Text Sizes-->
 

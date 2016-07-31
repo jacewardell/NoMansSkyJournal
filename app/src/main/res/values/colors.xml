@@ -21,4 +21,12 @@
 
     <color name="normal_background">#FFFFFFFF</color>
     <color name="dim_background">#80000000</color>
+	<color name="star_yellow">#d69c31</color>
+	<color name="system_purple">#33165b</color>
+	<color name="planet_purple">#573da0</color>
+	<color name="fauna_red">#e05c4d</color>
+	<color name="flora_blue">#4693cb</color>
+	<color name="structure_green">#5db39e</color>
+	<color name="ship_gray">#848a88</color>
+	<color name="item_red">#bb082e</color>
 </resources>

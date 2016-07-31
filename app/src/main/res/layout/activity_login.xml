@@ -30,8 +30,8 @@
                 android:id="@+id/login_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_banner_height"
-                android:src="@mipmap/ic_planet"
-                />
+                android:src="@drawable/ic_launcher"
+				android:layout_marginTop="@dimen/d16"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

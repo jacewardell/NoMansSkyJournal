@@ -37,8 +37,8 @@
     <!-- Discovery Type Strings -->
     <string name="solar_system">Solar System</string>
     <string name="planet">Planet</string>
-    <string name="animal">Animal</string>
-    <string name="plant">Plant</string>
+    <string name="animal">Fauna</string>
+    <string name="plant">Flora</string>
     <string name="structure">Structure</string>
     <string name="tool">Tool</string>
     <string name="ship">Ship</string>
@@ -90,4 +90,12 @@
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+	<string name="by_username">By: {username}</string>
+	<string name="time_ago">Time Ago</string>
+	<string name="star">star</string>
+	<string name="number_placeholder">32</string>
+	<string name="system">system</string>
+	<string name="fauna">fauna</string>
+	<string name="flora">flora</string>
+	<string name="item">item</string>
 </resources>

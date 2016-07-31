@@ -10,7 +10,6 @@ import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Views.DiscoveryViewHolder;
-import com.sadostrich.nomansskyjournal.Fragments.dummy.DummyContent;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(ViewHolder holder, int position) {
         DiscoveryViewHolder discoveryViewHolder = (DiscoveryViewHolder) holder;
         discoveryViewHolder.setData(discoveries.get(position));
-        discoveryViewHolder.setDiscoveryListener(discoveryListener);
+//        discoveryViewHolder.setDiscoveryListener(discoveryListener);
     }
 
     @Override

@@ -31,7 +31,9 @@ import android.widget.Toast;
 import com.sadostrich.nomansskyjournal.Data.Cache;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
+import com.sadostrich.nomansskyjournal.Fragments.NewDiscoveriesFragment;
 import com.sadostrich.nomansskyjournal.Fragments.PlanetFragment;
+import com.sadostrich.nomansskyjournal.Fragments.PopularDiscoveriesFragment;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
@@ -129,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements
 				showProgressBar(View.INVISIBLE);
 
 				Cache.getInstance().setDiscoveries(response.body());
+				NewDiscoveriesFragment newDiscoveriesFragment =
+						(NewDiscoveriesFragment) mSectionsPagerAdapter.getItem(0);
+				newDiscoveriesFragment.notifyDataSetChanged();
 			}
 
 			@Override
@@ -525,32 +530,30 @@ public class MainActivity extends AppCompatActivity implements
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
+			switch (position) {
+				case 0:
+					return NewDiscoveriesFragment.newInstance(2);
+
+				case 1:
+					return PopularDiscoveriesFragment.newInstance(2);
+
+			}
 			return PlanetFragment.newInstance("", "", listener);
 		}
 
 		@Override
 		public int getCount() {
-			// Show 4 total pages.
-			return 7;
+			// Show 2 total pages.
+			return 2;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 				case 0:
-					return getResources().getString(R.string.solar_systems);
+					return getResources().getString(R.string.newest);
 				case 1:
-					return getResources().getString(R.string.planets);
-				case 2:
-					return getResources().getString(R.string.animals);
-				case 3:
-					return getResources().getString(R.string.plants);
-				case 4:
-					return getResources().getString(R.string.structure);
-				case 5:
-					return getResources().getString(R.string.tool);
-				case 6:
-					return getResources().getString(R.string.ship);
+					return getResources().getString(R.string.popular);
 			}
 			return null;
 		}
