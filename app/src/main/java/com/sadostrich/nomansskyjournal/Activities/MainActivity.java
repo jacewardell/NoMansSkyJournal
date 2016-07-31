@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sadostrich.nomansskyjournal.Data.Cache;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
 import com.sadostrich.nomansskyjournal.Fragments.PlanetFragment;
@@ -57,10 +58,9 @@ public class MainActivity extends AppCompatActivity implements
 	private static final String TAG = "MainActivity";
 	Retrofit retrofit;
 	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
-	 * derivative, which will keep every loaded fragment in memory. If this
-	 * becomes too memory intensive, it may be best to switch to a
+	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
+	 * sections. We use a {@link FragmentPagerAdapter} derivative, which will keep every loaded
+	 * fragment in memory. If this becomes too memory intensive, it may be best to switch to a
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),
-				this);
+														 this);
 
 		// Set up the ViewPager with the sections adapter.
 		viewPager.setAdapter(mSectionsPagerAdapter);
@@ -126,8 +126,9 @@ public class MainActivity extends AppCompatActivity implements
 			@Override
 			public void onResponse(Call<List<Discovery>> call,
 					Response<List<Discovery>> response) {
-				Log.e(TAG, "response");
 				showProgressBar(View.INVISIBLE);
+
+				Cache.getInstance().setDiscoveries(response.body());
 			}
 
 			@Override
@@ -164,10 +165,13 @@ public class MainActivity extends AppCompatActivity implements
 		}
 
 		drawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
-				drawerLayout, /* DrawerLayout object */
-				toolbar, /* nav drawer icon to replace 'Up' caret */
-				R.string.drawer_open, /* "open drawer" description */
-				R.string.drawer_close /* "close drawer" description */
+												 drawerLayout, /* DrawerLayout object */
+												 toolbar, /* nav drawer icon to replace 'Up'
+												 caret */
+												 R.string.drawer_open, /* "open drawer"
+												 description */
+												 R.string.drawer_close /* "close drawer"
+												 description */
 		) {
 
 			/** Called when a drawer has settled in a completely open state. */
@@ -283,55 +287,55 @@ public class MainActivity extends AppCompatActivity implements
 	public void onClick(View v) {
 		fabExpanded = !fabExpanded;
 		switch (v.getId()) {
-		case R.id.fab:
-			if (fabExpanded) {
-				expandFabs();
-			} else {
-				collapseFabs();
-			}
-			break;
-
-		case R.id.solar_systems_fab:
-			collapseFabs();
-			// startAddDiscoveryActivity();
-			Toast.makeText(MainActivity.this, "solar system", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.planet_fab:
-			collapseFabs();
-			Toast.makeText(MainActivity.this, "planet", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.animal_fab:
-			collapseFabs();
-			Toast.makeText(MainActivity.this, "animal", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.plant_fab:
-			collapseFabs();
-			Toast.makeText(MainActivity.this, "plant", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.structure_fab:
-			collapseFabs();
-			Toast.makeText(MainActivity.this, "structure", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.tool_fab:
-			collapseFabs();
-			Toast.makeText(MainActivity.this, "tool", Toast.LENGTH_SHORT).show();
-			break;
-
-		case R.id.ship_fab:
-			collapseFabs();
-			Toast.makeText(MainActivity.this, "ship", Toast.LENGTH_SHORT).show();
-			break;
-
-		default:
-			if (!fabExpanded) {
-				collapseFabs();
+			case R.id.fab:
+				if (fabExpanded) {
+					expandFabs();
+				} else {
+					collapseFabs();
+				}
 				break;
-			}
+
+			case R.id.solar_systems_fab:
+				collapseFabs();
+				// startAddDiscoveryActivity();
+				Toast.makeText(MainActivity.this, "solar system", Toast.LENGTH_SHORT).show();
+				break;
+
+			case R.id.planet_fab:
+				collapseFabs();
+				Toast.makeText(MainActivity.this, "planet", Toast.LENGTH_SHORT).show();
+				break;
+
+			case R.id.animal_fab:
+				collapseFabs();
+				Toast.makeText(MainActivity.this, "animal", Toast.LENGTH_SHORT).show();
+				break;
+
+			case R.id.plant_fab:
+				collapseFabs();
+				Toast.makeText(MainActivity.this, "plant", Toast.LENGTH_SHORT).show();
+				break;
+
+			case R.id.structure_fab:
+				collapseFabs();
+				Toast.makeText(MainActivity.this, "structure", Toast.LENGTH_SHORT).show();
+				break;
+
+			case R.id.tool_fab:
+				collapseFabs();
+				Toast.makeText(MainActivity.this, "tool", Toast.LENGTH_SHORT).show();
+				break;
+
+			case R.id.ship_fab:
+				collapseFabs();
+				Toast.makeText(MainActivity.this, "ship", Toast.LENGTH_SHORT).show();
+				break;
+
+			default:
+				if (!fabExpanded) {
+					collapseFabs();
+					break;
+				}
 		}
 	}
 
@@ -374,33 +378,33 @@ public class MainActivity extends AppCompatActivity implements
 
 		for (FloatingActionButton subFab : subFabs) {
 			switch (subFab.getId()) {
-			case R.id.solar_systems_fab:
-				animateFab(solarSystemFab, 5);
-				break;
+				case R.id.solar_systems_fab:
+					animateFab(solarSystemFab, 5);
+					break;
 
-			case R.id.planet_fab:
-				animateFab(planetFab, 6);
-				break;
+				case R.id.planet_fab:
+					animateFab(planetFab, 6);
+					break;
 
-			case R.id.animal_fab:
-				animateFab(animalFab, 0);
-				break;
+				case R.id.animal_fab:
+					animateFab(animalFab, 0);
+					break;
 
-			case R.id.plant_fab:
-				animateFab(plantFab, 1);
-				break;
+				case R.id.plant_fab:
+					animateFab(plantFab, 1);
+					break;
 
-			case R.id.structure_fab:
-				animateFab(structureFab, 2);
-				break;
+				case R.id.structure_fab:
+					animateFab(structureFab, 2);
+					break;
 
-			case R.id.tool_fab:
-				animateFab(toolFab, 3);
-				break;
+				case R.id.tool_fab:
+					animateFab(toolFab, 3);
+					break;
 
-			case R.id.ship_fab:
-				animateFab(shipFab, 4);
-				break;
+				case R.id.ship_fab:
+					animateFab(shipFab, 4);
+					break;
 			}
 		}
 	}
@@ -472,7 +476,7 @@ public class MainActivity extends AppCompatActivity implements
 	public void onAddPlanet() {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(getString(R.string.discovery_type),
-				Enums.DiscoveryType.PLANET);
+							   Enums.DiscoveryType.PLANET);
 		bundle.putBoolean(getString(R.string.discovery_add), true);
 
 		Intent intent = new Intent(MainActivity.this, DiscoveryActivity.class);
@@ -484,20 +488,20 @@ public class MainActivity extends AppCompatActivity implements
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int titleRes = R.string.community;
 		switch (position) {
-		case 0:
-			// Show the community discoveries
-			titleRes = R.string.community;
-			break;
+			case 0:
+				// Show the community discoveries
+				titleRes = R.string.discoveries;
+				break;
 
-		case 1:
-			// Show friend's discoveries
-			titleRes = R.string.friends;
-			break;
+			case 1:
+				// Show friend's discoveries
+				titleRes = R.string.friends;
+				break;
 
-		case 2:
-			// Show your discoveries
-			titleRes = R.string.profile;
-			break;
+			case 2:
+				// Show your discoveries
+				titleRes = R.string.profile;
+				break;
 		}
 
 		drawerLayout.closeDrawers();
@@ -505,8 +509,8 @@ public class MainActivity extends AppCompatActivity implements
 	}
 
 	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
+	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the
+	 * sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		private IDiscoveryListener listener;
@@ -533,20 +537,20 @@ public class MainActivity extends AppCompatActivity implements
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
-			case 0:
-				return getResources().getString(R.string.solar_systems);
-			case 1:
-				return getResources().getString(R.string.planets);
-			case 2:
-				return getResources().getString(R.string.animals);
-			case 3:
-				return getResources().getString(R.string.plants);
-			case 4:
-				return getResources().getString(R.string.structure);
-			case 5:
-				return getResources().getString(R.string.tool);
-			case 6:
-				return getResources().getString(R.string.ship);
+				case 0:
+					return getResources().getString(R.string.solar_systems);
+				case 1:
+					return getResources().getString(R.string.planets);
+				case 2:
+					return getResources().getString(R.string.animals);
+				case 3:
+					return getResources().getString(R.string.plants);
+				case 4:
+					return getResources().getString(R.string.structure);
+				case 5:
+					return getResources().getString(R.string.tool);
+				case 6:
+					return getResources().getString(R.string.ship);
 			}
 			return null;
 		}
