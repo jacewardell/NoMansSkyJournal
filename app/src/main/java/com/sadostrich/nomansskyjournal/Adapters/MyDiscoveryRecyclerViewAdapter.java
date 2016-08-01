@@ -1,6 +1,7 @@
 package com.sadostrich.nomansskyjournal.Adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class MyDiscoveryRecyclerViewAdapter extends
 		RecyclerView.Adapter<DiscoveryViewHolder> {
+	private static final String TAG = "DiscoveryRecViewAdapter";
 
 	private final List<Discovery> mValues;
 	private final IDiscoveryListener mListener;
@@ -39,6 +41,7 @@ public class MyDiscoveryRecyclerViewAdapter extends
 	@Override
 	public void onBindViewHolder(final DiscoveryViewHolder holder, int position) {
 		holder.setData(mValues.get(position));
+		Log.d(TAG, "@ onBindViewHolder: " + mValues.get(position).getName());
 	}
 
 	@Override

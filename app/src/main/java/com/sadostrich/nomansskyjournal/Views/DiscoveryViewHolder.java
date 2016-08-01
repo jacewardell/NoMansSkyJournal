@@ -18,8 +18,9 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 
 	private View itemView;
 	private ImageView discoveryImage;
-	private TextView discoveryType, discoveryCommentCount, discoveryName, discoveryUsername;
+	private TextView discoveryCommentCount, discoveryName, discoveryUsername;
 	private Discovery discovery;
+	private ImageView discoveryType;
 
 	public DiscoveryViewHolder(View itemView) {
 		super(itemView);
@@ -34,21 +35,22 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 		discoveryImage = (ImageView) itemView.findViewById(R.id
 																   .img_discovery_grid_image);
 		discoveryType =
-				(TextView) itemView.findViewById(R.id.tv_discovery_grid_type);
+				(ImageView) itemView.findViewById(R.id.img_discovery_grid_type);
 		discoveryCommentCount =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_comment_count);
 		discoveryName =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_name);
 		discoveryUsername =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_username);
-		itemView.findViewById(R.id.tv_discovery_grid_time_ago);
+//		itemView.findViewById(R.id.tv_discovery_grid_time_ago);
 	}
 
 	public void setData(Discovery discovery) {
 		this.discovery = discovery;
 
 		Picasso.with(itemView.getContext())
-				.load(discovery.getImage().getFileUrl().getCarouselThumb())
+				.load(discovery.getImage().get(0).getFileUrl().getCarouselThumb()).fit()
+				.centerCrop()
 				.into(discoveryImage);
 		setDiscoveryType();
 		discoveryCommentCount.setText("" + discovery.getCommentCount());
@@ -58,47 +60,47 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 
 	private void setDiscoveryType() {
 		int colorRes = -1;
-		int stringRes = -1;
+		int imageRes = -1;
 
 		switch (discovery.getType().toLowerCase()) {
 			case NMSOriginsServiceHelper.SOLAR_SYSTEM:
 				colorRes = R.color.system_purple;
-				stringRes = R.string.system;
+				imageRes = R.drawable.ic_system;
 				break;
 
 			case NMSOriginsServiceHelper.STAR:
 				colorRes = R.color.star_yellow;
-				stringRes = R.string.star;
+				imageRes = R.drawable.ic_star;
 				break;
 
 			case NMSOriginsServiceHelper.PLANET:
 				colorRes = R.color.planet_purple;
-				stringRes = R.string.planet;
+				imageRes = R.drawable.ic_planet;
 				break;
 
 			case NMSOriginsServiceHelper.FAUNA:
 				colorRes = R.color.fauna_red;
-				stringRes = R.string.fauna;
+				imageRes = R.drawable.ic_fauna;
 				break;
 
 			case NMSOriginsServiceHelper.FLORA:
 				colorRes = R.color.flora_blue;
-				stringRes = R.string.flora;
+				imageRes = R.drawable.ic_flora;
 				break;
 
 			case NMSOriginsServiceHelper.STRUCTURE:
 				colorRes = R.color.structure_green;
-				stringRes = R.string.structure;
+				imageRes = R.drawable.ic_structure;
 				break;
 
 			case NMSOriginsServiceHelper.ITEM:
 				colorRes = R.color.item_red;
-				stringRes = R.string.item;
+				imageRes = R.drawable.ic_item;
 				break;
 
 			case NMSOriginsServiceHelper.SHIP:
 				colorRes = R.color.ship_gray;
-				stringRes = R.string.ship;
+				imageRes = R.drawable.ic_ship;
 				break;
 		}
 		if (colorRes == -1) {
@@ -106,20 +108,21 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 		}
 		discoveryType.setBackgroundColor(itemView.getResources().getColor(colorRes));
 
-		if (stringRes == -1) {
+		if (imageRes == -1) {
 			discoveryType.setVisibility(View.GONE);
 			return;
 		}
 		discoveryType.setVisibility(View.VISIBLE);
-		discoveryType.setText(stringRes);
+		discoveryType.setImageDrawable(itemView.getResources().getDrawable(imageRes));
 	}
 
 	private void setDiscoveryUsername() {
 		String byUsername = itemView.getResources().getString(R.string.by_username);
 
 		if (discovery.getUser() != null) {
-			byUsername = byUsername.replace(NMSOriginsService.USERNAME, discovery.getUser().getUsername
-					());
+			byUsername =
+					byUsername.replace(NMSOriginsService.USERNAME, discovery.getUser().getUsername
+							());
 		} else {
 			byUsername = byUsername.replace(NMSOriginsService.USERNAME, "N/A");
 		}

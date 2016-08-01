@@ -10,7 +10,8 @@ import com.google.gson.annotations.SerializedName;
 public class DiscoveryImage {
 	private String id;
 	@SerializedName("_user")
-	private String userId, name, mimeType, extension, filepath, filename;
+	private String userId;
+	private String name, mimeType, extension, filepath, filename;
 	@SerializedName("fileurl")
 	private FileUrl fileUrl;
 

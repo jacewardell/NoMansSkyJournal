@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -26,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sadostrich.nomansskyjournal.Data.Cache;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
@@ -40,6 +40,7 @@ import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Views.BottomTabsView;
+import com.sadostrich.nomansskyjournal.Views.SpinnerBarView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -73,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements
 	private boolean fabExpanded = false;
 	private DrawerLayout drawerLayout;
 	private ListView drawerListView;
-	// private AddDiscoveryCardView addDiscoveryCardView;
-	private FloatingActionButton mainFab, solarSystemFab, planetFab, animalFab, plantFab,
-			structureFab, toolFab, shipFab;
+	private SpinnerBarView spinnerBarView;
+	private FloatingActionButton mainFab, solarSystemFab, starFab, stationFab, planetFab,
+			animalFab, plantFab, structureFab, toolFab, shipFab;
 	private Toolbar toolbar;
 	private ActionBarDrawerToggle drawerToggle;
 	private ImageView drawerUserAvatar;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements
 
 		setupFabs();
 		setupDrawerLayout();
-		// setupBottomTabs();
+		setupSpinnerBarView();
 
 		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 		// set your desired log level
@@ -122,25 +123,29 @@ public class MainActivity extends AppCompatActivity implements
 				.addConverterFactory(GsonConverterFactory.create()).build();
 		NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
 
-		Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
-				.findDiscoveries(NMSOriginsServiceHelper.getDiscoveriesBodyHashMap());
-		findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
-			@Override
-			public void onResponse(Call<List<Discovery>> call,
-					Response<List<Discovery>> response) {
-				showProgressBar(View.INVISIBLE);
+		getNewDiscoveries(nmsOriginsService);
+		getPopularDiscoveries(nmsOriginsService);
+	}
 
-				Cache.getInstance().setDiscoveries(response.body());
-				NewDiscoveriesFragment newDiscoveriesFragment =
-						(NewDiscoveriesFragment) mSectionsPagerAdapter.getItem(0);
-				newDiscoveriesFragment.notifyDataSetChanged();
-			}
+	private void getViewRefs() {
+		viewPager = (ViewPager) findViewById(R.id.main_activity_viewpager);
 
-			@Override
-			public void onFailure(Call<List<Discovery>> call, Throwable t) {
-				Log.e(TAG, "response");
-			}
-		});
+		drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
+		drawerListView = (ListView) findViewById(R.id.drawer_listview);
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+		mainFab = (FloatingActionButton) findViewById(R.id.fab);
+		solarSystemFab = (FloatingActionButton) findViewById(R.id.solar_systems_fab);
+		starFab = (FloatingActionButton) findViewById(R.id.star_fab);
+		stationFab = (FloatingActionButton) findViewById(R.id.station_fab);
+		planetFab = (FloatingActionButton) findViewById(R.id.planet_fab);
+		animalFab = (FloatingActionButton) findViewById(R.id.animal_fab);
+		plantFab = (FloatingActionButton) findViewById(R.id.plant_fab);
+		structureFab = (FloatingActionButton) findViewById(R.id.structure_fab);
+		toolFab = (FloatingActionButton) findViewById(R.id.tool_fab);
+		shipFab = (FloatingActionButton) findViewById(R.id.ship_fab);
+
+		progressBarContainer = findViewById(R.id.layout_progress_bar_container);
 	}
 
 	@Override
@@ -204,47 +209,28 @@ public class MainActivity extends AppCompatActivity implements
 		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
-	// private void setupBottomTabs() {
-	// bottomTabsView.setTabSelectedListener(this);
-	// }
+	private void setupSpinnerBarView() {
 
-	private void getViewRefs() {
-		viewPager = (ViewPager) findViewById(R.id.container);
-
-		drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
-		drawerListView = (ListView) findViewById(R.id.drawer_listview);
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		// bottomTabsView = (BottomTabsView)
-		// findViewById(R.id.bottom_tabs_view);
-
-		mainFab = (FloatingActionButton) findViewById(R.id.fab);
-		// addDiscoveryCardViewz = (AddDiscoveryCardView) findViewById(R.id
-		// .add_discovery_card_view);
-		solarSystemFab = (FloatingActionButton) findViewById(R.id.solar_systems_fab);
-		planetFab = (FloatingActionButton) findViewById(R.id.planet_fab);
-		animalFab = (FloatingActionButton) findViewById(R.id.animal_fab);
-		plantFab = (FloatingActionButton) findViewById(R.id.plant_fab);
-		structureFab = (FloatingActionButton) findViewById(R.id.structure_fab);
-		toolFab = (FloatingActionButton) findViewById(R.id.tool_fab);
-		shipFab = (FloatingActionButton) findViewById(R.id.ship_fab);
-
-		progressBarContainer = findViewById(R.id.layout_progress_bar_container);
 	}
 
 	private void setupFabs() {
 		if (mainFab != null) {
 			// addDiscoveryCardView.setListener(this);
 			mainFab.setOnClickListener(this);
+			solarSystemFab.setOnClickListener(this);
+			starFab.setOnClickListener(this);
+			stationFab.setOnClickListener(this);
 			planetFab.setOnClickListener(this);
 			animalFab.setOnClickListener(this);
 			plantFab.setOnClickListener(this);
-			solarSystemFab.setOnClickListener(this);
 			structureFab.setOnClickListener(this);
 			toolFab.setOnClickListener(this);
 			shipFab.setOnClickListener(this);
 
 			subFabs = new ArrayList<FloatingActionButton>();
 			subFabs.add(solarSystemFab);
+			subFabs.add(starFab);
+			subFabs.add(stationFab);
 			subFabs.add(planetFab);
 			subFabs.add(animalFab);
 			subFabs.add(plantFab);
@@ -283,6 +269,51 @@ public class MainActivity extends AppCompatActivity implements
 
 	}
 
+	private void getNewDiscoveries(NMSOriginsService nmsOriginsService) {
+		Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
+				.findDiscoveries(NMSOriginsServiceHelper.getNewDiscoveriesRequestBody());
+		findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
+			@Override
+			public void onResponse(Call<List<Discovery>> call,
+					Response<List<Discovery>> response) {
+				Cache.getInstance().setNewDiscoveries(response.body());
+				final NewDiscoveriesFragment newDiscoveriesFragment =
+						(NewDiscoveriesFragment) mSectionsPagerAdapter.getItem(0);
+				Log.d(TAG, "@ onResponse: " + newDiscoveriesFragment);
+				newDiscoveriesFragment.notifyDataSetChanged();
+
+				showProgressBar(View.INVISIBLE);
+			}
+
+			@Override
+			public void onFailure(Call<List<Discovery>> call, Throwable t) {
+				Log.e(TAG, "response");
+			}
+		});
+	}
+
+	private void getPopularDiscoveries(NMSOriginsService nmsOriginsService) {
+		Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
+				.findDiscoveries(NMSOriginsServiceHelper.getPopularDiscoveriesRequestBody());
+		findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
+			@Override
+			public void onResponse(Call<List<Discovery>> call,
+					Response<List<Discovery>> response) {
+				Cache.getInstance().setPopularDiscoveries(response.body());
+				PopularDiscoveriesFragment popularDiscoveriesFragment =
+						(PopularDiscoveriesFragment) mSectionsPagerAdapter.getItem(1);
+				popularDiscoveriesFragment.notifyDataSetChanged();
+
+				showProgressBar(View.INVISIBLE);
+			}
+
+			@Override
+			public void onFailure(Call<List<Discovery>> call, Throwable t) {
+				Log.e(TAG, "response");
+			}
+		});
+	}
+
 	@Override
 	public void onTabSelected(int index) {
 		Log.d(TAG, "tab index: " + index);
@@ -302,38 +333,36 @@ public class MainActivity extends AppCompatActivity implements
 
 			case R.id.solar_systems_fab:
 				collapseFabs();
-				// startAddDiscoveryActivity();
-				Toast.makeText(MainActivity.this, "solar system", Toast.LENGTH_SHORT).show();
+				startAddDiscoveryActivity(R.string.title_system);
 				break;
 
 			case R.id.planet_fab:
 				collapseFabs();
-				Toast.makeText(MainActivity.this, "planet", Toast.LENGTH_SHORT).show();
+				startAddDiscoveryActivity(R.string.title_planet);
 				break;
 
 			case R.id.animal_fab:
 				collapseFabs();
-				Toast.makeText(MainActivity.this, "animal", Toast.LENGTH_SHORT).show();
+				startAddDiscoveryActivity(R.string.title_fauna);
 				break;
 
 			case R.id.plant_fab:
+				startAddDiscoveryActivity(R.string.title_flora);
 				collapseFabs();
-				Toast.makeText(MainActivity.this, "plant", Toast.LENGTH_SHORT).show();
 				break;
 
 			case R.id.structure_fab:
+				startAddDiscoveryActivity(R.string.title_structure);
 				collapseFabs();
-				Toast.makeText(MainActivity.this, "structure", Toast.LENGTH_SHORT).show();
 				break;
 
 			case R.id.tool_fab:
-				collapseFabs();
-				Toast.makeText(MainActivity.this, "tool", Toast.LENGTH_SHORT).show();
+				startAddDiscoveryActivity(R.string.title_item);
 				break;
 
 			case R.id.ship_fab:
 				collapseFabs();
-				Toast.makeText(MainActivity.this, "ship", Toast.LENGTH_SHORT).show();
+				startAddDiscoveryActivity(R.string.title_ship);
 				break;
 
 			default:
@@ -342,6 +371,11 @@ public class MainActivity extends AppCompatActivity implements
 					break;
 				}
 		}
+	}
+
+	private void startAddDiscoveryActivity(@StringRes int extraRes) {
+		Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
+		startActivity(intent);
 	}
 
 	private void expandFabs() {
@@ -374,7 +408,7 @@ public class MainActivity extends AppCompatActivity implements
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		int screenWidth = metrics.widthPixels;
 		int screenHeight = viewPager.getHeight();
-		circleRadius = (screenWidth * 0.40) / 2;
+		circleRadius = (screenWidth * 0.50) / 2;
 
 		// screenCenter = new Point((int) (viewPager.getX() +
 		// viewPager.getWidth() / 2),
@@ -384,53 +418,60 @@ public class MainActivity extends AppCompatActivity implements
 		for (FloatingActionButton subFab : subFabs) {
 			switch (subFab.getId()) {
 				case R.id.solar_systems_fab:
-					animateFab(solarSystemFab, 5);
+					animateFab(solarSystemFab, 7);
 					break;
 
+				case R.id.star_fab:
+					animateFab(starFab, 8);
+					break;
+
+				case R.id.station_fab:
+					animateFab(stationFab, 0);
+
 				case R.id.planet_fab:
-					animateFab(planetFab, 6);
+					animateFab(planetFab, 1);
 					break;
 
 				case R.id.animal_fab:
-					animateFab(animalFab, 0);
+					animateFab(animalFab, 2);
 					break;
 
 				case R.id.plant_fab:
-					animateFab(plantFab, 1);
+					animateFab(plantFab, 3);
 					break;
 
 				case R.id.structure_fab:
-					animateFab(structureFab, 2);
+					animateFab(structureFab, 4);
 					break;
 
 				case R.id.tool_fab:
-					animateFab(toolFab, 3);
+					animateFab(toolFab, 5);
 					break;
 
 				case R.id.ship_fab:
-					animateFab(shipFab, 4);
+					animateFab(shipFab, 6);
 					break;
 			}
 		}
 	}
 
 	private void animateFab(final FloatingActionButton fab, final float position) {
-		float xPos = 0;
-		float yPos = 0;
-		// Animate back to the mainFab
-		if (position == -1) {
-			xPos = mainFab.getX() + mainFab.getWidth() / 6;
-			yPos = mainFab.getY() + mainFab.getHeight() / 6;
-		} else {
+		float xPos = mainFab.getX() + mainFab.getWidth() / 6;
+		float yPos = mainFab.getY() + mainFab.getHeight() / 6;
+		float alpha = 0;
+		// Animate to the expanded position
+		if (position != -1) {
 			xPos = (float) (circleRadius
 					* Math.cos((2 * Math.PI / subFabs.size()) * position) + screenCenter.x
 					- solarSystemFab.getWidth() / 2);
 			yPos = (float) (circleRadius
 					* Math.sin((2 * Math.PI / subFabs.size()) * position)
 					+ screenCenter.y);
+
+			alpha = 1;
 		}
 
-		fab.animate().x(xPos).y(yPos)
+		fab.animate().x(xPos).y(yPos).alpha(alpha)
 				.setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(250)
 				.setListener(new Animator.AnimatorListener() {
 					@Override
@@ -472,7 +513,7 @@ public class MainActivity extends AppCompatActivity implements
 		bundle.putSerializable(getString(R.string.extra_discovery), discovery);
 		bundle.putBoolean(getString(R.string.discovery_add), false);
 
-		Intent intent = new Intent(MainActivity.this, DiscoveryActivity.class);
+		Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -484,7 +525,7 @@ public class MainActivity extends AppCompatActivity implements
 							   Enums.DiscoveryType.PLANET);
 		bundle.putBoolean(getString(R.string.discovery_add), true);
 
-		Intent intent = new Intent(MainActivity.this, DiscoveryActivity.class);
+		Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -527,6 +568,7 @@ public class MainActivity extends AppCompatActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
+			Log.d(TAG, "@ getItem: " + position);
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
@@ -538,7 +580,7 @@ public class MainActivity extends AppCompatActivity implements
 					return PopularDiscoveriesFragment.newInstance(2);
 
 			}
-			return PlanetFragment.newInstance("", "", listener);
+			return NewDiscoveriesFragment.newInstance(2);
 		}
 
 		@Override

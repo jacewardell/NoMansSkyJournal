@@ -13,19 +13,31 @@ import java.util.List;
 public class Cache {
 	private static Cache instance = new Cache();
 
-	private final List<Discovery> discoveries = new ArrayList<>();
+	private final List<Discovery> newDiscoveries = new ArrayList<>();
+
+	private final List<Discovery> popularDiscoveries = new ArrayList<>();
 
 	public static Cache getInstance() {
 		return instance;
 	}
 
-	public List<Discovery> getDiscoveries() {
-		return discoveries;
+	public List<Discovery> getNewDiscoveries() {
+		return newDiscoveries;
 	}
 
-	public void setDiscoveries(
+	public void setNewDiscoveries(
 			List<Discovery> discoveries) {
-		this.discoveries.clear();
-		this.discoveries.addAll(discoveries);
+		this.newDiscoveries.clear();
+		this.newDiscoveries.addAll(discoveries);
+	}
+
+	public List<Discovery> getPopularDiscoveries() {
+		return popularDiscoveries;
+	}
+
+	public void setPopularDiscoveries(
+			List<Discovery> discoveries) {
+		this.popularDiscoveries.clear();
+		this.popularDiscoveries.addAll(discoveries);
 	}
 }

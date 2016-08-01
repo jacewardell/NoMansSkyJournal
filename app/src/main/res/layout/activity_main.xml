@@ -39,10 +39,14 @@
 				android:layout_height="wrap_content"
 				app:tabMode="scrollable"/>
 
+			<com.sadostrich.nomansskyjournal.Views.SpinnerBarView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
 		</android.support.design.widget.AppBarLayout>
 
 		<android.support.v4.view.ViewPager
-			android:id="@+id/container"
+			android:id="@+id/main_activity_viewpager"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -54,7 +58,34 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_system"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/system_purple"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/star_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:src="@drawable/ic_star"
+			app:backgroundTint="@color/star_yellow"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/station_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:src="@drawable/ic_station"
+			app:backgroundTint="@color/station_green"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/planet_fab"
@@ -63,7 +94,10 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_planet"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/planet_purple"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/animal_fab"
@@ -72,7 +106,10 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_fauna"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/fauna_red"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/plant_fab"
@@ -81,7 +118,10 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_flora"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/flora_blue"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/structure_fab"
@@ -90,7 +130,10 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_structure"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/structure_green"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/tool_fab"
@@ -99,7 +142,10 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_item"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/item_red"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/ship_fab"
@@ -108,7 +154,10 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:src="@drawable/ic_ship"
-			app:fabSize="mini"/>
+			app:backgroundTint="@color/ship_gray"
+			app:fabSize="mini"
+			android:alpha="0"
+			android:visibility="invisible"/>
 
 
 		<android.support.design.widget.FloatingActionButton

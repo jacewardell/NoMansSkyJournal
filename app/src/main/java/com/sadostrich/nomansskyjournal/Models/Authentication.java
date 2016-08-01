@@ -5,50 +5,58 @@ import java.util.List;
 
 /**
  * Used to authenticate REQUEST queries to get information from the server
- * <p>
+ * <p/>
  * Created by jacewardell on 5/9/16.
  */
 public class Authentication {
-    private static Authentication instance;
+	private static Authentication instance;
 
-    private String id;
+	private String id;
 	private String cookie;
-    private String username, email;
-    private int totalScore;
-    private Activation activation;
+	private String username, email;
+	private int totalScore;
+	private Activation activation;
 	private boolean banned;
-    private List<Discovery> favorites;
-    private List<String> votes;
+	private List<Discovery> favorites;
+	private List<String> votes;
 	private boolean mod, admin;
 	private Avatar avatar;
 
 	public Authentication() {
-        id = cookie = username = email = "";
-        favorites = new ArrayList<>();
-        votes = new ArrayList<>();
-    }
+		id = cookie = username = email = "";
+		favorites = new ArrayList<>();
+		votes = new ArrayList<>();
+	}
 
-    public Authentication(String id, String cookie, String username, String email, List<Discovery>
+	public Authentication(String id, String cookie, String username, String email, List<Discovery>
 			favorites, List<String> votes, boolean admin) {
-        this.id = id;
+		this.id = id;
 		this.cookie = cookie;
-        this.username = username;
-        this.email = email;
-        this.favorites = favorites;
-        this.votes = votes;
-        this.admin = admin;
-    }
+		this.username = username;
+		this.email = email;
+		this.favorites = favorites;
+		this.votes = votes;
+		this.admin = admin;
+	}
 
-    public static Authentication getInstance() {
-        if (instance == null) {
-            instance = new Authentication();
-        }
-        return instance;
-    }
+	public static Authentication getInstance() {
+		if (instance == null) {
+			instance = new Authentication();
+		}
+		return instance;
+	}
 
-    public static void setInstance(Authentication inst) {
-        instance = inst;
-    }
+	public static void setInstance(Authentication inst) {
+		instance = inst;
+	}
+
+	public static boolean isValidUsername(Authentication auth) {
+		return auth != null && auth.getUsername() != null && !auth.getUsername().isEmpty();
+	}
+
+	public static boolean isValidUserAvatar(Authentication auth) {
+		return auth != null && auth.getAvatar() != null;
+	}
 
 	public String getId() {
 		return id;
@@ -90,14 +98,6 @@ public class Authentication {
 		this.activation = activation;
 	}
 
-	public boolean isBanned() {
-		return banned;
-	}
-
-	public void setBanned(boolean banned) {
-		this.banned = banned;
-	}
-
 	public List<Discovery> getFavorites() {
 		return favorites;
 	}
@@ -105,6 +105,14 @@ public class Authentication {
 	public void setFavorites(
 			List<Discovery> favorites) {
 		this.favorites = favorites;
+	}
+
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
 	}
 
 	public List<String> getVotes() {
@@ -137,13 +145,5 @@ public class Authentication {
 
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
-	}
-
-	public static boolean isValidUsername(Authentication auth) {
-		return auth != null && auth.getUsername() != null && !auth.getUsername().isEmpty();
-	}
-
-	public static boolean isValidUserAvatar(Authentication auth) {
-		return auth != null && auth.getAvatar() != null;
 	}
 }

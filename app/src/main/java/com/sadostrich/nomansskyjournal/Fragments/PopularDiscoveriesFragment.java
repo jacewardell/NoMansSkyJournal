@@ -12,14 +12,14 @@ import android.view.ViewGroup;
 
 import com.sadostrich.nomansskyjournal.Adapters.MyDiscoveryRecyclerViewAdapter;
 import com.sadostrich.nomansskyjournal.Data.Cache;
+import com.sadostrich.nomansskyjournal.Data.GridSpacingItemDecoration;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.R;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link IDiscoveryListener}
- * interface.
+ * Activities containing this fragment MUST implement the {@link IDiscoveryListener} interface.
  */
 public class PopularDiscoveriesFragment extends Fragment {
 
@@ -28,6 +28,7 @@ public class PopularDiscoveriesFragment extends Fragment {
 	// TODO: Customize parameters
 	private int mColumnCount = 2;
 	private IDiscoveryListener mListener;
+	private MyDiscoveryRecyclerViewAdapter adapter;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -44,6 +45,19 @@ public class PopularDiscoveriesFragment extends Fragment {
 		args.putInt(ARG_COLUMN_COUNT, columnCount);
 		fragment.setArguments(args);
 		return fragment;
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof IDiscoveryListener) {
+			mListener = (IDiscoveryListener) context;
+		} else {
+			throw new RuntimeException(context.toString()
+											   + " must implement "
+											   + "OnListFragmentInteractionListener");
+
+		}
 	}
 
 	@Override
@@ -64,34 +78,32 @@ public class PopularDiscoveriesFragment extends Fragment {
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;
+			recyclerView.addItemDecoration(new GridSpacingItemDecoration());
 			if (mColumnCount <= 1) {
 				recyclerView.setLayoutManager(new LinearLayoutManager(context));
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			recyclerView
-					.setAdapter(new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getDiscoveries(),
-																   mListener));
+
+			adapter =
+					new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getPopularDiscoveries(),
+													   mListener);
+			recyclerView.setAdapter(adapter);
 		}
 		return view;
-	}
-
-
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-		if (context instanceof IDiscoveryListener) {
-			mListener = (IDiscoveryListener) context;
-		} else {
-			throw new RuntimeException(context.toString()
-											   + " must implement OnListFragmentInteractionListener");
-
-		}
 	}
 
 	@Override
 	public void onDetach() {
 		super.onDetach();
 		mListener = null;
+	}
+
+	public void notifyDataSetChanged() {
+		if (adapter == null) {
+			adapter = new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getPopularDiscoveries(),
+														 mListener);
+		}
+		adapter.notifyDataSetChanged();
 	}
 }

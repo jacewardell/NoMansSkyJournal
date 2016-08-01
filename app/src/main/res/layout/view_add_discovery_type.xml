@@ -19,7 +19,7 @@
 		android:layout_marginBottom="@dimen/d8"
 		android:layout_marginRight="@dimen/d8"
 		android:gravity="center"
-		android:text="@string/planet"/>
+		android:text="@string/title_planet"/>
 
 	<TextView
 		android:id="@+id/tv_add_discovery_animal"

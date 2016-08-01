@@ -23,6 +23,8 @@ public class NMSOriginsServiceHelper {
 	public static final String ITEM = "item";
 	public static final String SHIP = "ship";
 
+	private static final int PAGE_SIZE = 20;
+
 	@NonNull
 	public static HashMap<String, String> getLoginBodyHashMap(String email, String password) {
 		HashMap<String, String> loginBody = new HashMap<>();
@@ -38,8 +40,12 @@ public class NMSOriginsServiceHelper {
 	 * @return
 	 */
 	@NonNull
-	public static RequestBody getDiscoveriesBodyHashMap() {
-		return getDiscoveriesBodyHashMap("", "createdAt", -1, 6);
+	public static RequestBody getNewDiscoveriesRequestBody() {
+		return getDiscoveriesBodyHashMap("", "createdAt", -1, PAGE_SIZE);
+	}
+
+	public static RequestBody getPopularDiscoveriesRequestBody() {
+		return getDiscoveriesBodyHashMap("", "score", -1, PAGE_SIZE);
 	}
 
 	public static RequestBody getDiscoveriesBodyHashMap(String query, String sortKey, int
