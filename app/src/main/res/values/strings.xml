@@ -74,6 +74,8 @@
 	<string name="discovery_type">extra_discovery_type</string>
 	<string name="discovery_add">extra_discovery_add</string>
 	<string name="discovery">extra_discovery</string>
+	<string name="discovered_by_colon">Discovered by:</string>
+	<string name="report_as_inappropriate">Report as inappropriate</string>
 
 	<!-- Menu strings -->
 	<string name="settings">Settings</string>
