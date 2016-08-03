@@ -128,4 +128,21 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 	<string name="previous">Previous</string>
 	<string name="submit">Submit</string>
+	<string name="unknown">Unknown</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="type">Type:</string>
+	<string name="total_planets">Total Planets:</string>
+	<string name="life">Life:</string>
+	<string name="dangerous">Dangerous:</string>
+	<string name="tag_total">{count} Tags Added</string>
+	<string name="show_tags">Show Tags</string>
+	<string name="add">Add</string>
+
+	<!-- String Arrays -->
+	<string-array name="array_system_life">
+		<item>Unknown</item>
+		<item>Yes</item>
+		<item>No</item>
+	</string-array>
 </resources>

@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Data;
+package com.sadostrich.nomansskyjournal.Utils;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

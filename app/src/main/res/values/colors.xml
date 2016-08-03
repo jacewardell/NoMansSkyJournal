@@ -22,6 +22,7 @@
     <color name="normal_background">#FFFFFFFF</color>
     <color name="dim_background">#80000000</color>
 	<color name="system_purple">#33165b</color>
+	<color name="system_purple_dark">#220f3e</color>
 	<color name="star_yellow">#d69c31</color>
 	<color name="station_green">#66be7a</color>
 	<color name="planet_purple">#573da0</color>

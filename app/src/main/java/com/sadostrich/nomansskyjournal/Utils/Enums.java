@@ -33,6 +33,16 @@ public class Enums {
         }
     }
 
+    public enum SystemType {
+        UNARY("Singular"), BINARY("Binary"), TERNARY("Triple"), QUATERNARY("Quadruple"), QUINARY("Quintuple"), SENARY("Sextuple"), SEPTENARY("Septuple");
+
+        private final String nonsensicalWebString;
+
+        SystemType(String nonsensicalWebString) {
+            this.nonsensicalWebString = nonsensicalWebString;
+        }
+    }
+
     public enum PlanetSize {
         XX_SMALL("XX-Small"), X_SMALL("X-Small"), SMALL("Small"), MEDIUM("Medium"), LARGE("Large"), X_LARGE("X-Large"), XX_LARGE("XX-Large");
 
