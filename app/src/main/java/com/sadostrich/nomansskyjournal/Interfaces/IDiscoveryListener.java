@@ -10,6 +10,4 @@ import com.sadostrich.nomansskyjournal.Activities.MainActivity;
  */
 public interface IDiscoveryListener {
     void onDiscoverySelected(Discovery discovery);
-
-    void onAddPlanet();
 }

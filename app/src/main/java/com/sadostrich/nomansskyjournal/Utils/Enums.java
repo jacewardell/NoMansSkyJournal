@@ -1,5 +1,9 @@
 package com.sadostrich.nomansskyjournal.Utils;
 
+import android.support.annotation.StringRes;
+
+import com.sadostrich.nomansskyjournal.R;
+
 /**
  * Class to contain all enums that will be used within the app
  * <p/>
@@ -8,21 +12,24 @@ package com.sadostrich.nomansskyjournal.Utils;
 public class Enums {
 
     public enum DiscoveryType {
-        SOLAR_SYSTEM("Solar System"), PLANET("Planet"), ANIMAL("Animal"), PLANT("Plant");
+        SOLAR_SYSTEM(R.string.title_solar_system),
+        STAR(R.string.title_star),
+        STATION(R.string.title_station),
+        PLANET(R.string.title_planet),
+        FAUNA(R.string.title_fauna),
+        FLORA(R.string.title_flora),
+        STRUCTURE(R.string.title_structure),
+        ITEM(R.string.title_item),
+        SHIP(R.string.title_ship);
 
-        String friendlyName;
+        int nameRes;
 
-        private DiscoveryType(String friendlyName) {
-            this.friendlyName = friendlyName;
+        private DiscoveryType(@StringRes int nameRes) {
+            this.nameRes = nameRes;
         }
 
-        public String getPluralizedString() {
-            return friendlyName + "s";
-        }
-
-        @Override
-        public String toString() {
-            return friendlyName;
+        public int getNameRes() {
+            return nameRes;
         }
     }
 

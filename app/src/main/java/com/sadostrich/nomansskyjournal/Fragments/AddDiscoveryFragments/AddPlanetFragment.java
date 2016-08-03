@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Fragments;
+package com.sadostrich.nomansskyjournal.Fragments.AddDiscoveryFragments;
 
 import android.app.Fragment;
 import android.content.Intent;

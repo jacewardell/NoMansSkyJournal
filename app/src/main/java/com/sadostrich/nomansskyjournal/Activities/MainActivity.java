@@ -139,10 +139,10 @@ public class MainActivity extends AppCompatActivity implements
         starFab = (FloatingActionButton) findViewById(R.id.star_fab);
         stationFab = (FloatingActionButton) findViewById(R.id.station_fab);
         planetFab = (FloatingActionButton) findViewById(R.id.planet_fab);
-        animalFab = (FloatingActionButton) findViewById(R.id.animal_fab);
-        plantFab = (FloatingActionButton) findViewById(R.id.plant_fab);
+        animalFab = (FloatingActionButton) findViewById(R.id.fauna_fab);
+        plantFab = (FloatingActionButton) findViewById(R.id.flora_fab);
         structureFab = (FloatingActionButton) findViewById(R.id.structure_fab);
-        toolFab = (FloatingActionButton) findViewById(R.id.tool_fab);
+        toolFab = (FloatingActionButton) findViewById(R.id.item_fab);
         shipFab = (FloatingActionButton) findViewById(R.id.ship_fab);
 
         progressBarContainer = findViewById(R.id.layout_progress_bar_container);
@@ -333,36 +333,46 @@ public class MainActivity extends AppCompatActivity implements
 
             case R.id.solar_systems_fab:
                 collapseFabs();
-                startAddDiscoveryActivity(R.string.title_system);
+                startAddDiscoveryActivity(Enums.DiscoveryType.SOLAR_SYSTEM);
+                break;
+
+            case R.id.star_fab:
+                collapseFabs();
+                startAddDiscoveryActivity(Enums.DiscoveryType.STAR);
+                break;
+
+            case R.id.station_fab:
+                collapseFabs();
+                startAddDiscoveryActivity(Enums.DiscoveryType.STATION);
                 break;
 
             case R.id.planet_fab:
                 collapseFabs();
-                startAddDiscoveryActivity(R.string.title_planet);
+                startAddDiscoveryActivity(Enums.DiscoveryType.PLANET);
                 break;
 
-            case R.id.animal_fab:
+            case R.id.fauna_fab:
                 collapseFabs();
-                startAddDiscoveryActivity(R.string.title_fauna);
+                startAddDiscoveryActivity(Enums.DiscoveryType.FAUNA);
                 break;
 
-            case R.id.plant_fab:
-                startAddDiscoveryActivity(R.string.title_flora);
+            case R.id.flora_fab:
+                startAddDiscoveryActivity(Enums.DiscoveryType.FLORA);
                 collapseFabs();
                 break;
 
             case R.id.structure_fab:
-                startAddDiscoveryActivity(R.string.title_structure);
+                startAddDiscoveryActivity(Enums.DiscoveryType.STRUCTURE);
                 collapseFabs();
                 break;
 
-            case R.id.tool_fab:
-                startAddDiscoveryActivity(R.string.title_item);
+            case R.id.item_fab:
+                startAddDiscoveryActivity(Enums.DiscoveryType.ITEM);
                 break;
 
             case R.id.ship_fab:
                 collapseFabs();
-                startAddDiscoveryActivity(R.string.title_ship);
+                startAddDiscoveryActivity(Enums.DiscoveryType.SHIP);
                 break;
 
             default:
@@ -373,8 +383,11 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private void startAddDiscoveryActivity(@StringRes int extraRes) {
+    private void startAddDiscoveryActivity(@StringRes Enums.DiscoveryType discoveryType) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(getString(R.string.extra_discovery_type), discoveryType);
         Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -429,11 +442,11 @@ public class MainActivity extends AppCompatActivity implements
                     animateFab(planetFab, 3, expand);
                     break;
 
-                case R.id.animal_fab:
+                case R.id.fauna_fab:
                     animateFab(animalFab, 4, expand);
                     break;
 
-                case R.id.plant_fab:
+                case R.id.flora_fab:
                     animateFab(plantFab, 5, expand);
                     break;
 
@@ -441,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements
                     animateFab(structureFab, 6, expand);
                     break;
 
-                case R.id.tool_fab:
+                case R.id.item_fab:
                     animateFab(toolFab, 7, expand);
                     break;
 
@@ -512,21 +525,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onDiscoverySelected(Discovery discovery) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(getString(R.string.discovery_type), discovery.getType());
+        bundle.putSerializable(getString(R.string.extra_discovery_type), discovery.getType());
         bundle.putSerializable(getString(R.string.extra_discovery), discovery);
-        bundle.putBoolean(getString(R.string.discovery_add), false);
-
-        Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onAddPlanet() {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(getString(R.string.discovery_type),
-                Enums.DiscoveryType.PLANET);
-        bundle.putBoolean(getString(R.string.discovery_add), true);
+        bundle.putBoolean(getString(R.string.extra_discovery_add), false);
 
         Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
         intent.putExtras(bundle);
