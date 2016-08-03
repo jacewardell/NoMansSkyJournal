@@ -23,11 +23,8 @@ import java.util.List;
 public class AddSystemView extends RelativeLayout {
     private Spinner systemType, planetCount, life;
     private Switch dangerous;
-    private TextView tagTotalTextView, showTagsTextView;
-    private Button addTagButton, previousButton;
+    private Button previousButton;
     private IAddSystemViewListener listener;
-
-    private int tagTotal = 0;
 
     public AddSystemView(Context context, IAddSystemViewListener listener) {
         super(context);
@@ -54,7 +51,6 @@ public class AddSystemView extends RelativeLayout {
         getViewRefs();
         setupSpinners();
         setupButtons();
-        setupTextViews();
         this.listener = listener;
     }
 
@@ -63,9 +59,6 @@ public class AddSystemView extends RelativeLayout {
         planetCount = (Spinner) findViewById(R.id.spinner_system_planet_count);
         life = (Spinner) findViewById(R.id.spinner_system_life);
         dangerous = (Switch) findViewById(R.id.swt_system_dangerous);
-        tagTotalTextView = (TextView) findViewById(R.id.tv_tag_total);
-        showTagsTextView = (TextView) findViewById(R.id.tv_show_tags);
-        addTagButton = (Button) findViewById(R.id.btn_add_tag);
         previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
     }
 
@@ -100,17 +93,7 @@ public class AddSystemView extends RelativeLayout {
     }
 
     private void setupButtons() {
-        setupAddTagButton();
         setupPreviousButton();
-    }
-
-    private void setupAddTagButton() {
-        addTagButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                incrementTagTotal();
-            }
-        });
     }
 
     private void setupPreviousButton() {
@@ -122,30 +105,6 @@ public class AddSystemView extends RelativeLayout {
                 }
             }
         });
-    }
-
-    private void setupTextViews() {
-        setTagTotalText(tagTotal);
-        setupShowTags();
-    }
-
-    private void setTagTotalText(int tagTotal) {
-        tagTotalTextView.setText(getResources().getString(R.string.tag_total).
-                replace("{count}", "" + tagTotal));
-    }
-
-    private void setupShowTags() {
-        showTagsTextView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Launch a new view showing tags w/remove function
-            }
-        });
-    }
-
-    private void incrementTagTotal() {
-        tagTotal++;
-        setTagTotalText(tagTotal);
     }
 
     public interface IAddSystemViewListener {
