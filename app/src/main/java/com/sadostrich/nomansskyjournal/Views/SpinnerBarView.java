@@ -106,12 +106,14 @@ public class SpinnerBarView extends LinearLayout implements AdapterView.OnItemSe
 
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-		switch (view.getId()) {
-			case R.id.spinner_bar_first:
-				break;
+		if(view != null) {
+			switch (view.getId()) {
+				case R.id.spinner_bar_first:
+					break;
 
-			case R.id.spinner_bar_second:
-				break;
+				case R.id.spinner_bar_second:
+					break;
+			}
 		}
 	}
 

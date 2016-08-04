@@ -31,4 +31,40 @@
         <item name="android:textColor">@android:color/transparent</item>
     </style>
 
+    <style name="SystemDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/system_purple</item>
+    </style>
+
+    <style name="StarDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/star_yellow</item>
+    </style>
+
+    <style name="StationDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/station_green</item>
+    </style>
+
+    <style name="PlanetDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/planet_purple</item>
+    </style>
+
+    <style name="FaunaDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/fauna_red</item>
+    </style>
+
+    <style name="FloraDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/flora_blue</item>
+    </style>
+
+    <style name="StructureDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/structure_green</item>
+    </style>
+
+    <style name="ItemDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/item_red</item>
+    </style>
+
+    <style name="ShipDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/ship_gray</item>
+    </style>
+
 </resources>

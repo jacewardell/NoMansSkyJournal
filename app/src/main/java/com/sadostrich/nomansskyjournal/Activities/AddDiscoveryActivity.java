@@ -11,7 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddDiscoveryMainView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddPlanetView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStarView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStationView;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddSystemView;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.Enums;
@@ -23,13 +27,12 @@ import java.util.List;
  * Activity that controls fragments used to add a new discovery
  * Is populated with either a planet, animal, or plant fragment
  */
-public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscoveryMainView.IAddDiscoveryMainViewListener, AddSystemView.IAddSystemViewListener {
+public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscoveryMainView.IAddDiscoveryMainViewListener, IAddDiscoveryListener {
     private ViewPager viewpager;
 
     private Enums.DiscoveryType discoveryType;
 
     private AddDiscoveryMainView addDiscoveryMainView;
-    private AddSystemView addSystemView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,34 +120,58 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
      * Shows the current fragment based on the user-chosen discovery type
      */
     private void showFragments() {
-
+        View viewToShow = null;
         switch (discoveryType) {
             case SOLAR_SYSTEM:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this);
-                addSystemView = new AddSystemView(getApplicationContext(), this);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.SystemDialogTheme, R.color.system_purple, R.color.system_purple_dark);
+                viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
+
             case STAR:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StarDialogTheme, R.color.star_yellow, R.color.star_yellow_dark);
+                viewToShow = new AddStarView(getApplicationContext(), this);
                 break;
+
             case STATION:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StationDialogTheme, R.color.station_green, R.color.station_green_dark);
+                viewToShow = new AddStationView(getApplicationContext(), this);
                 break;
+
             case PLANET:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.PlanetDialogTheme, R.color.planet_purple, R.color.planet_purple_dark);
+                viewToShow = new AddPlanetView(getApplicationContext(), this);
                 break;
+
             case FAUNA:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FaunaDialogTheme, R.color.fauna_red, R.color.fauna_red_dark);
+                viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
+
             case FLORA:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FloraDialogTheme, R.color.flora_blue, R.color.flora_blue_dark);
+                viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
+
             case STRUCTURE:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StructureDialogTheme, R.color.structure_green, R.color.structure_green_dark);
+                viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
+
             case ITEM:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ItemDialogTheme, R.color.item_red, R.color.item_red_dark);
+                viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
+
             case SHIP:
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ShipDialogTheme, R.color.ship_gray, R.color.ship_gray_dark);
+                viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
         }
 
-        addViewsToViewPager(addDiscoveryMainView, addSystemView);
+        addViewsToViewPager(addDiscoveryMainView, viewToShow);
     }
 
-    private void addViewsToViewPager(AddDiscoveryMainView mainView, AddSystemView detailsView) {
+    private void addViewsToViewPager(AddDiscoveryMainView mainView, View detailsView) {
         viewpager.removeAllViews();
 //        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //        viewpager.addView(mainView, 0, params);

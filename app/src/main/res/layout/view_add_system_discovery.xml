@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/d4"
-                android:text="@string/type"
+                android:text="@string/label_type"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/ts16" />
 
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/d4"
                 android:layout_marginStart="@dimen/d8"
-                android:text="@string/total_planets"
+                android:text="@string/label_total_planets"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/ts16" />
 
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/d4"
-                android:text="@string/life"
+                android:text="@string/label_life"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/ts16" />
 
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
-                android:text="@string/dangerous"
+                android:text="@string/label_dangerous"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/ts16" />
 
@@ -113,11 +113,12 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_next_add_discovery"
+        android:id="@+id/btn_submit_discovery"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/d48"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:background="@color/system_purple_dark"
         android:text="@string/submit" />
 
     <Button
@@ -126,6 +127,7 @@
         android:layout_height="@dimen/d48"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:background="@color/system_purple_dark"
         android:text="@string/previous" />
 
 </RelativeLayout>

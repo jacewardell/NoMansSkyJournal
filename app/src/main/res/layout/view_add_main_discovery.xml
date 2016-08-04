@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/system_purple"
+    android:background="@android:color/black"
     android:padding="@dimen/d16">
 
     <EditText
@@ -35,10 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_video_evidence"
+        android:layout_marginBottom="@dimen/d16"
         android:backgroundTint="@android:color/white"
         android:hint="@string/description"
         android:inputType="textMultiLine"
-        android:layout_marginBottom="@dimen/d16"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white" />
@@ -48,21 +49,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_description"
+        android:layout_marginBottom="@dimen/d8"
+        android:layout_toStartOf="@+id/btn_add_tag"
         android:backgroundTint="@android:color/white"
         android:hint="@string/tags"
         android:textAllCaps="true"
-        android:layout_toStartOf="@+id/btn_add_tag"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="@dimen/d8"
         android:textColorHint="@android:color/white" />
 
     <Button
         android:id="@+id/btn_add_tag"
         android:layout_width="@dimen/d32"
         android:layout_height="@dimen/d32"
-        android:background="@drawable/plus"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/et_description"
-        android:layout_alignParentEnd="true"/>
+        android:background="@drawable/plus" />
 
     <TextView
         android:id="@+id/tv_tag_total"
@@ -89,5 +90,28 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="@string/next" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_tag_total"
+        android:layout_marginTop="@dimen/d16"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_stardate"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ts18" />
+
+        <Button
+            android:id="@+id/btn_calendar"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/d8"
+            android:layout_height="wrap_content"
+            android:text="@string/date_placeholder" />
+    </LinearLayout>
 
 </RelativeLayout>

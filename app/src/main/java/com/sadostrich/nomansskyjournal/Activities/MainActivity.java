@@ -368,11 +368,12 @@ public class MainActivity extends AppCompatActivity implements
 
             case R.id.item_fab:
                 startAddDiscoveryActivity(Enums.DiscoveryType.ITEM);
+                collapseFabs();
                 break;
 
             case R.id.ship_fab:
-                collapseFabs();
                 startAddDiscoveryActivity(Enums.DiscoveryType.SHIP);
+                collapseFabs();
                 break;
 
             default:

@@ -5,17 +5,20 @@ import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.ColorRes;
 
 import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by jacewardell on 7/25/15.
  */
 public class MiscUtil {
+
     public static String getImagePath(Context context, Uri imageUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader loader = new CursorLoader(context, imageUri, proj, null, null, null);
@@ -56,11 +59,70 @@ public class MiscUtil {
         return options;
     }
 
-    public static List<CustomSpinnerObject> getSystemLifeOptions() {
+    public static List<CustomSpinnerObject> getDiscoveryLifeOptions(Context context, @ColorRes int backgroundRes) {
         List<CustomSpinnerObject> options = new ArrayList<>();
-        options.add(new CustomSpinnerObject(-1, -1, R.color.system_purple_dark, R.string.unknown));
-        options.add(new CustomSpinnerObject(-1, -1, R.color.system_purple_dark, R.string.yes));
-        options.add(new CustomSpinnerObject(-1, -1, R.color.system_purple_dark, R.string.no));
+
+        String[] lifeArray = context.getResources().getStringArray(R.array.array_life_options);
+        for (int i = 0; i < lifeArray.length; i++) {
+            String size = lifeArray[i];
+            options.add(new CustomSpinnerObject(size, backgroundRes));
+        }
+        return options;
+    }
+
+    public static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+    public static int getCurrentMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH);
+    }
+
+    public static int getCurrentDay() {
+        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static List<CustomSpinnerObject> getDiscoverySizeOptions(Context context, @ColorRes int backgroundRes) {
+        List<CustomSpinnerObject> options = new ArrayList<>();
+
+        String[] starSizes = context.getResources().getStringArray(R.array.array_discovery_sizes);
+        for (int i = 0; i < starSizes.length; i++) {
+            String size = starSizes[i];
+            options.add(new CustomSpinnerObject(size, backgroundRes));
+        }
+        return options;
+    }
+
+    public static List<CustomSpinnerObject> getStarTypeOptions(Context context) {
+        List<CustomSpinnerObject> options = new ArrayList<>();
+
+        String[] starTypes = context.getResources().getStringArray(R.array.array_star_types);
+        for (int i = 0; i < starTypes.length; i++) {
+            String type = starTypes[i];
+            options.add(new CustomSpinnerObject(type, R.color.star_yellow_dark));
+        }
+        return options;
+    }
+
+    public static List<CustomSpinnerObject> getPlanetTemperatureOptions(Context context) {
+        List<CustomSpinnerObject> options = new ArrayList<>();
+
+        String[] starSizes = context.getResources().getStringArray(R.array.array_temperatures);
+        for (int i = 0; i < starSizes.length; i++) {
+            String size = starSizes[i];
+            options.add(new CustomSpinnerObject(size, R.color.planet_purple_dark));
+        }
+        return options;
+    }
+
+    public static List<CustomSpinnerObject> getPlanetResourcesOptions(Context context) {
+        List<CustomSpinnerObject> options = new ArrayList<>();
+
+        String[] starSizes = context.getResources().getStringArray(R.array.array_resources);
+        for (int i = 0; i < starSizes.length; i++) {
+            String size = starSizes[i];
+            options.add(new CustomSpinnerObject(size, R.color.planet_purple_dark));
+        }
         return options;
     }
 }
