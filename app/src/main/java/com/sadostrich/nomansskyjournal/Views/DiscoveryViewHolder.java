@@ -1,12 +1,14 @@
 package com.sadostrich.nomansskyjournal.Views;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
+import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
 import com.squareup.picasso.Picasso;
@@ -22,12 +24,24 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 	private Discovery discovery;
 	private ImageView discoveryType;
 
+	private IDiscoveryListener discoveryListener;
+
 	public DiscoveryViewHolder(View itemView) {
 		super(itemView);
 
 		getViewRefs(itemView);
 
-		//		itemView.setOnClickListener(this);
+		itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.i("DiscoveryVH", "Discovery VH clicked for discovery: " + discovery
+						.getName());
+
+				if (discoveryListener != null) {
+					discoveryListener.onDiscoverySelected(discovery);
+				}
+			}
+		});
 	}
 
 	private void getViewRefs(View itemView) {
@@ -42,7 +56,11 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_name);
 		discoveryUsername =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_username);
-//		itemView.findViewById(R.id.tv_discovery_grid_time_ago);
+		//		itemView.findViewById(R.id.tv_discovery_grid_time_ago);
+	}
+
+	public void setListener(IDiscoveryListener listener) {
+		discoveryListener = listener;
 	}
 
 	public void setData(Discovery discovery) {
@@ -129,8 +147,4 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 		discoveryUsername.setText(byUsername);
 	}
 
-	//	@Override
-	//	public void onClick(View v) {
-	//		discoveryListener.onDiscoverySelected(discovery);
-	//	}
 }

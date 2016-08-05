@@ -23,8 +23,8 @@
 			app:expandedTitleTextAppearance="@style/TextAppearance.CollapsingToolbar.Title.Expanded"
 			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-			<com.icentris.vibeandroid.calendar.view.calendar.VibeCalendarView
-				android:id="@+id/calendar_view"
+			<com.sadostrich.nomansskyjournal.Views.DiscoveryDetailView
+				android:id="@+id/detail_view"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="top"

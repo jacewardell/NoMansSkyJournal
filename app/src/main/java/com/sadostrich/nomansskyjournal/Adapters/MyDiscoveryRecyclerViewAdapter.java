@@ -14,12 +14,12 @@ import com.sadostrich.nomansskyjournal.Views.DiscoveryViewHolder;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Discovery} and makes a call to the
- * specified {@link IDiscoveryListener}. TODO:
- * Replace the implementation with code for your data type.
+ * {@link RecyclerView.Adapter} that can display a {@link Discovery} and makes a
+ * call to the specified {@link IDiscoveryListener}. TODO: Replace the
+ * implementation with code for your data type.
  */
-public class MyDiscoveryRecyclerViewAdapter extends
-		RecyclerView.Adapter<DiscoveryViewHolder> {
+public class MyDiscoveryRecyclerViewAdapter
+		extends RecyclerView.Adapter<DiscoveryViewHolder> {
 	private static final String TAG = "DiscoveryRecViewAdapter";
 
 	private final List<Discovery> mValues;
@@ -35,7 +35,9 @@ public class MyDiscoveryRecyclerViewAdapter extends
 	public DiscoveryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.discovery_grid_item, parent, false);
-		return new DiscoveryViewHolder(view);
+		DiscoveryViewHolder dvh = new DiscoveryViewHolder(view);
+		dvh.setListener(mListener);
+		return dvh;
 	}
 
 	@Override
@@ -48,4 +50,5 @@ public class MyDiscoveryRecyclerViewAdapter extends
 	public int getItemCount() {
 		return mValues.size();
 	}
+
 }

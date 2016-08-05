@@ -17,7 +17,7 @@ public interface IDiscoveryDetailView {
 
 	void onImageClicked(Bitmap image);
 
-	void onUpvoteClicked(Discovery discovery);
+	void onUpVoteClicked(Discovery discovery);
 
 	void onReportInappropriate(Discovery discovery);
 
