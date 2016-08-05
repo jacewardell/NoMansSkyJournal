@@ -29,35 +29,35 @@ public class AddDiscoveryMainView extends RelativeLayout {
     private AddDiscoveryActivity activity;
     private IAddDiscoveryMainViewListener listener;
 
-    public AddDiscoveryMainView(Context context, AddDiscoveryActivity listener, @StyleRes int dialogStyleRes, @ColorRes int backgroundColorRes, @ColorRes int backgroundColorResDark) {
+    public AddDiscoveryMainView(Context context, AddDiscoveryActivity listener, @StyleRes int dialogStyleRes, @ColorRes int backgroundColorRes) {
         super(context);
-        init(listener, dialogStyleRes, backgroundColorRes, backgroundColorResDark);
+        init(listener, dialogStyleRes, backgroundColorRes);
     }
 
     public AddDiscoveryMainView(Context context, AttributeSet attrs, AddDiscoveryActivity listener) {
         super(context, attrs);
-        init(listener, 0, 0, 0);
+        init(listener, 0, 0);
     }
 
     public AddDiscoveryMainView(Context context, AttributeSet attrs, int defStyleAttr, AddDiscoveryActivity listener) {
         super(context, attrs, defStyleAttr);
-        init(listener, 0, 0, 0);
+        init(listener, 0, 0);
     }
 
     public AddDiscoveryMainView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, AddDiscoveryActivity listener) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(listener, 0, 0, 0);
+        init(listener, 0, 0);
     }
 
-    private void init(AddDiscoveryActivity listener, int dialogStyleRes, int backgroundColorRes, int backgroundColorResDark) {
+    private void init(AddDiscoveryActivity listener, int dialogStyleRes, int backgroundColorRes) {
         this.activity = listener;
         this.listener = listener;
         this.dialogStyleRes = dialogStyleRes;
 
         inflate(getContext(), R.layout.view_add_main_discovery, this);
-        findViewById(R.id.main_view).setBackgroundColor(getResources().getColor(backgroundColorRes));
+//        findViewById(R.id.main_view).setBackgroundColor(getResources().getColor(backgroundColorRes));
         setupTextViews();
-        setupButtons(backgroundColorResDark);
+        setupButtons(backgroundColorRes);
     }
 
     private void setupTextViews() {
@@ -86,10 +86,10 @@ public class AddDiscoveryMainView extends RelativeLayout {
         setTagTotalText(tagTotal);
     }
 
-    private void setupButtons(int backgroundColorResDark) {
+    private void setupButtons(int backgroundColorRes) {
         setupAddTagButton();
-        setupDateButton(backgroundColorResDark);
-        setupNextButton(backgroundColorResDark);
+        setupDateButton(backgroundColorRes);
+        setupNextButton(backgroundColorRes);
     }
 
     private void setupAddTagButton() {
@@ -102,9 +102,9 @@ public class AddDiscoveryMainView extends RelativeLayout {
         });
     }
 
-    private void setupDateButton(int backgroundColorResDark) {
+    private void setupDateButton(int backgroundColorRes) {
         dateButton = (Button) findViewById(R.id.btn_calendar);
-        dateButton.setBackgroundColor(getResources().getColor(backgroundColorResDark));
+        dateButton.setBackgroundColor(getResources().getColor(backgroundColorRes));
         dateButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,9 +119,9 @@ public class AddDiscoveryMainView extends RelativeLayout {
         });
     }
 
-    public void setupNextButton(int backgroundColorResDark) {
+    public void setupNextButton(int backgroundColorRes) {
         nextButton = (Button) findViewById(R.id.btn_next_add_discovery);
-        nextButton.setBackgroundColor(getResources().getColor(backgroundColorResDark));
+        nextButton.setBackgroundColor(getResources().getColor(backgroundColorRes));
         nextButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

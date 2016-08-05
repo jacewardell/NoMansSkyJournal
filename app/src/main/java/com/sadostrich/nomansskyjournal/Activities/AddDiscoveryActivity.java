@@ -1,6 +1,7 @@
 package com.sadostrich.nomansskyjournal.Activities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -123,47 +124,48 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
         View viewToShow = null;
         switch (discoveryType) {
             case SOLAR_SYSTEM:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.SystemDialogTheme, R.color.system_purple, R.color.system_purple_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.SystemDialogTheme, R.color.system_purple);
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.system_purple)));
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case STAR:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StarDialogTheme, R.color.star_yellow, R.color.star_yellow_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StarDialogTheme, R.color.star_yellow);
                 viewToShow = new AddStarView(getApplicationContext(), this);
                 break;
 
             case STATION:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StationDialogTheme, R.color.station_green, R.color.station_green_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StationDialogTheme, R.color.station_green);
                 viewToShow = new AddStationView(getApplicationContext(), this);
                 break;
 
             case PLANET:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.PlanetDialogTheme, R.color.planet_purple, R.color.planet_purple_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.PlanetDialogTheme, R.color.planet_purple);
                 viewToShow = new AddPlanetView(getApplicationContext(), this);
                 break;
 
             case FAUNA:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FaunaDialogTheme, R.color.fauna_red, R.color.fauna_red_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FaunaDialogTheme, R.color.fauna_red);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case FLORA:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FloraDialogTheme, R.color.flora_blue, R.color.flora_blue_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FloraDialogTheme, R.color.flora_blue);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case STRUCTURE:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StructureDialogTheme, R.color.structure_green, R.color.structure_green_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StructureDialogTheme, R.color.structure_green);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case ITEM:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ItemDialogTheme, R.color.item_red, R.color.item_red_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ItemDialogTheme, R.color.item_red);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case SHIP:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ShipDialogTheme, R.color.ship_gray, R.color.ship_gray_dark);
+                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ShipDialogTheme, R.color.ship_gray);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
         }
