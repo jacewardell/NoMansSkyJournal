@@ -1,27 +1,49 @@
 package com.sadostrich.nomansskyjournal.Views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sadostrich.nomansskyjournal.Adapters.LoadingImageViewPagerAdapter;
+import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
+import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryDetailView;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.Models.DiscoveryImage;
 import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.IconUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO JavaDoc
+ * Displays a <i>Discovery</i> in full page with full details.
+ * <p>
+ * User Interaction:<br>
+ * The 'Discovered by' user name is click-able and should navigate to that
+ * user's profile page.<br>
+ * An image is click-able and should display the image in a full page view with
+ * zoom and panning capabilities.<br>
+ * There is a button to 'up vote' the Discovery which should 'up vote' on the
+ * server when clicked or show the login dialog first if the current user is not
+ * logged in.<br>
+ * Finally, there is a button on the bottom right of the page to report the
+ * Discovery as inappropriate.
+ * </p>
+ * 
  * <p/>
  * Created by Jacobus LaFazia on 8/4/2016.
  */
-public class DiscoveryDetailView extends RelativeLayout {
+public class DiscoveryDetailView extends RelativeLayout
+		implements LoadingImageViewPagerAdapter.ILoadingImagePagerAdapterListener {
+
+	private static final String TAG = "DiscoveryDetailView";
 
 	private RelativeLayout mLayout;
 	private TextView mTvName, mTvUser, mTvType, mTvTime, mTvNumViews, mTvDesc, mTvCaption,
@@ -31,7 +53,7 @@ public class DiscoveryDetailView extends RelativeLayout {
 	private DynamicLinearLayout mDyLayoutTags;
 
 	private Discovery mDiscovery;
-	private LoadingImageViewPagerAdapter.ILoadingImagePagerAdapterListener mImageAdapterListener;
+	private IDiscoveryDetailView mListener;
 
 	public DiscoveryDetailView(Context context) {
 		super(context);
@@ -56,6 +78,7 @@ public class DiscoveryDetailView extends RelativeLayout {
 
 		if (!isInEditMode()) {
 			// TODO set icons to TVs
+			setClickListeners();
 
 		} else {
 			// TODO set dummy image
@@ -79,13 +102,18 @@ public class DiscoveryDetailView extends RelativeLayout {
 				.findViewById(R.id.layout_dynamic_tags);
 	}
 
+	private void setClickListeners() {
+		// TODO set view click listeners
+
+	}
+
 	private void setupViewPager() {
 		List<DiscoveryImage> images = mDiscovery.getImage();
 
 		// Create list of image URLs for the adapter
 		List<String> urls = new ArrayList<>();
 		for (DiscoveryImage i : images) {
-			String url = i.getFileUrl().getWinQuadratic();
+			String url = i.getFileUrl().getFullHd();
 			if (url != null && !url.isEmpty()) {
 				urls.add(url);
 			}
@@ -93,7 +121,7 @@ public class DiscoveryDetailView extends RelativeLayout {
 
 		// Create the ViewPager adapter
 		LoadingImageViewPagerAdapter adapter = new LoadingImageViewPagerAdapter(urls,
-				mImageAdapterListener);
+				this);
 		mViewPager.setAdapter(adapter);
 		mPageIndicator.setViewPager(mViewPager);
 
@@ -105,18 +133,129 @@ public class DiscoveryDetailView extends RelativeLayout {
 		}
 	}
 
+	private void setDiscoveryType() {
+		int colorRes = 0;
+		int imageRes = 0;
+
+		switch (mDiscovery.getType().toLowerCase()) {
+		case NMSOriginsServiceHelper.SOLAR_SYSTEM:
+			colorRes = R.color.system_purple;
+			imageRes = R.drawable.ic_system;
+			break;
+
+		case NMSOriginsServiceHelper.STAR:
+			colorRes = R.color.star_yellow;
+			imageRes = R.drawable.ic_star;
+			break;
+
+		case NMSOriginsServiceHelper.PLANET:
+			colorRes = R.color.planet_purple;
+			imageRes = R.drawable.ic_planet;
+			break;
+
+		case NMSOriginsServiceHelper.FAUNA:
+			colorRes = R.color.fauna_red;
+			imageRes = R.drawable.ic_fauna;
+			break;
+
+		case NMSOriginsServiceHelper.FLORA:
+			colorRes = R.color.flora_blue;
+			imageRes = R.drawable.ic_flora;
+			break;
+
+		case NMSOriginsServiceHelper.STRUCTURE:
+			colorRes = R.color.structure_green;
+			imageRes = R.drawable.ic_structure;
+			break;
+
+		case NMSOriginsServiceHelper.ITEM:
+			colorRes = R.color.item_red;
+			imageRes = R.drawable.ic_item;
+			break;
+
+		case NMSOriginsServiceHelper.SHIP:
+			colorRes = R.color.ship_gray;
+			imageRes = R.drawable.ic_ship;
+			break;
+		}
+
+		// Type name
+		mTvType.setText(mDiscovery.getType());
+
+		// Type color
+		if (colorRes == 0) {
+			colorRes = android.R.color.black;
+		}
+		mTvType.setBackgroundColor(getContext().getResources().getColor(colorRes));
+
+		// Type icon
+		if (imageRes != 0) {
+			Drawable icon = IconUtil.getIcon(getContext(), imageRes, R.color.text_icons,
+					R.dimen.d24);
+			mTvType.setCompoundDrawables(icon, null, null, null);
+		}
+	}
+
+	private void setDiscoveryToViews() {
+		// Name
+		mTvName.setText(mDiscovery.getName());
+
+		// User name
+		mTvUser.setText(mDiscovery.getUser().getUsername());
+
+		// Type
+		setDiscoveryType();
+
+		// TODO Time since added (amount of time elapsed since now)
+		mTvTime.setText(mDiscovery.getDiscoveredAt());
+
+		// Number of views
+		String numViews = getContext().getResources().getString(R.string.views)
+				.toUpperCase();
+		numViews = String.valueOf(mDiscovery.getViews()) + " " + numViews;
+		mTvNumViews.setText(numViews);
+
+		// TODO Number of up votes
+
+		// Images
+		setupViewPager();
+
+		// TODO Tags (in dynamic linear layout)
+
+		// Description
+		mTvDesc.setText(mDiscovery.getDescription());
+
+		// TODO Caption?
+		mTvCaption.setVisibility(View.GONE);
+	}
+
 	//////////////////////////////////////////////////////////////////
 	// Public Config Methods
 	//////////////////////////////////////////////////////////////////
 
-	public void setImageAdapterListener(
-			LoadingImageViewPagerAdapter.ILoadingImagePagerAdapterListener listener) {
-		mImageAdapterListener = listener;
+	public void setListener(IDiscoveryDetailView listener) {
+		mListener = listener;
 	}
 
 	public void setDiscovery(@NonNull Discovery discovery) {
 		mDiscovery = discovery;
 		// TODO set discovery to views!
+	}
+
+	//////////////////////////////////////////////////////////////////
+	// ILoadingImagePagerAdapterListener
+	//////////////////////////////////////////////////////////////////
+
+	@Override
+	public void onItemClick(String imageUrl, int position, Bitmap image) {
+		Log.i(TAG, "@ discovery image clicked with URL: " + imageUrl);
+
+		if (mListener != null) {
+			mListener.onImageClicked(image);
+
+		} else {
+			Log.w(TAG, "Discovery image clicked but no listener has been set!");
+		}
 	}
 
 }

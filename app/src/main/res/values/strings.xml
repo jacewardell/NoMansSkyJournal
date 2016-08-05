@@ -21,6 +21,7 @@
 	<string name="structures">Structures</string>
 	<string name="tools">Tools</string>
 	<string name="ships">Ships</string>
+	<string name="views">Views</string>
 
 	<!-- Fragment Extra Strings -->
 	<string name="extra_discovery">extra_discovery</string>
