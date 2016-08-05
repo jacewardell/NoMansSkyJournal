@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -14,6 +15,7 @@ import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.MiscUtil;
+import com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem;
 
 import java.util.List;
 
@@ -21,8 +23,9 @@ import java.util.List;
  *
  */
 public class AddSystemView extends RelativeLayout {
-    private Spinner systemType, planetCount, life;
-    private Switch dangerous;
+    private Spinner systemType, planetCount;
+    private LifeSpinnerItem lifeSpinnerItem;
+    private CheckBox dangerous;
     private Button previousButton, submitButton;
     private IAddDiscoveryListener listener;
 
@@ -57,8 +60,8 @@ public class AddSystemView extends RelativeLayout {
     private void getViewRefs() {
         systemType = (Spinner) findViewById(R.id.spinner_system_type);
         planetCount = (Spinner) findViewById(R.id.spinner_system_planet_count);
-        life = (Spinner) findViewById(R.id.spinner_system_life);
-        dangerous = (Switch) findViewById(R.id.swt_system_dangerous);
+        lifeSpinnerItem = (LifeSpinnerItem) findViewById(R.id.layout_life_dangerous_spinners);
+        dangerous = (CheckBox) findViewById(R.id.swt_system_dangerous);
         previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
         submitButton = (Button) findViewById(R.id.btn_submit_discovery);
     }
@@ -74,7 +77,7 @@ public class AddSystemView extends RelativeLayout {
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
         systemType.setAdapter(adapter);
 
-        systemType.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        systemType.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupSystemPlanetCountSpinner() {
@@ -82,15 +85,12 @@ public class AddSystemView extends RelativeLayout {
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
         planetCount.setAdapter(adapter);
 
-        planetCount.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        planetCount.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupSystemLifeSpinner() {
-        List<CustomSpinnerObject> options = MiscUtil.getDiscoveryLifeOptions(getContext(), R.color.system_purple_dark);
-        AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        life.setAdapter(adapter);
-
-        life.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        lifeSpinnerItem.setPageAccentColor(R.color.system_purple);
+        lifeSpinnerItem.showLifeOptions(false);
     }
 
     private void setupButtons() {

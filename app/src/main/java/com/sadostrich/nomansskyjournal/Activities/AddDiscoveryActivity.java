@@ -3,32 +3,49 @@ package com.sadostrich.nomansskyjournal.Activities;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
+import android.support.annotation.StyleRes;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
+import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigBaseObject;
+import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigObject;
+import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddDiscoveryMainView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddFaunaView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddFloraView;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddPlanetView;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStarView;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStationView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStructureView;
 import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddSystemView;
-import com.sadostrich.nomansskyjournal.R;
-import com.sadostrich.nomansskyjournal.Utils.Enums;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Activity that controls fragments used to add a new discovery
  * Is populated with either a planet, animal, or plant fragment
  */
 public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscoveryMainView.IAddDiscoveryMainViewListener, IAddDiscoveryListener {
+    private static final String TAG = "AddDiscoveryActivity";
+
     private ViewPager viewpager;
 
     private Enums.DiscoveryType discoveryType;
@@ -50,9 +67,24 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
         }
 
         setupViewPager();
-        setupNavButtons();
 
         showFragments();
+
+//        Retrofit retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create()).build();
+//        NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
+//        nmsOriginsService.getAddDiscoveryFields().enqueue(new Callback<ConfigBaseObject>() {
+//            @Override
+//            public void onResponse(Call<ConfigBaseObject> call, Response<ConfigBaseObject> response) {
+//                Log.d(TAG, "onResponse: ");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ConfigBaseObject> call, Throwable t) {
+//                Log.d(TAG, "onFailure: ");
+//            }
+//        });
+
     }
 
     private void setupViewPager() {
@@ -86,37 +118,6 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
         });
     }
 
-    private void setupNavButtons() {
-//        nextButton = (Button) findViewById(R.id.btn_next_add_discovery);
-//        nextButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switch (viewpager.getCurrentItem()) {
-//                    // Show the details view
-//                    case 0:
-//                        viewpager.setCurrentItem(1);
-//                        break;
-//
-//                    // Submit discovery to the server
-//                    case 1:
-//                        break;
-//                }
-//            }
-//        });
-
-//        previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
-//        previousButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switch (viewpager.getCurrentItem()) {
-//                    case 1:
-//                        viewpager.setCurrentItem(0);
-//                        break;
-//                }
-//            }
-//        });
-    }
-
     /**
      * Shows the current fragment based on the user-chosen discovery type
      */
@@ -124,53 +125,60 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
         View viewToShow = null;
         switch (discoveryType) {
             case SOLAR_SYSTEM:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.SystemDialogTheme, R.color.system_purple);
-                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.system_purple)));
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.SystemDialogTheme, R.color.system_purple);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case STAR:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StarDialogTheme, R.color.star_yellow);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.StarDialogTheme, R.color.star_yellow);
                 viewToShow = new AddStarView(getApplicationContext(), this);
                 break;
 
             case STATION:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StationDialogTheme, R.color.station_green);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.StationDialogTheme, R.color.station_green);
                 viewToShow = new AddStationView(getApplicationContext(), this);
                 break;
 
             case PLANET:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.PlanetDialogTheme, R.color.planet_purple);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.PlanetDialogTheme, R.color.planet_purple);
                 viewToShow = new AddPlanetView(getApplicationContext(), this);
                 break;
 
             case FAUNA:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FaunaDialogTheme, R.color.fauna_red);
-                viewToShow = new AddSystemView(getApplicationContext(), this);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.FaunaDialogTheme, R.color.fauna_red);
+                viewToShow = new AddFaunaView(getApplicationContext(), this);
                 break;
 
             case FLORA:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.FloraDialogTheme, R.color.flora_blue);
-                viewToShow = new AddSystemView(getApplicationContext(), this);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.FloraDialogTheme, R.color.flora_blue);
+                viewToShow = new AddFloraView(getApplicationContext(), this);
                 break;
 
             case STRUCTURE:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.StructureDialogTheme, R.color.structure_green);
-                viewToShow = new AddSystemView(getApplicationContext(), this);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.StructureDialogTheme, R.color.structure_green);
+                viewToShow = new AddStructureView(getApplicationContext(), this);
                 break;
 
             case ITEM:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ItemDialogTheme, R.color.item_red);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.ItemDialogTheme, R.color.item_red);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
 
             case SHIP:
-                addDiscoveryMainView = new AddDiscoveryMainView(getApplicationContext(), this, R.style.ShipDialogTheme, R.color.ship_gray);
+                addDiscoveryMainView = getAddDiscoveryMainView(R.style.ShipDialogTheme, R.color.ship_gray);
                 viewToShow = new AddSystemView(getApplicationContext(), this);
                 break;
         }
 
         addViewsToViewPager(addDiscoveryMainView, viewToShow);
+    }
+
+    private AddDiscoveryMainView getAddDiscoveryMainView(@StyleRes int dialogTheme, @ColorRes int pageAccentColor) {
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(pageAccentColor)));
+        }
+        return new AddDiscoveryMainView(getApplicationContext(), this, dialogTheme, pageAccentColor);
     }
 
     private void addViewsToViewPager(AddDiscoveryMainView mainView, View detailsView) {

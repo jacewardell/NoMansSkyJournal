@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,10 +13,9 @@
             android:padding="@dimen/d16">
 
             <LinearLayout
-                android:id="@+id/layout_type_planet_count_spinners"
+                android:id="@+id/layout_linear1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/d16"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -31,15 +29,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="@dimen/d4"
-                        android:text="@string/label_type"
-                        android:textColor="@color/system_purple"
+                        android:text="@string/label_size"
+                        android:textColor="@color/structure_green"
                         android:textSize="@dimen/ts16" />
 
                     <Spinner
-                        android:id="@+id/spinner_system_type"
+                        android:id="@+id/spinner_structure_size"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/system_purple" />
+                        android:backgroundTint="@color/structure_green" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -54,36 +52,83 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="@dimen/d4"
                         android:layout_marginStart="@dimen/d8"
-                        android:text="@string/label_total_planets"
-                        android:textColor="@color/system_purple"
+                        android:text="@string/label_type"
+                        android:textColor="@color/structure_green"
                         android:textSize="@dimen/ts16" />
 
                     <Spinner
-                        android:id="@+id/spinner_system_planet_count"
+                        android:id="@+id/spinner_structure_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/d8"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/system_purple" />
+                        android:backgroundTint="@color/structure_green" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_linear1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/d4"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/d4"
+                        android:text="@string/label_has_save"
+                        android:textColor="@color/structure_green"
+                        android:textSize="@dimen/ts16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_structure_has_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/structure_green" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d4"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/d4"
+                        android:layout_marginStart="@dimen/d8"
+                        android:text="@string/label_trading"
+                        android:textColor="@color/structure_green"
+                        android:textSize="@dimen/ts16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_structure_trading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/d8"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/structure_green" />
                 </LinearLayout>
             </LinearLayout>
 
             <com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem
-                android:id="@+id/layout_life_dangerous_spinners"
+                android:id="@+id/structure_life_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_type_planet_count_spinners"
+                android:layout_below="@+id/layout_linear2"
                 android:layout_marginBottom="@dimen/d16" />
 
-            <CheckBox
-                android:id="@+id/swt_system_dangerous"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_life_dangerous_spinners"
-                android:layout_gravity="center"
-                android:buttonTint="@color/system_purple"
-                android:text="@string/dangerous"
-                android:textColor="@color/system_purple" />
         </RelativeLayout>
     </ScrollView>
 
@@ -94,7 +139,7 @@
         android:layout_gravity="bottom|start"
         android:layout_marginBottom="@dimen/d16"
         android:layout_marginStart="@dimen/d16"
-        android:background="@color/system_purple"
+        android:background="@color/structure_green"
         android:text="@string/previous" />
 
     <Button
@@ -104,6 +149,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/d16"
         android:layout_marginEnd="@dimen/d16"
-        android:background="@color/system_purple"
+        android:background="@color/structure_green"
         android:text="@string/submit" />
 </FrameLayout>

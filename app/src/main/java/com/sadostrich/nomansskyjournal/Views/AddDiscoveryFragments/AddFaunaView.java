@@ -1,13 +1,12 @@
 package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 
 import com.sadostrich.nomansskyjournal.Adapters.AddDiscoverySpinnerAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
@@ -20,34 +19,34 @@ import java.util.List;
 /**
  *
  */
-public class AddStarView extends RelativeLayout {
-    private Spinner starSize, starType, life;
-    private Switch dangerous;
+public class AddFaunaView extends RelativeLayout {
+    private Spinner faunaSize, faunaBehavior;
     private Button previousButton, submitButton;
     private IAddDiscoveryListener listener;
+    private CheckBox landCheckbox, skyCheckbox, caveCheckbox, oceanCheckbox, riverCheckbox, lakeCheckbox;
 
-    public AddStarView(Context context, IAddDiscoveryListener listener) {
+    public AddFaunaView(Context context, IAddDiscoveryListener listener) {
         super(context);
         init(listener);
     }
 
-    public AddStarView(Context context, AttributeSet attrs, IAddDiscoveryListener listener) {
+    public AddFaunaView(Context context, AttributeSet attrs, IAddDiscoveryListener listener) {
         super(context, attrs);
         init(listener);
     }
 
-    public AddStarView(Context context, AttributeSet attrs, int defStyleAttr, IAddDiscoveryListener listener) {
+    public AddFaunaView(Context context, AttributeSet attrs, int defStyleAttr, IAddDiscoveryListener listener) {
         super(context, attrs, defStyleAttr);
         init(listener);
     }
 
-    public AddStarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, IAddDiscoveryListener listener) {
+    public AddFaunaView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, IAddDiscoveryListener listener) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(listener);
     }
 
     private void init(IAddDiscoveryListener listener) {
-        inflate(getContext(), R.layout.view_add_star_discovery, this);
+        inflate(getContext(), R.layout.view_add_fauna_discovery, this);
         getViewRefs();
         setupSpinners();
         setupButtons();
@@ -55,32 +54,36 @@ public class AddStarView extends RelativeLayout {
     }
 
     private void getViewRefs() {
-        starSize = (Spinner) findViewById(R.id.spinner_star_size);
-        starType = (Spinner) findViewById(R.id.spinner_star_type);
+        faunaSize = (Spinner) findViewById(R.id.spinner_fauna_size);
+        faunaBehavior = (Spinner) findViewById(R.id.spinner_fauna_behavior);
+        landCheckbox = (CheckBox) findViewById(R.id.cb_land);
+        skyCheckbox = (CheckBox) findViewById(R.id.cb_sky);
+        caveCheckbox = (CheckBox) findViewById(R.id.cb_cave);
+        oceanCheckbox = (CheckBox) findViewById(R.id.cb_ocean);
+        riverCheckbox = (CheckBox) findViewById(R.id.cb_river);
         previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
         submitButton = (Button) findViewById(R.id.btn_submit_discovery);
     }
 
     private void setupSpinners() {
-        setupStarSizeSpinner();
-        setupStarTypeSpinner();
-
+        setupFaunaSizeSpinner();
+        setupFaunaBehaviorSpinner();
     }
 
-    private void setupStarSizeSpinner() {
-        List<CustomSpinnerObject> options = MiscUtil.getDiscoverySizeOptions(getContext(), R.color.star_yellow);
+    private void setupFaunaSizeSpinner() {
+        List<CustomSpinnerObject> options = MiscUtil.getFaunaSizeOptions(getContext());
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        starSize.setAdapter(adapter);
+        faunaSize.setAdapter(adapter);
 
-//        starSize.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        faunaSize.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void setupStarTypeSpinner() {
-        List<CustomSpinnerObject> options = MiscUtil.getStarTypeOptions(getContext());
+    private void setupFaunaBehaviorSpinner() {
+        List<CustomSpinnerObject> options = MiscUtil.getFaunaBehaviorOptions(getContext());
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        starType.setAdapter(adapter);
+        faunaBehavior.setAdapter(adapter);
 
-//        starType.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        faunaBehavior.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupButtons() {
@@ -103,7 +106,7 @@ public class AddStarView extends RelativeLayout {
         submitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null) {
+                if (listener != null) {
                     // TODO: setup callbacks for submitting a discovery
                 }
             }

@@ -1,20 +1,19 @@
 package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 
 import com.sadostrich.nomansskyjournal.Adapters.AddDiscoverySpinnerAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.MiscUtil;
+import com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem;
 
 import java.util.List;
 
@@ -22,11 +21,12 @@ import java.util.List;
  *
  */
 public class AddPlanetView extends RelativeLayout {
-    private Spinner planetTemperature, planetResources, planetLife;
-    private Switch startingPlanet;
+    private Spinner planetTemperature, planetResources;
+    private LifeSpinnerItem lifeSpinnerItem;
+    private CheckBox startingPlanet;
     private Button previousButton, submitButton;
-    private IAddDiscoveryListener listener;
     private CheckBox toxicCheckbox, hotCheckbox, coldCheckbox, highPressureCheckbox, lowPressureCheckbox;
+    private IAddDiscoveryListener listener;
 
     public AddPlanetView(Context context, IAddDiscoveryListener listener) {
         super(context);
@@ -59,8 +59,8 @@ public class AddPlanetView extends RelativeLayout {
     private void getViewRefs() {
         planetTemperature = (Spinner) findViewById(R.id.spinner_planet_temperature);
         planetResources = (Spinner) findViewById(R.id.spinner_planet_resources);
-        planetLife = (Spinner) findViewById(R.id.spinner_planet_life);
-        startingPlanet = (Switch) findViewById(R.id.swt_starting_planet);
+        lifeSpinnerItem = (LifeSpinnerItem) findViewById(R.id.layout_linear2);
+        startingPlanet = (CheckBox) findViewById(R.id.cb_starting_planet);
         toxicCheckbox = (CheckBox) findViewById(R.id.cb_toxic);
         hotCheckbox = (CheckBox) findViewById(R.id.cb_hot);
         coldCheckbox = (CheckBox) findViewById(R.id.cb_cold);
@@ -81,7 +81,7 @@ public class AddPlanetView extends RelativeLayout {
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
         planetTemperature.setAdapter(adapter);
 
-        planetTemperature.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        planetTemperature.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupPlanetResourcesSpinner() {
@@ -89,15 +89,12 @@ public class AddPlanetView extends RelativeLayout {
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
         planetResources.setAdapter(adapter);
 
-        planetResources.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        planetResources.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupPlanetLifeSpinner() {
-        List<CustomSpinnerObject> options = MiscUtil.getDiscoveryLifeOptions(getContext(), R.color.planet_purple_dark);
-        AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        planetLife.setAdapter(adapter);
-
-        planetLife.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        lifeSpinnerItem.setPageAccentColor(R.color.planet_purple);
+        lifeSpinnerItem.showLifeOptions(false);
     }
 
     private void setupButtons() {

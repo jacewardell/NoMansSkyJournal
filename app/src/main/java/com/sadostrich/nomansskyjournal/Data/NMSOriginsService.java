@@ -1,6 +1,8 @@
 package com.sadostrich.nomansskyjournal.Data;
 
 import com.sadostrich.nomansskyjournal.Models.Authentication;
+import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigBaseObject;
+import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigObject;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.List;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -33,4 +36,7 @@ public interface NMSOriginsService {
 	@Headers("Content-Type:application/json;charset=UTF-8")
 	@POST("discoveries/find")
 	Call<List<Discovery>> findDiscoveries(@Body RequestBody findDiscoveriesQuery);
+
+	@GET("config.json")
+	Call<ConfigBaseObject> getAddDiscoveryFields();
 }
