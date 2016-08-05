@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,8 +42,8 @@ import java.util.List;
  * <p/>
  * Created by Jacobus LaFazia on 8/4/2016.
  */
-public class DiscoveryDetailView extends RelativeLayout
-		implements LoadingImageViewPagerAdapter.ILoadingImagePagerAdapterListener {
+public class DiscoveryDetailView extends RelativeLayout implements View.OnClickListener,
+		LoadingImageViewPagerAdapter.ILoadingImagePagerAdapterListener {
 
 	private static final String TAG = "DiscoveryDetailView";
 
@@ -77,24 +79,20 @@ public class DiscoveryDetailView extends RelativeLayout
 		getViewRefs();
 
 		if (!isInEditMode()) {
-			// TODO set icons to TVs
 			setClickListeners();
-
-		} else {
-			// TODO set dummy image
+			setIconsToViews(context);
 		}
-
 	}
 
 	private void getViewRefs() {
 		mTvName = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvUser = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvType = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvTime = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvNumViews = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvDesc = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvCaption = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
-		mTvBtnReport = (TextView) mLayout.findViewById(R.id.tv_discovery_name);
+		mTvUser = (TextView) mLayout.findViewById(R.id.tv_discovered_by_user);
+		mTvType = (TextView) mLayout.findViewById(R.id.tv_type);
+		mTvTime = (TextView) mLayout.findViewById(R.id.tv_time);
+		mTvNumViews = (TextView) mLayout.findViewById(R.id.tv_num_views);
+		mTvDesc = (TextView) mLayout.findViewById(R.id.tv_discovery_desc);
+		mTvCaption = (TextView) mLayout.findViewById(R.id.tv_discovery_caption);
+		mTvBtnReport = (TextView) mLayout.findViewById(R.id.tv_btn_report);
 		mViewPager = (ViewPager) mLayout.findViewById(R.id.view_pager_images);
 		mPageIndicator = (CirclePageIndicator) mLayout
 				.findViewById(R.id.indicator_images);
@@ -103,8 +101,16 @@ public class DiscoveryDetailView extends RelativeLayout
 	}
 
 	private void setClickListeners() {
-		// TODO set view click listeners
+		mTvUser.setOnClickListener(this);
+		// TODO click listener for up vote!
+		mTvBtnReport.setOnClickListener(this);
+	}
 
+	private void setIconsToViews(Context context) {
+		// TODO bell icon for the report btn
+		Drawable icon = IconUtil.getIcon(context, android.R.drawable.alert_dark_frame,
+				R.color.accent, R.dimen.d24);
+		mTvBtnReport.setCompoundDrawables(null, null, icon, null);
 	}
 
 	private void setupViewPager() {
@@ -196,6 +202,26 @@ public class DiscoveryDetailView extends RelativeLayout
 		}
 	}
 
+	private void setupTagViews() {
+		// TODO Tags (in dynamic linear layout)
+
+		final LayoutInflater inflater = (LayoutInflater) getContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		List<String> tags = mDiscovery.getTags();
+		int count = tags.size();
+		TextView[] tagViews = new TextView[count];
+		for (int i = 0; i < count; i++) {
+			TextView tv = (TextView) inflater.inflate(R.layout.tv_tag, mDyLayoutTags,
+					false);
+			tv.setText(tags.get(i));
+			tagViews[i] = tv;
+		}
+
+		int width = (int) (getContext().getResources().getDimension(R.dimen.d96));
+		mDyLayoutTags.setViews(tagViews, width);
+	}
+
 	private void setDiscoveryToViews() {
 		// Name
 		mTvName.setText(mDiscovery.getName());
@@ -220,7 +246,8 @@ public class DiscoveryDetailView extends RelativeLayout
 		// Images
 		setupViewPager();
 
-		// TODO Tags (in dynamic linear layout)
+		// Tags
+		setupTagViews();
 
 		// Description
 		mTvDesc.setText(mDiscovery.getDescription());
@@ -233,13 +260,39 @@ public class DiscoveryDetailView extends RelativeLayout
 	// Public Config Methods
 	//////////////////////////////////////////////////////////////////
 
-	public void setListener(IDiscoveryDetailView listener) {
+	public void setListener(@Nullable IDiscoveryDetailView listener) {
 		mListener = listener;
 	}
 
 	public void setDiscovery(@NonNull Discovery discovery) {
 		mDiscovery = discovery;
-		// TODO set discovery to views!
+		setDiscoveryToViews();
+	}
+
+	//////////////////////////////////////////////////////////////////
+	// View.OnClickListener
+	//////////////////////////////////////////////////////////////////
+
+	@Override
+	public void onClick(View v) {
+		if (mListener == null) {
+			Log.w(TAG, "@ onClick(): No listener set!");
+			return;
+		}
+
+		switch (v.getId()) {
+		case R.id.tv_discovered_by_user:
+			Log.i(TAG, "User name clicked!");
+			mListener.onUserClicked(mDiscovery.getUser());
+			break;
+
+		// TODO click listener to up vote!
+
+		case R.id.tv_btn_report:
+			Log.i(TAG, "Report Inappropriate clicked!");
+			mListener.onReportInappropriate(mDiscovery);
+			break;
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////

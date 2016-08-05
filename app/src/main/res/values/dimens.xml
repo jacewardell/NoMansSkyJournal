@@ -17,6 +17,7 @@
 	<dimen name="d32">32dp</dimen>
 	<dimen name="d48">48dp</dimen>
 	<dimen name="d64">64dp</dimen>
+	<dimen name="d96">96dp</dimen>
 	<dimen name="d128">128dp</dimen>
 	<dimen name="d192">192dp</dimen>
 	<dimen name="d256">256dp</dimen>
