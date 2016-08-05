@@ -36,4 +36,10 @@
 	<color name="structure_green">#5db39e</color>
 	<color name="ship_gray">#848a88</color>
 	<color name="item_red">#bb082e</color>
+
+	<!-- Page Indicators -->
+	<color name="default_page_indicator_fill_color">@color/text_icons</color>
+	<color name="default_page_indicator_page_color">#00000000</color>
+	<color name="default_page_indicator_stroke_color">@color/primary</color>
+
 </resources>

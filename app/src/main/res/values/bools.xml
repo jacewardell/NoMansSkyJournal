@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Page Indicators -->
+	<bool name="default_page_indicator_centered">true</bool>
+	<bool name="default_page_indicator_snap">false</bool>
+
+</resources>
