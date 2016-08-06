@@ -1,7 +1,9 @@
 package com.sadostrich.nomansskyjournal.Activities;
 
+import android.app.DialogFragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -24,6 +26,7 @@ import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
 import com.sadostrich.nomansskyjournal.Models.User;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Views.DiscoveryDetailView;
+import com.sadostrich.nomansskyjournal.modals.FullPageImageModal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,9 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	private CollapsingToolbarLayout mCollapsingToolbarLayout;
 	private RecyclerView mRvComments;
 	private FloatingActionButton mAddCommentFAB;
+
+	/* Modal */
+	private DialogFragment mCurrentlyShowingModal;
 
 	private Discovery mDiscovery;
 	private CommentAdapter mCommentAdapter;
@@ -146,7 +152,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 			});
 		}
 
-		// TODO appbar layout collapse listener
+		// appbar layout collapse listener
 		AppBarLayout appBar = ((AppBarLayout) findViewById(R.id.appbar));
 		if (appBar != null) {
 			appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -155,11 +161,11 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 						int verticalOffset) {
 					if (mCollapsingToolbarLayout.getHeight() + verticalOffset < 2
 							* ViewCompat.getMinimumHeight(mCollapsingToolbarLayout)) {
-						// TODO show the FAB
+						// show the FAB
 						mAddCommentFAB.show();
 
 					} else {
-						// TODO hide the FAB
+						// hide the FAB
 						mAddCommentFAB.hide();
 					}
 				}
@@ -183,6 +189,42 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+
+
+		// Dismiss the currently showing modal (if any).
+		if (mCurrentlyShowingModal != null) {
+			mCurrentlyShowingModal.dismiss();
+			mCurrentlyShowingModal = null;
+		}
+	}
+
+	/**
+	 * Shows the full screen image modal for the given bundle containing the
+	 * bitmap image.
+	 *
+	 * @param bundle
+	 *            Bundle containing the bitmap image to show. The bundle & the
+	 *            Bitmap in the bundle must not be <strong>null</strong>.
+	 */
+	public void showFullScreenImage(@NonNull Bundle bundle) {
+		FullPageImageModal modal = new FullPageImageModal();
+
+		// Add arguments bundle
+		modal.setArguments(bundle);
+
+		if (mCurrentlyShowingModal != null) {
+			// Log.d(TAG, "@ showModal(): A Modal is already showing, replacing
+			// it...");
+			mCurrentlyShowingModal.dismiss();
+		}
+		mCurrentlyShowingModal = modal;
+		modal.show(getFragmentManager(), "Current Modal");
+	}
+
 	//////////////////////////////////////////////////////////////////
 	// IDiscoveryDetailView
 	//////////////////////////////////////////////////////////////////
@@ -198,6 +240,19 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	public void onImageClicked(Bitmap image) {
 		Log.d(TAG, "@ onImageClicked(): ");
 		// TODO display image in full page image view thingy
+
+		// Product Image Clicked. Show full screen.
+		if (image != null) {
+			Log.i(TAG, "Bitmap Image Clicked!");
+
+			Bundle bundle = new Bundle();
+			bundle.putParcelable(FullPageImageModal.BUNDLE_KEY_IMAGE_BITMAP, image);
+			showFullScreenImage(bundle);
+
+		} else {
+			Log.w(TAG, "Do not have product image Bitmap. "
+					+ "Unable to view full screen :(");
+		}
 	}
 
 	@Override

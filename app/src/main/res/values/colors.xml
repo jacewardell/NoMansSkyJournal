@@ -16,6 +16,7 @@
 	<color name="text_primary_light">#63A6B4</color>
 	<color name="text_gray">#DBDEE6</color>
 	<color name="bg_tag">#3F2830</color>
+	<color name="modal_bg_dark">#CC000000</color>
 
 	<!--<color name="primary">#D32F2F</color>-->
 	<!--<color name="primary_dark">#B71C1C</color>-->
