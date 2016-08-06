@@ -208,5 +208,5 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/d1"
 		android:layout_below="@+id/layout_discovery_details"
-		android:background="@android:color/transparent"/>
+		android:background="@color/text_icons"/>
 </RelativeLayout>

@@ -3,7 +3,10 @@ package com.sadostrich.nomansskyjournal.Activities;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.sadostrich.nomansskyjournal.Adapters.CommentAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.ICommentVhListener;
@@ -42,6 +46,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	private DiscoveryDetailView mDetailView;
 	private CollapsingToolbarLayout mCollapsingToolbarLayout;
 	private RecyclerView mRvComments;
+	private FloatingActionButton mAddCommentFAB;
 
 	private Discovery mDiscovery;
 	private CommentAdapter mCommentAdapter;
@@ -68,13 +73,15 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	private void createTestComments() {
 		List<DiscoveryComment> comments = new ArrayList<>();
 
-		User user = new User("123", "Bob Zudusky", "2016-08-01T13:25.000-07:00", false, false);
+		User user = new User("123", "Bob Zudusky", "2016-08-01T13:25.000-07:00", false,
+				false);
 
 		DiscoveryComment dc = new DiscoveryComment();
 		dc.setUser(user);
 		dc.setTimeAgo("4 days ago");
 		dc.setReportsCount(0);
-		dc.setComment("Nice one slick!\nYou find all on your own or did your mommy help you?");
+		dc.setComment(
+				"Nice one slick!\nYou find all on your own or did your mommy help you?");
 		comments.add(dc);
 
 		dc = new DiscoveryComment();
@@ -123,9 +130,41 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 		// The CollapsingToolbarLayout that will act as the comments header.
 		mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(
 				R.id.collapsing_toolbar);
-		mCollapsingToolbarLayout.setTitle(getResources().getString(R.string.comments));
+		mCollapsingToolbarLayout
+				.setTitle(getResources().getString(R.string.comments).toUpperCase());
 
-		// TODO add a FAB for the 'add comment' btn!
+		mAddCommentFAB = (FloatingActionButton) findViewById(R.id.fab_add_comment);
+		if (mAddCommentFAB != null) {
+			// mAddCommentFAB.hide();
+			mAddCommentFAB.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "@ Add Comment FAB clicked!");
+
+					// TODO show add comment dialog
+				}
+			});
+		}
+
+		// TODO appbar layout collapse listener
+		AppBarLayout appBar = ((AppBarLayout) findViewById(R.id.appbar));
+		if (appBar != null) {
+			appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+				@Override
+				public void onOffsetChanged(AppBarLayout appBarLayout,
+						int verticalOffset) {
+					if (mCollapsingToolbarLayout.getHeight() + verticalOffset < 2
+							* ViewCompat.getMinimumHeight(mCollapsingToolbarLayout)) {
+						// TODO show the FAB
+						mAddCommentFAB.show();
+
+					} else {
+						// TODO hide the FAB
+						mAddCommentFAB.hide();
+					}
+				}
+			});
+		}
 	}
 
 	private void initCommentsAdapter() {

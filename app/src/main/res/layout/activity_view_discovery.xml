@@ -31,7 +31,7 @@
 				android:layout_gravity="top"
 				android:minHeight="0dp"
 				app:layout_collapseMode="none"
-				app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"/>
+				app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed|snap"/>
 
 			<android.support.v7.widget.Toolbar
 				android:id="@+id/toolbar"
@@ -49,4 +49,16 @@
 		android:background="@color/primary"
 		android:clipToPadding="false"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/fab_add_comment"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end|bottom"
+		android:layout_margin="@dimen/d16"
+		android:alpha="0"
+		android:src="@drawable/plus"
+		android:tint="@color/text_icons"
+		app:backgroundTint="@color/item_red"
+		app:fabSize="normal"/>
 </android.support.design.widget.CoordinatorLayout>
