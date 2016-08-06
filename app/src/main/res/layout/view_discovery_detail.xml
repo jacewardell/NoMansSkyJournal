@@ -27,10 +27,11 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentStart="true"
 		android:layout_below="@+id/tv_discovery_name"
-		android:layout_marginBottom="@dimen/d16"
+		android:layout_marginBottom="@dimen/d8"
 		android:layout_marginEnd="@dimen/d4"
 		android:layout_marginStart="@dimen/d16"
 		android:maxLines="1"
+		android:paddingBottom="@dimen/d8"
 		android:text="@string/discovered_by_colon"
 		android:textColor="@color/text_primary_light"
 		android:textSize="16sp"/>
@@ -43,6 +44,7 @@
 		android:layout_marginEnd="@dimen/d16"
 		android:layout_toEndOf="@+id/tv_discovered_by_label"
 		android:maxLines="1"
+		android:paddingBottom="@dimen/d8"
 		android:textColor="@color/color_state_light_to_primary"
 		android:textSize="16sp"
 		tools:text="[TPG] Roobean"/>
@@ -149,9 +151,10 @@
 		android:layout_toStartOf="@+id/layout_num_up_votes"
 		android:background="#00000000"
 		android:clickable="true"
-		app:octagon_color="@color/text_icons">
+		app:asButton="true"
+		app:octagon_color="@color/text_icons"
+		app:octagon_color_pressed="@color/item_red">
 
-		<!-- TODO set icon color state list -->
 		<ImageView
 			android:id="@+id/iv_arrow_up"
 			android:layout_width="@dimen/d24"
@@ -194,7 +197,7 @@
 			android:layout_below="@+id/tv_discovery_desc"
 			android:layout_marginBottom="@dimen/d16"
 			android:layout_marginTop="@dimen/d16"
-			android:drawablePadding="@dimen/d8"
+			android:drawablePadding="@dimen/d4"
 			android:text="@string/report_as_inappropriate"
 			android:textColor="@color/color_state_accent_to_light"
 			android:textSize="16sp"/>

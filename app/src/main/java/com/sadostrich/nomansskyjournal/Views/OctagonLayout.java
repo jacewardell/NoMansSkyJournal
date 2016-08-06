@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
 import com.sadostrich.nomansskyjournal.R;
@@ -18,11 +19,16 @@ import com.sadostrich.nomansskyjournal.R;
  */
 public class OctagonLayout extends RelativeLayout {
 
-	private AttributeSet mAttributes;
 	private final RectF mCanvasBounds = new RectF(0, 0, 0, 0);
 	private Path mClipPath;
 	private Path mOctPath;
+
+	// Settings
+	private AttributeSet mAttributes;
+	private boolean mAsBtn;
 	private int mColor;
+	private int mColorMain;
+	private int mColorPressed;
 
 	public OctagonLayout(Context context) {
 		super(context);
@@ -46,14 +52,23 @@ public class OctagonLayout extends RelativeLayout {
 		if (mAttributes != null) {
 			TypedArray a = context.obtainStyledAttributes(mAttributes,
 					R.styleable.OctagonLayout, 0, 0);
+
 			// Get desired octagon color
-			mColor = a.getColor(R.styleable.OctagonLayout_octagon_color,
+			mColor = mColorMain = a.getColor(R.styleable.OctagonLayout_octagon_color,
 					context.getResources().getColor(R.color.accent));
+
+			// Get pressed color (if any)
+			mColorPressed = a.getColor(R.styleable.OctagonLayout_octagon_color_pressed,
+					context.getResources().getColor(R.color.accent));
+
+			// Check if desired as btn (change color on pressed)
+			mAsBtn = a.getBoolean(R.styleable.OctagonLayout_asButton, false);
 
 			a.recycle();
 
 		} else {
-			mColor = context.getResources().getColor(R.color.accent);
+			mColor = mColorMain = mColorPressed = context.getResources()
+					.getColor(R.color.accent);
 		}
 
 		mClipPath = new Path();
@@ -64,6 +79,27 @@ public class OctagonLayout extends RelativeLayout {
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
 		resetCanvasBounds(w, h);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// Change colors if is in button mode
+		if (mAsBtn) {
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				mColor = mColorPressed;
+				invalidate();
+				break;
+
+			case MotionEvent.ACTION_UP:
+			case MotionEvent.ACTION_CANCEL:
+				mColor = mColorMain;
+				invalidate();
+				break;
+			}
+		}
+
+		return super.onTouchEvent(event);
 	}
 
 	/**
@@ -94,15 +130,6 @@ public class OctagonLayout extends RelativeLayout {
 		float midX = getWidth() / 2;
 		float midY = getHeight() / 2;
 		mOctPath.moveTo(midX, midY);
-		// mOctPath.lineTo(midX + 300, midY + 120);
-		// mOctPath.lineTo(midX + 120, midY + 300);
-		// mOctPath.lineTo(midX - 120, midY + 300);
-		// mOctPath.lineTo(midX - 300, midY + 120);
-		// mOctPath.lineTo(midX - 300, midY - 120);
-		// mOctPath.lineTo(midX - 120, midY - 300);
-		// mOctPath.lineTo(midX + 120, midY - 300);
-		// mOctPath.lineTo(midX + 300, midY - 120);
-		// mOctPath.lineTo(midX + 300, midY + 120);
 
 		float large = (getWidth() / 2) * 0.91f;
 		float small = (getWidth() / 5) * 0.91f;

@@ -51,6 +51,8 @@
 	|||||||||||||||||||||||||||||||||||||| -->
 	<declare-styleable name="OctagonLayout">
 		<attr name="octagon_color" format="color"/>
+		<attr name="octagon_color_pressed" format="color"/>
+		<attr name="asButton" format="boolean"/>
 	</declare-styleable>
 
 </resources>
