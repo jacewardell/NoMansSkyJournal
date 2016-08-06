@@ -21,6 +21,9 @@ import com.sadostrich.nomansskyjournal.Models.User;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Views.DiscoveryDetailView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Activity that controls fragments related to the viewing of a discovery in
  * full detail.<br>
@@ -57,7 +60,31 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 
 		// Init views
 		initViews();
+		// TODO create test comments
+		createTestComments();
 		initCommentsAdapter();
+	}
+
+	private void createTestComments() {
+		List<DiscoveryComment> comments = new ArrayList<>();
+
+		User user = new User("123", "Bob Zudusky", "2016-08-01T13:25.000-07:00", false, false);
+
+		DiscoveryComment dc = new DiscoveryComment();
+		dc.setUser(user);
+		dc.setTimeAgo("4 days ago");
+		dc.setReportsCount(0);
+		dc.setComment("Nice one slick!\nYou find all on your own or did your mommy help you?");
+		comments.add(dc);
+
+		dc = new DiscoveryComment();
+		dc.setUser(user);
+		dc.setTimeAgo("5 days ago");
+		dc.setReportsCount(0);
+		dc.setComment("I dare you to report me!!!\n\nCHUMP");
+		comments.add(dc);
+
+		mDiscovery.setComments(comments);
 	}
 
 	@Override

@@ -2,11 +2,12 @@
 <TextView
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
+	android:layout_margin="@dimen/d1"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:background="@color/bg_tag"
-	android:padding="@dimen/d8"
 	android:maxLines="1"
+	android:padding="@dimen/d8"
 	android:textColor="@color/text_icons"
 	android:textSize="@dimen/ts16"
 	tools:text="Size: Monstrous"/>
