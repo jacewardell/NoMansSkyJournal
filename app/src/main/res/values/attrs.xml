@@ -45,4 +45,12 @@
 		<attr name="android:background"/>
 	</declare-styleable>
 
+
+	<!--||||||||||||||||||||||||||||||||||||||
+	|||||       Octagon Layout Attrs     |||||
+	|||||||||||||||||||||||||||||||||||||| -->
+	<declare-styleable name="OctagonLayout">
+		<attr name="octagon_color" format="color"/>
+	</declare-styleable>
+
 </resources>

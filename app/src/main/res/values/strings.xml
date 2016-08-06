@@ -54,6 +54,7 @@
 	<!-- Content Descriptions -->
 	<string name="drawer_open">open drawer</string>
 	<string name="drawer_close">close drawer</string>
+	<string name="cont_desc_up_vote_discovery">upvote this discovery</string>
 
 	<!-- Strings related to login -->
 	<string name="prompt_email">Email</string>

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,8 +49,8 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 	private static final String TAG = "DiscoveryDetailView";
 
 	private RelativeLayout mLayout;
-	private TextView mTvName, mTvUser, mTvType, mTvTime, mTvNumViews, mTvDesc, mTvCaption,
-			mTvBtnReport;
+	private TextView mTvName, mTvUser, mTvType, mTvTime, mTvNumViews, mTvNumVotes,
+			mTvDesc, mTvBtnReport;
 	private ViewPager mViewPager;
 	private CirclePageIndicator mPageIndicator;
 	private DynamicLinearLayout mDyLayoutTags;
@@ -90,8 +91,8 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		mTvType = (TextView) mLayout.findViewById(R.id.tv_type);
 		mTvTime = (TextView) mLayout.findViewById(R.id.tv_time);
 		mTvNumViews = (TextView) mLayout.findViewById(R.id.tv_num_views);
+		mTvNumVotes = (TextView) mLayout.findViewById(R.id.tv_num_votes);
 		mTvDesc = (TextView) mLayout.findViewById(R.id.tv_discovery_desc);
-		mTvCaption = (TextView) mLayout.findViewById(R.id.tv_discovery_caption);
 		mTvBtnReport = (TextView) mLayout.findViewById(R.id.tv_btn_report);
 		mViewPager = (ViewPager) mLayout.findViewById(R.id.view_pager_images);
 		mPageIndicator = (CirclePageIndicator) mLayout
@@ -102,14 +103,13 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 
 	private void setClickListeners() {
 		mTvUser.setOnClickListener(this);
-		// TODO click listener for up vote!
+		mLayout.findViewById(R.id.layout_btn_up_vote).setOnClickListener(this);
 		mTvBtnReport.setOnClickListener(this);
 	}
 
 	private void setIconsToViews(Context context) {
-		// TODO bell icon for the report btn
-		Drawable icon = IconUtil.getIcon(context, android.R.drawable.alert_dark_frame,
-				R.color.accent, R.dimen.d24);
+		Drawable icon = IconUtil.getIconWithTintList(context, R.drawable.ic_bell,
+				R.dimen.d16, R.color.color_state_accent_to_light, R.color.accent);
 		mTvBtnReport.setCompoundDrawables(null, null, icon, null);
 	}
 
@@ -139,6 +139,7 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void setDiscoveryType() {
 		int colorRes = 0;
 		int imageRes = 0;
@@ -186,7 +187,7 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		}
 
 		// Type name
-		mTvType.setText(mDiscovery.getType());
+		mTvType.setText(mDiscovery.getType().toUpperCase());
 
 		// Type color
 		if (colorRes == 0) {
@@ -197,7 +198,7 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		// Type icon
 		if (imageRes != 0) {
 			Drawable icon = IconUtil.getIcon(getContext(), imageRes, R.color.text_icons,
-					R.dimen.d24);
+					R.dimen.d20);
 			mTvType.setCompoundDrawables(icon, null, null, null);
 		}
 	}
@@ -233,7 +234,9 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		setDiscoveryType();
 
 		// TODO Time since added (amount of time elapsed since now)
-		mTvTime.setText(mDiscovery.getDiscoveredAt());
+		// Format: "2016-08-02T01:23:37.866"
+		// mTvTime.setText(mDiscovery.getDiscoveredAt());
+		mTvTime.setVisibility(View.GONE);
 
 		// Number of views
 		String numViews = getContext().getResources().getString(R.string.views)
@@ -241,7 +244,8 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		numViews = String.valueOf(mDiscovery.getViews()) + " " + numViews;
 		mTvNumViews.setText(numViews);
 
-		// TODO Number of up votes
+		// Number of up votes
+		mTvNumVotes.setText(String.valueOf(mDiscovery.getScore()));
 
 		// Images
 		setupViewPager();
@@ -250,10 +254,10 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 		setupTagViews();
 
 		// Description
-		mTvDesc.setText(mDiscovery.getDescription());
-
-		// TODO Caption?
-		mTvCaption.setVisibility(View.GONE);
+		String desc = mDiscovery.getDescription();
+		if (desc != null && !desc.isEmpty()) {
+			mTvDesc.setText(Html.fromHtml(desc));
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -282,14 +286,14 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 
 		switch (v.getId()) {
 		case R.id.tv_discovered_by_user:
-			Log.i(TAG, "User name clicked!");
 			mListener.onUserClicked(mDiscovery.getUser());
 			break;
 
-		// TODO click listener to up vote!
+		case R.id.layout_btn_up_vote:
+			mListener.onUpVoteClicked(mDiscovery);
+			break;
 
 		case R.id.tv_btn_report:
-			Log.i(TAG, "Report Inappropriate clicked!");
 			mListener.onReportInappropriate(mDiscovery);
 			break;
 		}
@@ -301,8 +305,6 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 
 	@Override
 	public void onItemClick(String imageUrl, int position, Bitmap image) {
-		Log.i(TAG, "@ discovery image clicked with URL: " + imageUrl);
-
 		if (mListener != null) {
 			mListener.onImageClicked(image);
 

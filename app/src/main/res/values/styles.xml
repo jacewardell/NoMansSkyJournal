@@ -24,13 +24,13 @@
 	<style name="TextAppearance.CollapsingToolbar.Title.Collapsed"
 		   parent="android:TextAppearance.DeviceDefault.Small">
 		<item name="android:textSize">16sp</item>
-		<item name="android:textColor">@color/primary</item>
+		<item name="android:textColor">@android:color/white</item>
 	</style>
 
 	<style name="TextAppearance.CollapsingToolbar.Title.Expanded"
 		   parent="android:TextAppearance.DeviceDefault.Small">
 		<item name="android:textSize">16sp</item>
-		<item name="android:textColor">@android:color/transparent</item>
+		<item name="android:textColor">@android:color/white</item>
 	</style>
 
 

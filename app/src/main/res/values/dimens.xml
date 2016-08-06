@@ -13,6 +13,7 @@
 	<dimen name="d5">5dp</dimen>
 	<dimen name="d8">8dp</dimen>
 	<dimen name="d16">16dp</dimen>
+	<dimen name="d20">20dp</dimen>
 	<dimen name="d24">24dp</dimen>
 	<dimen name="d32">32dp</dimen>
 	<dimen name="d48">48dp</dimen>
