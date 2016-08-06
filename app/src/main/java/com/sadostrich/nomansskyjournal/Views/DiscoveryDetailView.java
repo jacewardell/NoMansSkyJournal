@@ -204,8 +204,6 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 	}
 
 	private void setupTagViews() {
-		// TODO Tags (in dynamic linear layout)
-
 		final LayoutInflater inflater = (LayoutInflater) getContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -219,8 +217,7 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
 			tagViews[i] = tv;
 		}
 
-		int width = (int) (getContext().getResources().getDimension(R.dimen.d96));
-		mDyLayoutTags.setViews(tagViews, width);
+		mDyLayoutTags.setViews(tagViews);
 	}
 
 	private void setDiscoveryToViews() {

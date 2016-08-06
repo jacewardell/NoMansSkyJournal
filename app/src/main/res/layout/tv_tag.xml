@@ -6,6 +6,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:background="@color/bg_tag"
 	android:padding="@dimen/d8"
+	android:maxLines="1"
 	android:textColor="@color/text_icons"
 	android:textSize="@dimen/ts16"
 	tools:text="Size: Monstrous"/>
