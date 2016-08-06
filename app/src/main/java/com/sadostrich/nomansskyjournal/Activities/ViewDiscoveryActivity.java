@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sadostrich.nomansskyjournal.Adapters.CommentAdapter;
+import com.sadostrich.nomansskyjournal.Interfaces.ICommentVhListener;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryDetailView;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
+import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
 import com.sadostrich.nomansskyjournal.Models.User;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Views.DiscoveryDetailView;
@@ -23,12 +26,12 @@ import com.sadostrich.nomansskyjournal.Views.DiscoveryDetailView;
  * full detail.<br>
  * Clicking the picture goes to full screen view of the pic.<br>
  * Maybe a button to view 'related discoveries' in a full page fashion?
- *
+ * <p/>
  * <p/>
  * Created by Jacobus LaFazia on 8/2/2016.
  */
 public class ViewDiscoveryActivity extends AppCompatActivity
-		implements IDiscoveryDetailView {
+		implements IDiscoveryDetailView, ICommentVhListener {
 
 	private static final String TAG = "ViewDiscoveryActivity";
 	public static final String INTENT_EXTRA_DISCOVERY = "INTENT_EXTRA_DISCOVERY";
@@ -38,6 +41,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	private RecyclerView mRvComments;
 
 	private Discovery mDiscovery;
+	private CommentAdapter mCommentAdapter;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 
 		// Init views
 		initViews();
+		initCommentsAdapter();
 	}
 
 	@Override
@@ -96,6 +101,22 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 		// TODO add a FAB for the 'add comment' btn!
 	}
 
+	private void initCommentsAdapter() {
+		// TODO init RV comments adapter
+
+		mCommentAdapter = new CommentAdapter(mDiscovery.getComments(), this);
+		mRvComments.setAdapter(mCommentAdapter);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// TODO fetch comments from server!
+		Log.i(TAG, "@ onResume(): Must fetch discovery comments from the server!");
+
+	}
+
 	//////////////////////////////////////////////////////////////////
 	// IDiscoveryDetailView
 	//////////////////////////////////////////////////////////////////
@@ -123,6 +144,24 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	public void onReportInappropriate(Discovery discovery) {
 		Log.d(TAG, "@ onReportInappropriate(): Discovery = " + discovery.getName());
 		// TODO report discovery as inappropriate
+	}
+
+	//////////////////////////////////////////////////////////////////
+	// ICommentVhListener
+	//////////////////////////////////////////////////////////////////
+
+	@Override
+	public void onCommentUserClicked(DiscoveryComment comment) {
+		Log.d(TAG, "@ onCommentUserClicked(): User = " + comment.getUser().getUsername());
+
+		// TODO Navigate to view user profile
+	}
+
+	@Override
+	public void onReportCommentClicked(DiscoveryComment comment) {
+		Log.d(TAG, "@ onReportCommentClicked(): Comment = " + comment.getComment());
+
+		// TODO Report comment as inappropriate
 	}
 
 }
