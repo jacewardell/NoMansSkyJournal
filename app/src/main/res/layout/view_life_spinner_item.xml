@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/d4"
                 android:text="@string/label_life"
-                android:textColor="@android:color/black"
+                android:textColor="@color/gray_dark"
                 android:textSize="@dimen/ts16" />
 
             <Spinner
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@android:color/black" />
+                android:backgroundTint="@color/gray_dark" />
         </LinearLayout>
 
         <FrameLayout
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/d4"
         android:text="@string/label_inhabitants"
-        android:textColor="@android:color/black"
+        android:textColor="@color/gray_dark"
         android:layout_below="@+id/life_row0"
         android:textSize="@dimen/ts16" />
 
@@ -70,9 +70,9 @@
                 android:id="@+id/cb_traders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/traders"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/gray_dark" />
         </FrameLayout>
 
         <FrameLayout
@@ -84,9 +84,9 @@
                 android:id="@+id/cb_scavengers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/scavengers"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/gray_dark" />
         </FrameLayout>
     </LinearLayout>
 
@@ -107,9 +107,9 @@
                 android:id="@+id/cb_scientists"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/scientists"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/gray_dark" />
         </FrameLayout>
 
         <FrameLayout
@@ -121,9 +121,9 @@
                 android:id="@+id/cb_militant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/militant"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/gray_dark" />
         </FrameLayout>
     </LinearLayout>
 
@@ -143,9 +143,9 @@
                 android:id="@+id/cb_hunters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@android:color/black"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/hunters"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/gray_dark" />
         </FrameLayout>
 
         <FrameLayout

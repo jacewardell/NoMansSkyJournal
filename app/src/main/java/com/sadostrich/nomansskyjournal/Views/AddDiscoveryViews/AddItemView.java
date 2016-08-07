@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
+package com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -19,34 +19,34 @@ import java.util.List;
 /**
  *
  */
-public class AddFloraView extends RelativeLayout {
-    private Spinner floraSize;
+public class AddItemView extends RelativeLayout {
+    private Spinner itemTypeSpinner, itemRaritySpinner;
+    private CheckBox itemRequiresBlueprintCheckbox;
     private Button previousButton, submitButton;
     private IAddDiscoveryListener listener;
-    private CheckBox poisonousCheckbox, resourcesCheckbox, carnivorousCheckbox;
 
-    public AddFloraView(Context context, IAddDiscoveryListener listener) {
+    public AddItemView(Context context, IAddDiscoveryListener listener) {
         super(context);
         init(listener);
     }
 
-    public AddFloraView(Context context, AttributeSet attrs, IAddDiscoveryListener listener) {
+    public AddItemView(Context context, AttributeSet attrs, IAddDiscoveryListener listener) {
         super(context, attrs);
         init(listener);
     }
 
-    public AddFloraView(Context context, AttributeSet attrs, int defStyleAttr, IAddDiscoveryListener listener) {
+    public AddItemView(Context context, AttributeSet attrs, int defStyleAttr, IAddDiscoveryListener listener) {
         super(context, attrs, defStyleAttr);
         init(listener);
     }
 
-    public AddFloraView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, IAddDiscoveryListener listener) {
+    public AddItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, IAddDiscoveryListener listener) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(listener);
     }
 
     private void init(IAddDiscoveryListener listener) {
-        inflate(getContext(), R.layout.view_add_flora_discovery, this);
+        inflate(getContext(), R.layout.view_add_item_discovery, this);
         getViewRefs();
         setupSpinners();
         setupButtons();
@@ -54,24 +54,28 @@ public class AddFloraView extends RelativeLayout {
     }
 
     private void getViewRefs() {
-        floraSize = (Spinner) findViewById(R.id.spinner_flora_size);
-        poisonousCheckbox = (CheckBox) findViewById(R.id.cb_poisonous);
-        resourcesCheckbox = (CheckBox) findViewById(R.id.cb_resources);
-        carnivorousCheckbox = (CheckBox) findViewById(R.id.cb_carnivorous);
+        itemTypeSpinner = (Spinner) findViewById(R.id.spinner_item_type);
+        itemRaritySpinner = (Spinner) findViewById(R.id.spinner_item_rarity);
+        itemRequiresBlueprintCheckbox = (CheckBox) findViewById(R.id.cb_item_requires_blueprint);
         previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
         submitButton = (Button) findViewById(R.id.btn_submit_discovery);
     }
 
     private void setupSpinners() {
-        setupFloraSizeSpinner();
+        setupItemTypeSpinner();
+        setupItemRaritySpinner();
     }
 
-    private void setupFloraSizeSpinner() {
-        List<CustomSpinnerObject> options = MiscUtil.getDiscoverySizeOptions(getContext(), R.color.flora_blue);
+    private void setupItemTypeSpinner() {
+        List<CustomSpinnerObject> options = MiscUtil.getItemTypeOptions(getContext());
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        floraSize.setAdapter(adapter);
+        itemTypeSpinner.setAdapter(adapter);
+    }
 
-//        floraSize.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+    private void setupItemRaritySpinner() {
+        List<CustomSpinnerObject> options = MiscUtil.getItemRarityOptions(getContext());
+        AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
+        itemRaritySpinner.setAdapter(adapter);
     }
 
     private void setupButtons() {

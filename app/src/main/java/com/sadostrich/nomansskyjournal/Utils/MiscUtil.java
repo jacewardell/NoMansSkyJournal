@@ -158,4 +158,26 @@ public class MiscUtil {
         }
         return options;
     }
+
+    public static List<CustomSpinnerObject> getItemTypeOptions(Context context) {
+        List<CustomSpinnerObject> options = new ArrayList<>();
+
+        String[] itemTypes = context.getResources().getStringArray(R.array.array_item_type);
+        for (int i = 0; i < itemTypes.length; i++) {
+            String type = itemTypes[i];
+            options.add(new CustomSpinnerObject(type, R.color.item_red));
+        }
+        return options;
+    }
+
+    public static List<CustomSpinnerObject> getItemRarityOptions(Context context) {
+        List<CustomSpinnerObject> options = new ArrayList<>();
+
+        String[] itemRarity = context.getResources().getStringArray(R.array.array_rarity);
+        for (int i = 0; i < itemRarity.length; i++) {
+            String rarity = itemRarity[i];
+            options.add(new CustomSpinnerObject(rarity, R.color.item_red));
+        }
+        return options;
+    }
 }

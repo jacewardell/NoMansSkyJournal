@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
+package com.sadostrich.nomansskyjournal.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,15 +11,15 @@ import com.sadostrich.nomansskyjournal.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class AddAnimalFragment extends Fragment {
+public class AddPlantFragment extends Fragment {
 
-    public AddAnimalFragment() {
+    public AddPlantFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO: Change to right layout
+        // TODO: change to right layout
         return inflater.inflate(R.layout.discovery_card, container, false);
     }
 }

@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void getNewDiscoveries(NMSOriginsService nmsOriginsService) {
         Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
-                .findDiscoveries(NMSOriginsServiceHelper.getNewDiscoveriesRequestBody());
+                .findDiscoveries(NMSOriginsServiceHelper.createGetNewDiscoveriesRequestBody());
         findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
             @Override
             public void onResponse(Call<List<Discovery>> call,
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void getPopularDiscoveries(NMSOriginsService nmsOriginsService) {
         Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
-                .findDiscoveries(NMSOriginsServiceHelper.getPopularDiscoveriesRequestBody());
+                .findDiscoveries(NMSOriginsServiceHelper.createGetPopularDiscoveriesRequestBody());
         findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
             @Override
             public void onResponse(Call<List<Discovery>> call,

@@ -38,25 +38,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d4"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/d4"
-                android:text="@string/label_life"
-                android:textColor="@color/station_green"
-                android:textSize="@dimen/ts16" />
-
-            <Spinner
-                android:id="@+id/spinner_station_life"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/d8"
-                android:layout_weight="1"
-                android:backgroundTint="@color/station_green" />
-        </LinearLayout>
+            android:orientation="vertical"/>
     </LinearLayout>
+
+    <com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem
+        android:id="@+id/station_life_spinner_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_type_planet_count_spinners"
+        android:layout_marginBottom="@dimen/d16" />
 
     <Button
         android:id="@+id/btn_submit_discovery"

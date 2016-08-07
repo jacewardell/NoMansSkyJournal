@@ -1,32 +1,33 @@
-package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
+package com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 
 import com.sadostrich.nomansskyjournal.Adapters.AddDiscoverySpinnerAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Utils.MiscUtil;
 import com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  */
 public class AddSystemView extends RelativeLayout {
-    private Spinner systemType, planetCount;
+    private Spinner spnrSystemType, spnrPlanetCount;
     private LifeSpinnerItem lifeSpinnerItem;
-    private CheckBox dangerous;
-    private Button previousButton, submitButton;
+    private CheckBox cbDangerous;
+    private Button btnPrevious, btnSubmit;
     private IAddDiscoveryListener listener;
 
     public AddSystemView(Context context, IAddDiscoveryListener listener) {
@@ -58,12 +59,12 @@ public class AddSystemView extends RelativeLayout {
     }
 
     private void getViewRefs() {
-        systemType = (Spinner) findViewById(R.id.spinner_system_type);
-        planetCount = (Spinner) findViewById(R.id.spinner_system_planet_count);
+        spnrSystemType = (Spinner) findViewById(R.id.spinner_system_type);
+        spnrPlanetCount = (Spinner) findViewById(R.id.spinner_system_planet_count);
         lifeSpinnerItem = (LifeSpinnerItem) findViewById(R.id.layout_life_dangerous_spinners);
-        dangerous = (CheckBox) findViewById(R.id.swt_system_dangerous);
-        previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
-        submitButton = (Button) findViewById(R.id.btn_submit_discovery);
+        cbDangerous = (CheckBox) findViewById(R.id.swt_system_dangerous);
+        btnPrevious = (Button) findViewById(R.id.btn_previous_add_discovery);
+        btnSubmit = (Button) findViewById(R.id.btn_submit_discovery);
     }
 
     private void setupSpinners() {
@@ -75,17 +76,17 @@ public class AddSystemView extends RelativeLayout {
     private void setupSystemTypeSpinner() {
         List<CustomSpinnerObject> options = MiscUtil.getSystemTypeOptions();
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        systemType.setAdapter(adapter);
+        spnrSystemType.setAdapter(adapter);
 
-//        systemType.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        spnrSystemType.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupSystemPlanetCountSpinner() {
         List<CustomSpinnerObject> options = MiscUtil.getSystemPlanetCountOptions();
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        planetCount.setAdapter(adapter);
+        spnrPlanetCount.setAdapter(adapter);
 
-//        planetCount.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        spnrPlanetCount.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setupSystemLifeSpinner() {
@@ -99,7 +100,7 @@ public class AddSystemView extends RelativeLayout {
     }
 
     private void setupPreviousButton() {
-        previousButton.setOnClickListener(new OnClickListener() {
+        btnPrevious.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
@@ -110,13 +111,35 @@ public class AddSystemView extends RelativeLayout {
     }
 
     private void setupSubmitButton() {
-        submitButton.setOnClickListener(new OnClickListener() {
+        btnSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null) {
-                    // TODO: setup callbacks for submitting a discovery
+                if (listener != null) {
+                    Map<String, Object> properties = createSystemPropertiesMap();
+                    listener.submitDiscovery(Enums.DiscoveryType.SOLAR_SYSTEM.getNameString(getContext()), createSystemPropertiesMap());
                 }
             }
         });
+    }
+
+    private HashMap<String, Object> createSystemPropertiesMap() {
+        HashMap<String, Object> systemProperties = new HashMap<>();
+        systemProperties.put("system-type", getSystemTypeValue());
+        systemProperties.put("number-of-planets", getSystemPlanetCountValue());
+        systemProperties.put("life", lifeSpinnerItem.getLifeFound());
+        systemProperties.put("inhabitants", lifeSpinnerItem.getInhabitantsString());
+        systemProperties.put("dangerous", cbDangerous.isChecked());
+
+        return systemProperties;
+    }
+
+    private String getSystemTypeValue() {
+        CustomSpinnerObject systemType = (CustomSpinnerObject) spnrSystemType.getSelectedItem();
+        return "" + ((Enums.SystemType) systemType.getObject()).getNonsensicalWebString() + "";
+    }
+
+    private String getSystemPlanetCountValue() {
+        CustomSpinnerObject systemType = (CustomSpinnerObject) spnrPlanetCount.getSelectedItem();
+        return (String) systemType.getObject();
     }
 }

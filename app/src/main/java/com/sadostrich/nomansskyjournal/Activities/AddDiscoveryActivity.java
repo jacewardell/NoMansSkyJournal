@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StyleRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -16,22 +17,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
+import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
-import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigBaseObject;
-import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigObject;
+import com.sadostrich.nomansskyjournal.Models.Authentication;
+import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.Enums;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddDiscoveryMainView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddFaunaView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddFloraView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddPlanetView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStarView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStationView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddStructureView;
-import com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments.AddSystemView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddDiscoveryMainView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddFaunaView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddFloraView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddItemView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddPlanetView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddStarView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddStationView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddStructureView;
+import com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews.AddSystemView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,6 +55,8 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
     private Enums.DiscoveryType discoveryType;
 
     private AddDiscoveryMainView addDiscoveryMainView;
+    private String discoveryName, youtubeUrl, description, discoveredAt;
+    private List<String> tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +75,6 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
         setupViewPager();
 
         showFragments();
-
-//        Retrofit retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create()).build();
-//        NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
-//        nmsOriginsService.getAddDiscoveryFields().enqueue(new Callback<ConfigBaseObject>() {
-//            @Override
-//            public void onResponse(Call<ConfigBaseObject> call, Response<ConfigBaseObject> response) {
-//                Log.d(TAG, "onResponse: ");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ConfigBaseObject> call, Throwable t) {
-//                Log.d(TAG, "onFailure: ");
-//            }
-//        });
 
     }
 
@@ -161,16 +152,17 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
 
             case ITEM:
                 addDiscoveryMainView = getAddDiscoveryMainView(R.style.ItemDialogTheme, R.color.item_red);
-                viewToShow = new AddSystemView(getApplicationContext(), this);
+                viewToShow = new AddItemView(getApplicationContext(), this);
                 break;
 
             case SHIP:
                 addDiscoveryMainView = getAddDiscoveryMainView(R.style.ShipDialogTheme, R.color.ship_gray);
-                viewToShow = new AddSystemView(getApplicationContext(), this);
-                break;
+                addDiscoveryMainView.setNextButtonAsSubmit(this);
+                addOneViewToViewPager(addDiscoveryMainView);
+                return;
         }
 
-        addViewsToViewPager(addDiscoveryMainView, viewToShow);
+        addTwoViewsToViewPager(addDiscoveryMainView, viewToShow);
     }
 
     private AddDiscoveryMainView getAddDiscoveryMainView(@StyleRes int dialogTheme, @ColorRes int pageAccentColor) {
@@ -181,11 +173,16 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
         return new AddDiscoveryMainView(getApplicationContext(), this, dialogTheme, pageAccentColor);
     }
 
-    private void addViewsToViewPager(AddDiscoveryMainView mainView, View detailsView) {
+    private void addOneViewToViewPager(AddDiscoveryMainView mainView) {
         viewpager.removeAllViews();
-//        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        viewpager.addView(mainView, 0, params);
-//        viewpager.addView(detailsView, 0, params);
+        List<View> views = new ArrayList<>();
+        views.add(mainView);
+        AddDiscoveryPagerAdapter adapter = new AddDiscoveryPagerAdapter(views);
+        viewpager.setAdapter(adapter);
+    }
+
+    private void addTwoViewsToViewPager(AddDiscoveryMainView mainView, View detailsView) {
+        viewpager.removeAllViews();
         List<View> views = new ArrayList<>();
         views.add(mainView);
         views.add(detailsView);
@@ -251,13 +248,72 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
     }
 
     @Override
-    public void nextClicked() {
-        viewpager.setCurrentItem(1);
+    public void nextClicked(String name, String youtubeUrl, String description, List<String> tags, String discoveredAt) {
+        discoveryName = name;
+
+        if (discoveryName.isEmpty()) {
+            View contentView = findViewById(android.R.id.content);
+            if (contentView != null) {
+                Snackbar.make(contentView, R.string.error_add_disc_name_missing, Snackbar.LENGTH_LONG).show();
+            }
+        } else {
+            this.youtubeUrl = youtubeUrl;
+            this.description = description;
+            this.tags = tags;
+            this.discoveredAt = discoveredAt;
+
+            viewpager.setCurrentItem(1);
+        }
+    }
+
+    @Override
+    public void showErrorSnackbar() {
+        View contentView = findViewById(android.R.id.content);
+        if (contentView != null) {
+            Snackbar.make(contentView, R.string.error_add_disc_name_missing, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void previousSelected() {
         viewpager.setCurrentItem(0);
+    }
+
+    @Override
+    public void submitDiscovery(String type, Map<String, Object> properties) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
+        nmsOriginsService.saveDiscovery(Authentication.getInstance().getCookie(), NMSOriginsServiceHelper.createSaveDiscoveryBodyHashMap(type,
+                properties, tags, discoveredAt, discoveryName, youtubeUrl, description)).enqueue(new Callback<Discovery>() {
+            @Override
+            public void onResponse(Call<Discovery> call, Response<Discovery> response) {
+                Log.d(TAG, "onResponse: ");
+            }
+
+            @Override
+            public void onFailure(Call<Discovery> call, Throwable t) {
+                Log.d(TAG, "onFailure: ");
+            }
+        });
+    }
+
+    @Override
+    public void submitShipDiscovery(String type, Map<String, Object> properties, ArrayList<String> strings, List<String> tags, String discoveredAt,
+                                    String name, String youtubeUrl, String description) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
+        nmsOriginsService.saveDiscovery(Authentication.getInstance().getCookie(), NMSOriginsServiceHelper.createSaveDiscoveryBodyHashMap(type,
+                properties, tags, discoveredAt, name, youtubeUrl, description)).enqueue(new Callback<Discovery>() {
+            @Override
+            public void onResponse(Call<Discovery> call, Response<Discovery> response) {
+                Log.d(TAG, "onResponse: ");
+            }
+
+            @Override
+            public void onFailure(Call<Discovery> call, Throwable t) {
+                Log.d(TAG, "onFailure: ");
+            }
+        });
     }
 
     public class AddDiscoveryPagerAdapter extends PagerAdapter {

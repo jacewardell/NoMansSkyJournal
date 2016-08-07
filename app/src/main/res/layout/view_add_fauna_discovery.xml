@@ -85,7 +85,7 @@
                 android:id="@+id/cb_land"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/fauna_red"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/land"
                 android:textColor="@color/fauna_red" />
         </FrameLayout>
@@ -99,7 +99,7 @@
                 android:id="@+id/cb_sky"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/fauna_red"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/sky"
                 android:textColor="@color/fauna_red" />
         </FrameLayout>
@@ -122,7 +122,7 @@
                 android:id="@+id/cb_cave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/fauna_red"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/cave"
                 android:textColor="@color/fauna_red" />
         </FrameLayout>
@@ -136,7 +136,7 @@
                 android:id="@+id/cb_ocean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/fauna_red"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/ocean"
                 android:textColor="@color/fauna_red" />
         </FrameLayout>
@@ -159,7 +159,7 @@
                 android:id="@+id/cb_river"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/fauna_red"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/river"
                 android:textColor="@color/fauna_red" />
         </FrameLayout>
@@ -173,7 +173,7 @@
                 android:id="@+id/cb_lake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/fauna_red"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/lake"
                 android:textColor="@color/fauna_red" />
         </FrameLayout>

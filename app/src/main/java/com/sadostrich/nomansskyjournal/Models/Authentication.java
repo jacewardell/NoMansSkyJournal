@@ -1,7 +1,11 @@
 package com.sadostrich.nomansskyjournal.Models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Headers;
 
 /**
  * Used to authenticate REQUEST queries to get information from the server
@@ -9,6 +13,8 @@ import java.util.List;
  * Created by jacewardell on 5/9/16.
  */
 public class Authentication {
+	private static final String TAG = "Authentication";
+
 	private static Authentication instance;
 
 	private String id;
@@ -145,5 +151,15 @@ public class Authentication {
 
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
+	}
+
+	public void setCookie(Headers headers) {
+		String tempCookie = headers.get("set-cookie");
+		this.cookie = tempCookie.substring(0, tempCookie.indexOf(';'));
+		Log.d(TAG, "setCookie: cookie " + cookie);
+	}
+
+	public String getCookie() {
+		return cookie;
 	}
 }

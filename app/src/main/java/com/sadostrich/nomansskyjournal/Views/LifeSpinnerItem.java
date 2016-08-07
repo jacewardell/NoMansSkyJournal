@@ -1,7 +1,7 @@
 package com.sadostrich.nomansskyjournal.Views;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +15,7 @@ import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.MiscUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,13 +24,14 @@ import java.util.List;
  * Created by Jace Wardell on 7/31/16.
  */
 public class LifeSpinnerItem extends RelativeLayout implements AdapterView.OnItemSelectedListener {
-    private Spinner lifeSpinner;
-    private TextView lifeLabel, inhabitantsTextView;
+    private Spinner spnrLife;
+    private TextView tvLife, tvInhabitants;
     private View viewToHide1, viewToHide2, viewToHide3;
-    private CheckBox tradersCheckbox, scavengersCheckbox, scientistsCheckbox, militantCheckbox, huntersCheckbox;
+    private CheckBox cbTraders, cbScavengers, cbScientists, cbMilitant, cbHunters;
     private int pageAccentColor;
     private boolean initializing = true;
     private List<CustomSpinnerObject> options;
+    private ArrayList<CheckBox> checkboxes;
 
     public LifeSpinnerItem(Context context) {
         super(context);
@@ -58,65 +60,66 @@ public class LifeSpinnerItem extends RelativeLayout implements AdapterView.OnIte
     }
 
     private void getViewRefs() {
-        lifeSpinner = (Spinner) findViewById(R.id.spinner_life);
-        lifeLabel = (TextView) findViewById(R.id.label_life);
-        inhabitantsTextView = (TextView) findViewById(R.id.tv_inhabitants);
+        spnrLife = (Spinner) findViewById(R.id.spinner_life);
+        tvLife = (TextView) findViewById(R.id.label_life);
+        tvInhabitants = (TextView) findViewById(R.id.tv_inhabitants);
         viewToHide1 = findViewById(R.id.life_row1);
         viewToHide2 = findViewById(R.id.life_row2);
         viewToHide3 = findViewById(R.id.life_row3);
 
-        tradersCheckbox = (CheckBox) findViewById(R.id.cb_traders);
-        scavengersCheckbox = (CheckBox) findViewById(R.id.cb_scavengers);
-        scientistsCheckbox = (CheckBox) findViewById(R.id.cb_scientists);
-        militantCheckbox = (CheckBox) findViewById(R.id.cb_militant);
-        huntersCheckbox = (CheckBox) findViewById(R.id.cb_hunters);
+        cbTraders = (CheckBox) findViewById(R.id.cb_traders);
+        cbScavengers = (CheckBox) findViewById(R.id.cb_scavengers);
+        cbScientists = (CheckBox) findViewById(R.id.cb_scientists);
+        cbMilitant = (CheckBox) findViewById(R.id.cb_militant);
+        cbHunters = (CheckBox) findViewById(R.id.cb_hunters);
+
+        saveCheckboxes();
+    }
+
+    private void saveCheckboxes() {
+        checkboxes = new ArrayList<CheckBox>();
+        checkboxes.add(cbTraders);
+        checkboxes.add(cbScavengers);
+        checkboxes.add(cbScientists);
+        checkboxes.add(cbMilitant);
+        checkboxes.add(cbHunters);
     }
 
     public void showLifeOptions(boolean show) {
-        inhabitantsTextView.setVisibility(show ? View.VISIBLE : View.GONE);
+        tvInhabitants.setVisibility(show ? View.VISIBLE : View.GONE);
         viewToHide1.setVisibility(show ? View.VISIBLE : View.GONE);
         viewToHide2.setVisibility(show ? View.VISIBLE : View.GONE);
         viewToHide3.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private void setupLifeSpinner() {
-        lifeSpinner.setOnItemSelectedListener(this);
+        spnrLife.setOnItemSelectedListener(this);
     }
 
     private void setAdapters() {
         options = MiscUtil.getDiscoveryLifeOptions(getContext(), pageAccentColor);
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        lifeSpinner.setAdapter(adapter);
+        spnrLife.setAdapter(adapter);
     }
 
     public void setPageAccentColor(int pageAccentColor) {
         this.pageAccentColor = pageAccentColor;
         int accentColor = getResources().getColor(pageAccentColor);
 
-        lifeLabel.setTextColor(accentColor);
-        inhabitantsTextView.setTextColor(accentColor);
+        tvLife.setTextColor(accentColor);
+        tvInhabitants.setTextColor(accentColor);
 
-        setCheckboxAccent(tradersCheckbox, accentColor);
-        setCheckboxAccent(scavengersCheckbox, accentColor);
-        setCheckboxAccent(scientistsCheckbox, accentColor);
-        setCheckboxAccent(militantCheckbox, accentColor);
-        setCheckboxAccent(huntersCheckbox, accentColor);
+        setCheckboxAccent(cbTraders, accentColor);
+        setCheckboxAccent(cbScavengers, accentColor);
+        setCheckboxAccent(cbScientists, accentColor);
+        setCheckboxAccent(cbMilitant, accentColor);
+        setCheckboxAccent(cbHunters, accentColor);
 
         setAdapters();
     }
 
     private void setCheckboxAccent(CheckBox checkBox, int accentColor) {
-//        checkBox.setButtonDrawable(getResources().getDrawable(R.drawable.system_checkbox));
-
-//        checkBox.setTextColor(accentColor);
-
-//        ColorStateList colorStateList = new ColorStateList(
-//                new int[][]{
-//                        new int[]{android.R.attr.state_enabled} //enabled
-//                },
-//                new int[]{accentColor}
-//        );
-//        checkBox.setSupportButtonTintList(colorStateList);
+        checkBox.setTextColor(accentColor);
     }
 
     @Override
@@ -136,5 +139,31 @@ public class LifeSpinnerItem extends RelativeLayout implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @NonNull
+    public String getInhabitantsString() {
+        String inhabitantString = "";
+        int i = 0;
+        for (CheckBox checkbox : checkboxes) {
+            if (!checkbox.isChecked()) {
+                continue;
+            }
+
+            if (i > 0) {
+                inhabitantString += ",";
+            }
+            i++;
+
+            inhabitantString += "\"" + checkbox.getText() + "\"";
+        }
+
+
+        return inhabitantString;
+    }
+
+    public boolean getLifeFound() {
+        String lifeOption = (String) ((CustomSpinnerObject) spnrLife.getSelectedItem()).getObject();
+        return lifeOption.equalsIgnoreCase("yes");
     }
 }

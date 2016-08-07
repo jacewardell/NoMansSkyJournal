@@ -1,7 +1,6 @@
-package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
+package com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -12,16 +11,21 @@ import com.sadostrich.nomansskyjournal.Adapters.AddDiscoverySpinnerAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Utils.MiscUtil;
+import com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  */
 public class AddStationView extends RelativeLayout {
-    private Spinner stationSize, life;
-    private Button previousButton, submitButton;
+    private Spinner spnrStationSize;
+    private LifeSpinnerItem lifeSpinnerItem;
+    private Button btnPrevious, btnSubmit;
     private IAddDiscoveryListener listener;
 
     public AddStationView(Context context, IAddDiscoveryListener listener) {
@@ -53,32 +57,27 @@ public class AddStationView extends RelativeLayout {
     }
 
     private void getViewRefs() {
-        stationSize = (Spinner) findViewById(R.id.spinner_station_size);
-        life = (Spinner) findViewById(R.id.spinner_station_life);
-        previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
-        submitButton = (Button) findViewById(R.id.btn_submit_discovery);
+        spnrStationSize = (Spinner) findViewById(R.id.spinner_station_size);
+        lifeSpinnerItem = (LifeSpinnerItem) findViewById(R.id.station_life_spinner_item);
+        btnPrevious = (Button) findViewById(R.id.btn_previous_add_discovery);
+        btnSubmit = (Button) findViewById(R.id.btn_submit_discovery);
     }
 
     private void setupSpinners() {
         setupSizeSpinner();
-        setupLifeSpinner();
+        setupStationLifeSpinner();
 
     }
 
     private void setupSizeSpinner() {
         List<CustomSpinnerObject> options = MiscUtil.getDiscoverySizeOptions(getContext(), R.color.station_green);
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        stationSize.setAdapter(adapter);
-
-//        stationSize.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        spnrStationSize.setAdapter(adapter);
     }
 
-    private void setupLifeSpinner() {
-        List<CustomSpinnerObject> options = MiscUtil.getDiscoveryLifeOptions(getContext(), R.color.station_green);
-        AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        life.setAdapter(adapter);
-
-//        life.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+    private void setupStationLifeSpinner() {
+        lifeSpinnerItem.setPageAccentColor(R.color.station_green);
+        lifeSpinnerItem.showLifeOptions(false);
     }
 
     private void setupButtons() {
@@ -87,7 +86,7 @@ public class AddStationView extends RelativeLayout {
     }
 
     private void setupPreviousButton() {
-        previousButton.setOnClickListener(new OnClickListener() {
+        btnPrevious.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
@@ -98,13 +97,27 @@ public class AddStationView extends RelativeLayout {
     }
 
     private void setupSubmitButton() {
-        submitButton.setOnClickListener(new OnClickListener() {
+        btnSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null) {
-                    // TODO: setup callbacks for submitting a discovery
+                if (listener != null) {
+                    Map<String, Object> properties = createStationPropertiesMap();
+                    listener.submitDiscovery(Enums.DiscoveryType.STATION.getNameString(getContext()), createStationPropertiesMap());
                 }
             }
         });
+    }
+
+    private HashMap<String, Object> createStationPropertiesMap() {
+        HashMap<String, Object> systemProperties = new HashMap<>();
+        systemProperties.put("size", getStationSizeValue());
+        systemProperties.put("life", lifeSpinnerItem.getLifeFound());
+
+        return systemProperties;
+    }
+
+    private String getStationSizeValue() {
+        CustomSpinnerObject starSize = (CustomSpinnerObject) spnrStationSize.getSelectedItem();
+        return (String) starSize.getObject();
     }
 }

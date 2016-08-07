@@ -81,7 +81,7 @@
                 android:layout_below="@+id/layout_linear2"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/d16"
-                android:buttonTint="@color/planet_purple"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/starting_planet"
                 android:textColor="@color/planet_purple" />
 
@@ -111,7 +111,7 @@
                         android:id="@+id/cb_hot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/planet_purple"
+                        android:buttonTint="@color/gray_dark"
                         android:text="@string/hot"
                         android:textColor="@color/planet_purple" />
                 </FrameLayout>
@@ -125,7 +125,7 @@
                         android:id="@+id/cb_cold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/planet_purple"
+                        android:buttonTint="@color/gray_dark"
                         android:text="@string/cold"
                         android:textColor="@color/planet_purple" />
                 </FrameLayout>
@@ -148,7 +148,7 @@
                         android:id="@+id/cb_high_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/planet_purple"
+                        android:buttonTint="@color/gray_dark"
                         android:text="@string/low_pressure"
                         android:textColor="@color/planet_purple" />
                 </FrameLayout>
@@ -162,7 +162,7 @@
                         android:id="@+id/cb_low_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/planet_purple"
+                        android:buttonTint="@color/gray_dark"
                         android:text="@string/high_pressure"
                         android:textColor="@color/planet_purple" />
                 </FrameLayout>
@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_linear4"
-                android:buttonTint="@color/planet_purple"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/toxic"
                 android:textColor="@color/planet_purple" />
 

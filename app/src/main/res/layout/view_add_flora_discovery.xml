@@ -68,7 +68,7 @@
                 android:id="@+id/cb_poisonous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/flora_blue"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/poisonous"
                 android:textColor="@color/flora_blue" />
         </FrameLayout>
@@ -82,7 +82,7 @@
                 android:id="@+id/cb_resources"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/flora_blue"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/resources"
                 android:textColor="@color/flora_blue" />
         </FrameLayout>
@@ -105,7 +105,7 @@
                 android:id="@+id/cb_carnivorous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/flora_blue"
+                android:buttonTint="@color/gray_dark"
                 android:text="@string/carnivorous"
                 android:textColor="@color/flora_blue" />
         </FrameLayout>

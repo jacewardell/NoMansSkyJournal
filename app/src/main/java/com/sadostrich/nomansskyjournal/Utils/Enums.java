@@ -1,5 +1,6 @@
 package com.sadostrich.nomansskyjournal.Utils;
 
+import android.content.Context;
 import android.support.annotation.StringRes;
 
 import com.sadostrich.nomansskyjournal.R;
@@ -12,34 +13,43 @@ import com.sadostrich.nomansskyjournal.R;
 public class Enums {
 
     public enum DiscoveryType {
-        SOLAR_SYSTEM(R.string.title_solar_system),
-        STAR(R.string.title_star),
-        STATION(R.string.title_station),
-        PLANET(R.string.title_planet),
-        FAUNA(R.string.title_fauna),
-        FLORA(R.string.title_flora),
-        STRUCTURE(R.string.title_structure),
-        ITEM(R.string.title_item),
-        SHIP(R.string.title_ship);
+        SOLAR_SYSTEM(R.string.system),
+        STAR(R.string.star),
+        STATION(R.string.station),
+        PLANET(R.string.planet),
+        FAUNA(R.string.fauna),
+        FLORA(R.string.flora),
+        STRUCTURE(R.string.structure),
+        ITEM(R.string.item),
+        SHIP(R.string.ship);
 
         int nameRes;
 
-        private DiscoveryType(@StringRes int nameRes) {
+        DiscoveryType(@StringRes int nameRes) {
             this.nameRes = nameRes;
         }
 
         public int getNameRes() {
             return nameRes;
         }
+
+        public String getNameString(Context context) {
+            return context.getResources().getString(nameRes);
+        }
     }
 
     public enum SystemType {
-        UNARY("Singular"), BINARY("Binary"), TERNARY("Triple"), QUATERNARY("Quadruple"), QUINARY("Quintuple"), SENARY("Sextuple"), SEPTENARY("Septuple");
+        UNARY("Singular"), BINARY("Binary"), TERNARY("Triple"), QUATERNARY("Quadruple"), QUINARY("Quintuple"), SENARY("Sextuple"), SEPTENARY
+                ("Septuple");
 
         private final String nonsensicalWebString;
 
         SystemType(String nonsensicalWebString) {
             this.nonsensicalWebString = nonsensicalWebString;
+        }
+
+        public String getNonsensicalWebString() {
+            return nonsensicalWebString;
         }
     }
 

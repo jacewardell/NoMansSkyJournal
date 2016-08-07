@@ -37,9 +37,9 @@
     <string name="solar_system">Solar System</string>
     <string name="animal">@string/title_fauna</string>
     <string name="plant">@string/title_flora</string>
-    <string name="structure">Structure</string>
+    <string name="structure">structure</string>
     <string name="tool">Tool</string>
-    <string name="ship">Ship</string>
+    <string name="ship">ship</string>
 
     <!-- Placeholders -->
     <string name="button_placeholder">Button</string>
@@ -100,6 +100,7 @@
     <string name="time_ago">Time Ago</string>
     <string name="star">star</string>
     <string name="station">station</string>
+    <string name="planet">planet</string>
     <string name="number_placeholder">32</string>
     <string name="system">system</string>
     <string name="fauna">fauna</string>
@@ -171,6 +172,9 @@
     <string name="scientists">Scientists</string>
     <string name="militant">Militant</string>
     <string name="hunters">Hunters</string>
+    <string name="requires_blueprint">Requires Blueprint</string>
+    <string name="label_rarity">Rarity:</string>
+    <string name="error_add_disc_name_missing">Discoveries must have a name. Please provide one to continue.</string>
 
     <!-- String Arrays -->
     <string-array name="array_life_options">
@@ -243,5 +247,23 @@
         <item>Ruin</item>
         <item>Relic</item>
         <item>Henge</item>
+    </string-array>
+
+    <string-array name="array_item_type">
+        <item>@string/unknown</item>
+        <item>Weapon</item>
+        <item>Upgrade</item>
+        <item>Component</item>
+        <item>Consumable</item>
+        <item>Treasure</item>
+    </string-array>
+
+    <string-array name="array_rarity">
+        <item>Common</item>
+        <item>Uncommon</item>
+        <item>Rare</item>
+        <item>Super Rare</item>
+        <item>Epic</item>
+        <item>Legendary</item>
     </string-array>
 </resources>

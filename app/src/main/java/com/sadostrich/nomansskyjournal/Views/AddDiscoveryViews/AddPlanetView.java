@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Views.AddDiscoveryFragments;
+package com.sadostrich.nomansskyjournal.Views.AddDiscoveryViews;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,20 +12,23 @@ import com.sadostrich.nomansskyjournal.Adapters.AddDiscoverySpinnerAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.IAddDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.CustomSpinnerObject;
 import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Utils.MiscUtil;
 import com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  */
 public class AddPlanetView extends RelativeLayout {
-    private Spinner planetTemperature, planetResources;
+    private Spinner spnrPlanetTemp, spnrPlanetResources;
     private LifeSpinnerItem lifeSpinnerItem;
-    private CheckBox startingPlanet;
-    private Button previousButton, submitButton;
-    private CheckBox toxicCheckbox, hotCheckbox, coldCheckbox, highPressureCheckbox, lowPressureCheckbox;
+    private CheckBox cbStartingPlanet;
+    private Button btnPrevious, btnSubmit;
+    private CheckBox cbToxic, cbHot, cbCold, cbHighPressure, cbLowPressure;
     private IAddDiscoveryListener listener;
 
     public AddPlanetView(Context context, IAddDiscoveryListener listener) {
@@ -57,17 +60,17 @@ public class AddPlanetView extends RelativeLayout {
     }
 
     private void getViewRefs() {
-        planetTemperature = (Spinner) findViewById(R.id.spinner_planet_temperature);
-        planetResources = (Spinner) findViewById(R.id.spinner_planet_resources);
+        spnrPlanetTemp = (Spinner) findViewById(R.id.spinner_planet_temperature);
+        spnrPlanetResources = (Spinner) findViewById(R.id.spinner_planet_resources);
         lifeSpinnerItem = (LifeSpinnerItem) findViewById(R.id.layout_linear2);
-        startingPlanet = (CheckBox) findViewById(R.id.cb_starting_planet);
-        toxicCheckbox = (CheckBox) findViewById(R.id.cb_toxic);
-        hotCheckbox = (CheckBox) findViewById(R.id.cb_hot);
-        coldCheckbox = (CheckBox) findViewById(R.id.cb_cold);
-        highPressureCheckbox = (CheckBox) findViewById(R.id.cb_high_pressure);
-        lowPressureCheckbox = (CheckBox) findViewById(R.id.cb_low_pressure);
-        previousButton = (Button) findViewById(R.id.btn_previous_add_discovery);
-        submitButton = (Button) findViewById(R.id.btn_submit_discovery);
+        cbStartingPlanet = (CheckBox) findViewById(R.id.cb_starting_planet);
+        cbToxic = (CheckBox) findViewById(R.id.cb_toxic);
+        cbHot = (CheckBox) findViewById(R.id.cb_hot);
+        cbCold = (CheckBox) findViewById(R.id.cb_cold);
+        cbHighPressure = (CheckBox) findViewById(R.id.cb_high_pressure);
+        cbLowPressure = (CheckBox) findViewById(R.id.cb_low_pressure);
+        btnPrevious = (Button) findViewById(R.id.btn_previous_add_discovery);
+        btnSubmit = (Button) findViewById(R.id.btn_submit_discovery);
     }
 
     private void setupSpinners() {
@@ -79,17 +82,13 @@ public class AddPlanetView extends RelativeLayout {
     private void setupPlanetTemperatureSpinner() {
         List<CustomSpinnerObject> options = MiscUtil.getPlanetTemperatureOptions(getContext());
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        planetTemperature.setAdapter(adapter);
-
-//        planetTemperature.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        spnrPlanetTemp.setAdapter(adapter);
     }
 
     private void setupPlanetResourcesSpinner() {
         List<CustomSpinnerObject> options = MiscUtil.getPlanetResourcesOptions(getContext());
         AddDiscoverySpinnerAdapter adapter = new AddDiscoverySpinnerAdapter(getContext(), options);
-        planetResources.setAdapter(adapter);
-
-//        planetResources.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        spnrPlanetResources.setAdapter(adapter);
     }
 
     private void setupPlanetLifeSpinner() {
@@ -103,7 +102,7 @@ public class AddPlanetView extends RelativeLayout {
     }
 
     private void setupPreviousButton() {
-        previousButton.setOnClickListener(new OnClickListener() {
+        btnPrevious.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
@@ -114,13 +113,39 @@ public class AddPlanetView extends RelativeLayout {
     }
 
     private void setupSubmitButton() {
-        submitButton.setOnClickListener(new OnClickListener() {
+        btnSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    // TODO: setup callbacks for submitting a discovery
+                    Map<String, Object> properties = createPlanetPropertiesMap();
+                    listener.submitDiscovery(Enums.DiscoveryType.PLANET.getNameString(getContext()), createPlanetPropertiesMap());
                 }
             }
         });
+    }
+
+    private HashMap<String, Object> createPlanetPropertiesMap() {
+        HashMap<String, Object> systemProperties = new HashMap<>();
+        systemProperties.put("temperature", getPlanetTempValue());
+        systemProperties.put("resources", getPlanetResourcesValue());
+        systemProperties.put("life", lifeSpinnerItem.getLifeFound());
+        systemProperties.put("inhabitants", lifeSpinnerItem.getInhabitantsString());
+        systemProperties.put("dangerous", cbToxic.isChecked());
+        systemProperties.put("dangerous", cbHot.isChecked());
+        systemProperties.put("dangerous", cbCold.isChecked());
+        systemProperties.put("dangerous", cbHighPressure.isChecked());
+        systemProperties.put("dangerous", cbLowPressure.isChecked());
+
+        return systemProperties;
+    }
+
+    private String getPlanetTempValue() {
+        CustomSpinnerObject planetTemp = (CustomSpinnerObject) spnrPlanetTemp.getSelectedItem();
+        return (String) planetTemp.getObject();
+    }
+
+    private String getPlanetResourcesValue() {
+        CustomSpinnerObject planetResources = (CustomSpinnerObject) spnrPlanetResources.getSelectedItem();
+        return (String) planetResources.getObject();
     }
 }

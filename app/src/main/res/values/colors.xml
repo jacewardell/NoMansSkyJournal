@@ -45,4 +45,5 @@
 	<color name="item_red_dark">#930625</color>
 	<color name="ship_gray">#848a88</color>
 	<color name="ship_gray_dark">#707574</color>
+	<color name="gray_dark">@color/ship_gray_dark</color>
 </resources>
