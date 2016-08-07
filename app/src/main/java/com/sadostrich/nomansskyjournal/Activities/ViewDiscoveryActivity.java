@@ -1,5 +1,6 @@
 package com.sadostrich.nomansskyjournal.Activities;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.EditText;
 
 import com.sadostrich.nomansskyjournal.Adapters.CommentAdapter;
 import com.sadostrich.nomansskyjournal.Interfaces.ICommentVhListener;
@@ -53,6 +56,9 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 
 	/* Modal */
 	private DialogFragment mCurrentlyShowingModal;
+
+	/* Dialog */
+	private Dialog mAddCommentDialog;
 
 	private Discovery mDiscovery;
 	private CommentAdapter mCommentAdapter;
@@ -148,6 +154,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 					Log.d(TAG, "@ Add Comment FAB clicked!");
 
 					// TODO show add comment dialog
+					showAddCommentDialog();
 				}
 			});
 		}
@@ -193,8 +200,6 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 	protected void onDestroy() {
 		super.onDestroy();
 
-
-
 		// Dismiss the currently showing modal (if any).
 		if (mCurrentlyShowingModal != null) {
 			mCurrentlyShowingModal.dismiss();
@@ -223,6 +228,35 @@ public class ViewDiscoveryActivity extends AppCompatActivity
 		}
 		mCurrentlyShowingModal = modal;
 		modal.show(getFragmentManager(), "Current Modal");
+	}
+
+	private void showAddCommentDialog() {
+		if (mAddCommentDialog == null) {
+			mAddCommentDialog = new Dialog(ViewDiscoveryActivity.this);
+			mAddCommentDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			mAddCommentDialog.setContentView(R.layout.dialog_add_comment);
+			mAddCommentDialog.findViewById(R.id.btn_cancel)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							mAddCommentDialog.dismiss();
+						}
+					});
+			mAddCommentDialog.findViewById(R.id.btn_post)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							String comment = ((EditText) mAddCommentDialog
+									.findViewById(R.id.et_comment)).getText().toString();
+
+							Log.i(TAG, "Post new comment: " + comment);
+
+							// TODO post new comment
+						}
+					});
+		}
+
+		mAddCommentDialog.show();
 	}
 
 	//////////////////////////////////////////////////////////////////

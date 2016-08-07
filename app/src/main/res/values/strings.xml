@@ -37,6 +37,10 @@
 	<string name="add_structure">Add Structure</string>
 	<string name="add_tool">Add Tool</string>
 	<string name="add_ship">Add Ship</string>
+	<string name="add_comment">Add Comment</string>
+	<string name="hint_enter_comment">Enter Comment</string>
+	<string name="cancel">Cancel</string>
+	<string name="post">Post</string>
 
 	<!-- Discovery Type Strings -->
 	<string name="solar_system">Solar System</string>
