@@ -16,7 +16,8 @@ import retrofit2.http.POST;
  * Created by jacewardell on 5/10/16.
  */
 public interface NMSOriginsService {
-	String BASE_URL = "https://www.nmsorigins.com/";
+//	String BASE_URL = "https://www.nmsorigins.com/";
+	String BASE_URL = "https://www.dev.nmsorigins.com";
 
 	/////////////////////////////////////////////////////////
 	// Request Placeholders
