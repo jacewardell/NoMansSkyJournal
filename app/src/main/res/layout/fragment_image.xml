@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/layout_root_image_frag"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@color/modal_bg_dark">
+
+	<com.sadostrich.nomansskyjournal.Views.TouchImageView
+		android:id="@+id/touch_image_view_full_screen"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:contentDescription="@string/cont_desc_full_page_image"/>
+</RelativeLayout>

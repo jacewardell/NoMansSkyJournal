@@ -10,12 +10,15 @@
 	<dimen name="d1">1dp</dimen>
 	<dimen name="d2">2dp</dimen>
 	<dimen name="d4">4dp</dimen>
+	<dimen name="d5">5dp</dimen>
 	<dimen name="d8">8dp</dimen>
 	<dimen name="d16">16dp</dimen>
+	<dimen name="d20">20dp</dimen>
 	<dimen name="d24">24dp</dimen>
 	<dimen name="d32">32dp</dimen>
 	<dimen name="d48">48dp</dimen>
 	<dimen name="d64">64dp</dimen>
+	<dimen name="d96">96dp</dimen>
 	<dimen name="d128">128dp</dimen>
 	<dimen name="d192">192dp</dimen>
 	<dimen name="d256">256dp</dimen>

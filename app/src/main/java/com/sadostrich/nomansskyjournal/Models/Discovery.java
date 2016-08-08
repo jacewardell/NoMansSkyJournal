@@ -1,13 +1,17 @@
 package com.sadostrich.nomansskyjournal.Models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Class that will be inherited and that represents any one of the user's discoveries
+ * Class that will be inherited and that represents any one of the user's
+ * discoveries
  * <p/>
  * Created by jacewardell on 7/2/15.
  */
@@ -24,96 +28,98 @@ public class Discovery implements Serializable {
 	@SerializedName("_images")
 	private List<DiscoveryImage> image;
 
+	// TODO need to store list of comments?
+	private final List<DiscoveryComment> mComments = new ArrayList<>();
 
 	public Discovery() {
-		//        this.user = new User();
-		//		date = getCurrentDate();
-		//        commonName = name = description = story = imageUrl = "";
+		// this.user = new User();
+		// date = getCurrentDate();
+		// commonName = name = description = story = imageUrl = "";
 	}
 
 	/**
 	 * Sets the variables according to the parameters
 	 *
 	 * @param user
-	 * 		user
+	 *            user
 	 * @param commonName
-	 * 		common name
+	 *            common name
 	 * @param name
-	 * 		scientific name
+	 *            scientific name
 	 * @param description
-	 * 		description
+	 *            description
 	 * @param story
-	 * 		story
+	 *            story
 	 * @param imageUrl
-	 * 		image url
+	 *            image url
 	 */
-	public Discovery(User user, String commonName, String name, String description, String story,
-			String imageUrl) {
-		//        this.user = user;
-		//        this.date = getCurrentDate();
-		//        this.commonName = commonName;
-		//        this.name = name;
-		//        this.description = description;
-		//        this.story = story;
-		//        this.imageUrl = imageUrl;
-	}
-
-	/**
-	 * Sets the variables according to the parameters
-	 *
-	 * @param user
-	 * 		user
-	 * @param date
-	 * 		date
-	 * @param commonName
-	 * 		common name
-	 * @param name
-	 * 		scientific name
-	 * @param description
-	 * 		description
-	 * @param story
-	 * 		story
-	 * @param imageUrl
-	 * 		image url
-	 */
-	public Discovery(User user, String date, String commonName, String name, String description,
+	public Discovery(User user, String commonName, String name, String description,
 			String story, String imageUrl) {
-		//        this.user = user;
-		//        this.date = date;
-		//        this.commonName = commonName;
-		//        this.name = name;
-		//        this.description = description;
-		//        this.story = story;
-		//        this.imageUrl = imageUrl;
+		// this.user = user;
+		// this.date = getCurrentDate();
+		// this.commonName = commonName;
+		// this.name = name;
+		// this.description = description;
+		// this.story = story;
+		// this.imageUrl = imageUrl;
+	}
+
+	/**
+	 * Sets the variables according to the parameters
+	 *
+	 * @param user
+	 *            user
+	 * @param date
+	 *            date
+	 * @param commonName
+	 *            common name
+	 * @param name
+	 *            scientific name
+	 * @param description
+	 *            description
+	 * @param story
+	 *            story
+	 * @param imageUrl
+	 *            image url
+	 */
+	public Discovery(User user, String date, String commonName, String name,
+			String description, String story, String imageUrl) {
+		// this.user = user;
+		// this.date = date;
+		// this.commonName = commonName;
+		// this.name = name;
+		// this.description = description;
+		// this.story = story;
+		// this.imageUrl = imageUrl;
 	}
 
 	/**
 	 * s Sets the variables according to the parameters
 	 *
 	 * @param user
-	 * 		user
+	 *            user
 	 * @param date
-	 * 		date
+	 *            date
 	 * @param commonName
-	 * 		common name
+	 *            common name
 	 * @param name
-	 * 		scientific name
+	 *            scientific name
 	 * @param description
-	 * 		description
+	 *            description
 	 * @param story
-	 * 		story
+	 *            story
 	 * @param imageUrl
-	 * 		image url
+	 *            image url
 	 */
-	public Discovery(User user, Date date, String commonName, String name, String description,
-			String story, String imageUrl) {
-		//        this.user = user;
-		//        this.date = Formatter.dateFormat.format(date);
-		//        this.commonName = commonName;
-		//        this.name = name;
-		//        this.description = description;
-		//        this.story = story;
-		//        this.imageUrl = imageUrl;
+	public Discovery(User user, Date date, String commonName, String name,
+			String description, String story, String imageUrl) {
+		// this.user = user;
+		// this.date = Formatter.dateFormat.format(date);
+		// this.commonName = commonName;
+		// this.name = name;
+		// this.description = description;
+		// this.story = story;
+		// this.imageUrl = imageUrl;
 	}
 
 	public String getId() {
@@ -219,4 +225,14 @@ public class Discovery implements Serializable {
 	public void setImage(List<DiscoveryImage> image) {
 		this.image = image;
 	}
+
+	public List<DiscoveryComment> getComments() {
+		return mComments;
+	}
+
+	public void setComments(@NonNull List<DiscoveryComment> comments) {
+		mComments.clear();
+		mComments.addAll(comments);
+	}
+
 }

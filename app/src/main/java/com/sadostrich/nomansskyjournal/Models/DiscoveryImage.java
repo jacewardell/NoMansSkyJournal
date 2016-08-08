@@ -2,12 +2,14 @@ package com.sadostrich.nomansskyjournal.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * TODO JavaDoc
  * <p/>
  * Created by Jace Wardell on 7/31/16.
  */
-public class DiscoveryImage {
+public class DiscoveryImage implements Serializable {
 	private String id;
 	@SerializedName("_user")
 	private String userId;
@@ -79,7 +81,7 @@ public class DiscoveryImage {
 		this.fileUrl = fileUrl;
 	}
 
-	public class FileUrl {
+	public class FileUrl implements Serializable {
 		private String winQuadratic, carousel, carouselThumb, thumb;
 		@SerializedName("fullhd")
 		private String fullHd;

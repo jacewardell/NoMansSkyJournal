@@ -2,6 +2,7 @@
     <string name="app_name">NMS Origins</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="prompt_double_tap_zoom_out">Double tap to zoom out</string>
 
     <!-- Tab Strings -->
     <string name="newest">Newest</string>
@@ -21,6 +22,8 @@
     <string name="structures">Structures</string>
     <string name="tools">Tools</string>
     <string name="ships">Ships</string>
+    <string name="views">Views</string>
+    <string name="comments">Comments</string>
 
     <!-- App bar titles -->
     <string name="add_solar_system">Add System</string>
@@ -50,6 +53,8 @@
     <!-- Content Descriptions -->
     <string name="drawer_open">open drawer</string>
     <string name="drawer_close">close drawer</string>
+    <string name="cont_desc_up_vote_discovery">upvote this discovery</string>
+    <string name="cont_desc_full_page_image">Full page image</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -79,6 +84,7 @@
     <string name="extra_discovery_add">extra_discovery_add</string>
     <string name="extra_discovery">extra_discovery</string>
     <string name="discovered_by_colon">Discovered by:</string>
+    <string name="report">Report</string>
     <string name="report_as_inappropriate">Report as inappropriate</string>
 
     <!-- Menu strings -->
@@ -176,6 +182,12 @@
     <string name="label_rarity">Rarity:</string>
     <string name="error_add_disc_name_missing">Discoveries must have a name. Please provide one to continue.</string>
 
+    <string name="add_comment">Add Comment</string>
+    <string name="hint_enter_comment">Enter Comment</string>
+    <string name="cancel">Cancel</string>
+    <string name="post">Post</string>
+
+
     <!-- String Arrays -->
     <string-array name="array_life_options">
         <item>Unknown</item>
@@ -266,4 +278,5 @@
         <item>Epic</item>
         <item>Legendary</item>
     </string-array>
+>>>>>>> dev
 </resources>
