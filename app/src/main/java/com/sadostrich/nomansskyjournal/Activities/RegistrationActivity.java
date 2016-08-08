@@ -74,13 +74,16 @@ public class RegistrationActivity extends AppCompatActivity {
                     .enqueue(new Callback<Authentication>() {
                 @Override
                 public void onResponse(Call<Authentication> call, Response<Authentication> response) {
-                    if (response != null && response.body() != null) {
+                    if (response != null && response.body() != null && response.code() == 200) {
                         View contentView = findViewById(android.R.id.content);
                         if (contentView != null) {
                             showSuccessfulRegistrationsDialog();
                         }
                     } else {
-
+                        View contentView = findViewById(android.R.id.content);
+                        if (contentView != null) {
+                            Snackbar.make(contentView, R.string.error_registration, Snackbar.LENGTH_LONG).show();
+                        }
                     }
                 }
 
@@ -99,8 +102,8 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void showSuccessfulRegistrationsDialog() {
-        new AlertDialog.Builder(RegistrationActivity.this).setTitle(R.string.registration_successful).setMessage(R.string.registration_confirmation)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(RegistrationActivity.this).setTitle(R.string.registration_successful).setMessage(R.string
+                .registration_confirmation).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();

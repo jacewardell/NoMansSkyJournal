@@ -54,8 +54,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements
-        PlanetFragment.OnFragmentInteractionListener, BottomTabsView.ITabSelectedListener,
+public class MainActivity extends AppCompatActivity implements PlanetFragment.OnFragmentInteractionListener, BottomTabsView.ITabSelectedListener,
         View.OnClickListener, IDiscoveryListener, AdapterView.OnItemClickListener {
 
     private static final String TAG = "MainActivity";
@@ -75,8 +74,7 @@ public class MainActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private SpinnerBarView spinnerBarView;
-    private FloatingActionButton mainFab, solarSystemFab, starFab, stationFab, planetFab,
-            animalFab, plantFab, structureFab, toolFab, shipFab;
+    private FloatingActionButton mainFab, solarSystemFab, starFab, stationFab, planetFab, animalFab, plantFab, structureFab, toolFab, shipFab;
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
     private ImageView drawerUserAvatar;
@@ -98,8 +96,7 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),
-                this);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
 
         // Set up the ViewPager with the sections adapter.
         viewPager.setAdapter(mSectionsPagerAdapter);
@@ -119,8 +116,7 @@ public class MainActivity extends AppCompatActivity implements
         // add logging as last interceptor
         httpClient.addInterceptor(logging); // <-- this is the important line!
 
-        retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
 
         getNewDiscoveries(nmsOriginsService);
@@ -169,9 +165,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         if (Authentication.isValidUserAvatar(Authentication.getInstance())) {
-            Picasso.with(getApplicationContext())
-                    .load(Authentication.getInstance().getAvatar().getSmall())
-                    .into(drawerUserAvatar);
+            Picasso.with(getApplicationContext()).load(Authentication.getInstance().getAvatar().getSmall()).into(drawerUserAvatar);
         }
 
         drawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
@@ -181,8 +175,7 @@ public class MainActivity extends AppCompatActivity implements
                 R.string.drawer_open, /* "open drawer"
                                                  description */
                 R.string.drawer_close /* "close drawer"
-                                                 description */
-        ) {
+                                                 description */) {
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
@@ -270,19 +263,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void getNewDiscoveries(NMSOriginsService nmsOriginsService) {
-        Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
-                .findDiscoveries(NMSOriginsServiceHelper.createGetNewDiscoveriesRequestBody());
+        Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService.findDiscoveries(NMSOriginsServiceHelper.createGetNewDiscoveriesRequestBody());
         findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
             @Override
-            public void onResponse(Call<List<Discovery>> call,
-                                   Response<List<Discovery>> response) {
-                Cache.getInstance().setNewDiscoveries(response.body());
-                final NewDiscoveriesFragment newDiscoveriesFragment =
-                        (NewDiscoveriesFragment) mSectionsPagerAdapter.getItem(0);
-                Log.d(TAG, "@ onResponse: " + newDiscoveriesFragment);
-                newDiscoveriesFragment.notifyDataSetChanged();
+            public void onResponse(Call<List<Discovery>> call, Response<List<Discovery>> response) {
+                if (response != null && response.body() != null && response.code() == 200) {
+                    Cache.getInstance().setNewDiscoveries(response.body());
+                    final NewDiscoveriesFragment newDiscoveriesFragment = (NewDiscoveriesFragment) mSectionsPagerAdapter.getItem(0);
+                    Log.d(TAG, "@ onResponse: " + newDiscoveriesFragment);
+                    newDiscoveriesFragment.notifyDataSetChanged();
 
-                showProgressBar(View.INVISIBLE);
+                    showProgressBar(View.INVISIBLE);
+                }
             }
 
             @Override
@@ -293,18 +285,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void getPopularDiscoveries(NMSOriginsService nmsOriginsService) {
-        Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService
-                .findDiscoveries(NMSOriginsServiceHelper.createGetPopularDiscoveriesRequestBody());
+        Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService.findDiscoveries(NMSOriginsServiceHelper
+                .createGetPopularDiscoveriesRequestBody());
         findDiscoveriesCall.enqueue(new Callback<List<Discovery>>() {
             @Override
-            public void onResponse(Call<List<Discovery>> call,
-                                   Response<List<Discovery>> response) {
-                Cache.getInstance().setPopularDiscoveries(response.body());
-                PopularDiscoveriesFragment popularDiscoveriesFragment =
-                        (PopularDiscoveriesFragment) mSectionsPagerAdapter.getItem(1);
-                popularDiscoveriesFragment.notifyDataSetChanged();
+            public void onResponse(Call<List<Discovery>> call, Response<List<Discovery>> response) {
+                if (response != null && response.body() != null && response.code() == 200) {
+                    Cache.getInstance().setPopularDiscoveries(response.body());
+                    PopularDiscoveriesFragment popularDiscoveriesFragment = (PopularDiscoveriesFragment) mSectionsPagerAdapter.getItem(1);
+                    popularDiscoveriesFragment.notifyDataSetChanged();
 
-                showProgressBar(View.INVISIBLE);
+                    showProgressBar(View.INVISIBLE);
+                }
             }
 
             @Override
@@ -478,43 +470,38 @@ public class MainActivity extends AppCompatActivity implements
             // Calculate the angle based off the fab's position
             // Need to adjust each fab so position 0 is at the top instead of the right side like a unit circle
             double fabAngle = (angleIncrement * position) - (2 * angleIncrement);
-            xPos = (float) (circleRadius
-                    * Math.cos(fabAngle) + screenCenter.x) - solarSystemFab.getWidth() / 2;
-            yPos = (float) (circleRadius
-                    * Math.sin(fabAngle)
-                    + screenCenter.y);
+            xPos = (float) (circleRadius * Math.cos(fabAngle) + screenCenter.x) - solarSystemFab.getWidth() / 2;
+            yPos = (float) (circleRadius * Math.sin(fabAngle) + screenCenter.y);
 
             alpha = 1;
         }
         duration += (expand ? position : -position) * 20;
 
-        fab.animate().x(xPos).y(yPos).alpha(alpha)
-                .setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(duration)
-                .setListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        if (position != -1) {
-                            fab.setVisibility(View.VISIBLE);
-                        }
-                    }
+        fab.animate().x(xPos).y(yPos).alpha(alpha).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(duration).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                if (position != -1) {
+                    fab.setVisibility(View.VISIBLE);
+                }
+            }
 
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        if (position == -1) {
-                            fab.setVisibility(View.GONE);
-                        }
-                    }
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (position == -1) {
+                    fab.setVisibility(View.GONE);
+                }
+            }
 
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
+            @Override
+            public void onAnimationCancel(Animator animation) {
 
-                    }
+            }
 
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
+            @Override
+            public void onAnimationRepeat(Animator animation) {
 
-                    }
-                });
+            }
+        });
     }
 
     private void showProgressBar(int visibility) {

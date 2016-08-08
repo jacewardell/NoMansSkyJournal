@@ -178,8 +178,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             loginCall.enqueue(new Callback<Authentication>() {
                 @Override
                 public void onResponse(Call<Authentication> call, Response<Authentication> response) {
-                    Authentication auth = response.body();
-                    if (auth != null && auth.getId() != null && !auth.getId().isEmpty()) {
+                    if (response != null && response.body() != null && response.code() == 200) {
+                        Authentication auth = response.body();
                         Authentication.setInstance(auth);
                         auth.setCookie(response.headers());
                         goToHomePage();
