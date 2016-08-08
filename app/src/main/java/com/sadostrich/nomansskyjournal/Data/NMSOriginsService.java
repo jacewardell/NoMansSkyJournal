@@ -33,4 +33,8 @@ public interface NMSOriginsService {
 	@Headers("Content-Type:application/json;charset=UTF-8")
 	@POST("discoveries/find")
 	Call<List<Discovery>> findDiscoveries(@Body RequestBody findDiscoveriesQuery);
+
+	@Headers("Content-Type:application/json;charset=UTF-8")
+	@POST("discoveries/vote")
+	Call<Void> likeDiscovery(@Body Discovery discovery);
 }
