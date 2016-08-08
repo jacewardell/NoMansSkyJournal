@@ -2,12 +2,14 @@ package com.sadostrich.nomansskyjournal.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * TODO JavaDoc
  * <p/>
  * Created by Jace Wardell on 7/28/16.
  */
-public class DiscoveryProperties {
+public class DiscoveryProperties implements Serializable {
 
 	@SerializedName("system-type")
 	private String systemType;

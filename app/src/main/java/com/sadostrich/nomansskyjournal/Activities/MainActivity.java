@@ -512,15 +512,29 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
 
     @Override
     public void onDiscoverySelected(Discovery discovery) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(getString(R.string.extra_discovery_type), discovery.getType());
-        bundle.putSerializable(getString(R.string.extra_discovery), discovery);
-        bundle.putBoolean(getString(R.string.extra_discovery_add), false);
+		Log.w(TAG, "@ onDiscoverySelected(): Discovery = "+discovery.getName());
+		Log.w(TAG, "@ onDiscoverySelected(): Going to the ViewDiscoveryActivity...");
 
-        Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
+		// TODO go to the ViewDiscoveryActivity with the given Discovery!
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ViewDiscoveryActivity.INTENT_EXTRA_DISCOVERY, discovery);
+
+        Intent intent = new Intent(MainActivity.this, ViewDiscoveryActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
+//    @Override
+//    public void onAddPlanet() {
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable(getString(R.string.discovery_type),
+//                Enums.DiscoveryType.PLANET);
+//        bundle.putBoolean(getString(R.string.discovery_add), true);
+//
+//        Intent intent = new Intent(MainActivity.this, AddDiscoveryActivity.class);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
+//    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

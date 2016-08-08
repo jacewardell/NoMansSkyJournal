@@ -9,14 +9,16 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     private String id, username, createdAt;
+	private Avatar avatar;
 	private boolean mod, admin;
 
-	public User(String id, String username, String createdAt, boolean mod, boolean admin) {
+	public User(String id, String username, String createdAt, boolean mod, boolean admin, Avatar avatar) {
 		this.id = id;
 		this.username = username;
 		this.createdAt = createdAt;
 		this.mod = mod;
 		this.admin = admin;
+		this.avatar = avatar;
 	}
 
 	public String getId() {
@@ -57,5 +59,13 @@ public class User implements Serializable {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public Avatar getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
 	}
 }

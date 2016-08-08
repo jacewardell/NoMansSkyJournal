@@ -2,6 +2,8 @@ package com.sadostrich.nomansskyjournal.Data;
 
 import android.support.annotation.NonNull;
 
+import com.sadostrich.nomansskyjournal.Models.Discovery;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +116,19 @@ public class NMSOriginsServiceHelper {
         String bodyString = "{\"username\":\"" + username + "\",\"email\":\"" + email + "\",\"password\":\"" + password + "\"," +
                 "\"password2\":\"" + passwordConfirm + "\",\"termsAndConditions\":{\"accepted\":true,\"acceptanceDate\":\"" + dateString + "\"}}";
 
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
+        return body;
+    }
+
+    public static RequestBody createGetCommentsRequestBody(Discovery discovery) {
+        String bodyString = "{\"query\":{\"_discovery\":\"" + discovery.getId() + "\"},\"limit\":50,\"page\":0}";
+
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
+        return body;
+    }
+
+    public static RequestBody createSubmitCommentRequestBody(String userId, String discoveryId, String commentText) {
+        String bodyString = "{\"_user\":\"" + userId + "\",\"_discovery\":\"" + discoveryId + "\",\"text\":\"<p>" + commentText + "</p>\"}";
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
         return body;
     }
