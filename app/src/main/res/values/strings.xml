@@ -198,6 +198,7 @@
     <string name="hint_enter_comment">Enter Comment</string>
     <string name="cancel">Cancel</string>
     <string name="post">Post</string>
+    <string name="title_registration">Registration</string>
 
 
     <!-- String Arrays -->
@@ -290,5 +291,5 @@
         <item>Epic</item>
         <item>Legendary</item>
     </string-array>
->>>>>>> dev
+    >>>>>>> dev
 </resources>

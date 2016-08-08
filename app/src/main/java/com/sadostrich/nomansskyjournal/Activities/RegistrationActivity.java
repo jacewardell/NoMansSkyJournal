@@ -3,9 +3,11 @@ package com.sadostrich.nomansskyjournal.Activities;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,6 +40,12 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         getViewRefs();
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.title_registration);
+        }
     }
 
     private void getViewRefs() {
@@ -121,5 +129,21 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private boolean isValidPassword(String password, String passwordConfirm) {
         return password.equals(passwordConfirm) && password.length() >= 4;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

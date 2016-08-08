@@ -39,6 +39,7 @@ import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.Enums;
+import com.sadostrich.nomansskyjournal.Utils.SharedPreferencesHelper;
 import com.sadostrich.nomansskyjournal.Views.BottomTabsView;
 import com.sadostrich.nomansskyjournal.Views.SpinnerBarView;
 import com.squareup.picasso.Picasso;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
 
     private double circleRadius;
     private Point screenCenter;
+    private TextView btnSettings, btnLogout;
     // private BottomTabsView bottomTabsView;
 
     @Override
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
 
         drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
         drawerListView = (ListView) findViewById(R.id.drawer_listview);
+        btnSettings = (TextView) findViewById(R.id.tv_settings);
+        btnLogout = (TextView) findViewById(R.id.tv_logout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mainFab = (FloatingActionButton) findViewById(R.id.fab);
@@ -194,12 +198,26 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
             }
         };
 
+        setupFooterOptions();
+
         // Set the drawer toggle as the DrawerListener
         drawerLayout.setDrawerListener(drawerToggle);
         drawerListView.setOnItemClickListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    private void setupFooterOptions() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesHelper.logout(MainActivity.this);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupSpinnerBarView() {
@@ -233,6 +251,14 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.On
 
             mainFab.setEnabled(false);
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 
     @Override
