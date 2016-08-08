@@ -118,4 +118,10 @@ public class NMSOriginsServiceHelper {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
         return body;
     }
+
+    public static RequestBody createSubmitCommentRequestBody(String userId, String discoveryId, String commentText) {
+        String bodyString = "{\"_user\":\"" + userId + "\",\"_discovery\":\"" + discoveryId + "\",\"text\":\"<p>" + commentText + "</p>\"}";
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
+        return body;
+    }
 }

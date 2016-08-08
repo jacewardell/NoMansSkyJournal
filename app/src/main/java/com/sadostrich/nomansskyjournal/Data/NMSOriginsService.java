@@ -4,6 +4,7 @@ import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigBaseObject;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
+import com.sadostrich.nomansskyjournal.Models.Report;
 import com.squareup.picasso.Request;
 
 import java.util.HashMap;
@@ -69,7 +70,13 @@ public interface NMSOriginsService {
     @POST("discoveries/vote")
     Call<Void> likeDiscovery(@Header("Cookie") String cookie, @Body Discovery discovery);
 
+    Call<Void> reportDiscovery(@Body Report report);
+
     @Headers("Content-Type:application/json;charset=UTF-8")
     @POST("discoveries/comments")
     Call<List<DiscoveryComment>> getDiscoveryComments(@Body RequestBody getCommentsQuery);
+
+    @Headers("Content-Type:application/json;charset=UTF-8")
+    @POST("discoveries/comment")
+    Call<Void> submitDiscoveryComment(@Header("Cookie") String cookie, @Body RequestBody submitCommentQuery);
 }

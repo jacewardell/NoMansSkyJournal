@@ -66,6 +66,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
 
     /* Dialog */
     private Dialog mAddCommentDialog;
+    private Dialog mReportDiscoveryDialog;
 
     private Discovery mDiscovery;
     private CommentAdapter mCommentAdapter;
@@ -86,7 +87,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
         initViews();
         initRetrofit();
         // TODO create test comments
-        createTestComments();
+        retrieveDiscoveryComments();
         initCommentsAdapter();
     }
 
@@ -95,27 +96,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
         nmsOriginsService = retrofit.create(NMSOriginsService.class);
     }
 
-    private void createTestComments() {
-//        List<DiscoveryComment> comments = new ArrayList<>();
-//
-//        User user = new User("123", "Bob Zudusky", "2016-08-01T13:25.000-07:00", false, false);
-//
-//        DiscoveryComment dc = new DiscoveryComment();
-//        dc.setUser(user);
-//        dc.setTimeAgo("4 days ago");
-//        dc.setReportsCount(0);
-//        dc.setComment("Nice one slick!\nYou find all on your own or did your mommy help you?");
-//        comments.add(dc);
-//
-//        dc = new DiscoveryComment();
-//        dc.setUser(user);
-//        dc.setTimeAgo("5 days ago");
-//        dc.setReportsCount(0);
-//        dc.setComment("I dare you to report me!!!\n\nCHUMP");
-//        comments.add(dc);
-//
-//        mDiscovery.setComments(comments);
-
+    private void retrieveDiscoveryComments() {
         nmsOriginsService.getDiscoveryComments(NMSOriginsServiceHelper.createGetCommentsRequestBody(mDiscovery)).enqueue(new Callback<List<DiscoveryComment>>() {
             @Override
             public void onResponse(Call<List<DiscoveryComment>> call, Response<List<DiscoveryComment>> response) {
@@ -269,6 +250,25 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
                     Log.i(TAG, "Post new comment: " + comment);
 
                     // TODO post new comment
+                    if (!comment.isEmpty()) {
+                        nmsOriginsService.submitDiscoveryComment(Authentication.getInstance().getCookie(), NMSOriginsServiceHelper
+                                .createSubmitCommentRequestBody(Authentication.getInstance().getId(), mDiscovery.getId(), comment)).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+//                                DiscoveryComment commentObject = new DiscoveryComment();
+//                                Authentication.getInstance().getAsUser();
+//                                commentObject.
+//                                        mDiscovery.getComments().add(new DiscoveryComment());
+                                retrieveDiscoveryComments();
+                                mAddCommentDialog.dismiss();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+
+                            }
+                        });
+                    }
                 }
             });
         }
