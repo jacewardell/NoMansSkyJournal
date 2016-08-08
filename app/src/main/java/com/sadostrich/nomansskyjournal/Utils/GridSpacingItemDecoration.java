@@ -1,4 +1,4 @@
-package com.sadostrich.nomansskyjournal.Data;
+package com.sadostrich.nomansskyjournal.Utils;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,8 @@ import android.view.View;
  * Created by Jace Wardell on 7/31/16.
  */
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-	int spanCount = 2; // 3 columns
-	int spacing = 16; // 50px
+	int spanCount = 2; // 2 columns
+	int spacing = 16; // 16px
 	boolean includeEdge = true;
 
 	@Override

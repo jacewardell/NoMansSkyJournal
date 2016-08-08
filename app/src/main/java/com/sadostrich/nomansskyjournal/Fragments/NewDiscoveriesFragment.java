@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.sadostrich.nomansskyjournal.Adapters.MyDiscoveryRecyclerViewAdapter;
 import com.sadostrich.nomansskyjournal.Data.Cache;
-import com.sadostrich.nomansskyjournal.Data.GridSpacingItemDecoration;
+import com.sadostrich.nomansskyjournal.Utils.GridSpacingItemDecoration;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.R;
 

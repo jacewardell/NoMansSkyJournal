@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/d16">
+
+            <LinearLayout
+                android:id="@+id/layout_linear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/d8"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/d4"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/d4"
+                        android:text="@string/label_temperature"
+                        android:textColor="@color/planet_purple"
+                        android:textSize="@dimen/ts16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_planet_temperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/planet_purple" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d4"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/d4"
+                        android:layout_marginStart="@dimen/d8"
+                        android:text="@string/label_resources"
+                        android:textColor="@color/planet_purple"
+                        android:textSize="@dimen/ts16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_planet_resources"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/d8"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/planet_purple" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem
+                android:id="@+id/layout_linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_linear1"
+                android:layout_marginBottom="@dimen/d16" />
+
+            <CheckBox
+                android:id="@+id/cb_starting_planet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_linear2"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/d16"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/starting_planet"
+                android:textColor="@color/planet_purple" />
+
+            <TextView
+                android:id="@+id/tv_required_suit_upgrades"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cb_starting_planet"
+                android:text="@string/label_required_suit_upgrades"
+                android:textColor="@color/planet_purple"
+                android:textSize="@dimen/ts16" />
+
+            <LinearLayout
+                android:id="@+id/layout_linear3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_required_suit_upgrades"
+                android:layout_marginBottom="@dimen/d8"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <CheckBox
+                        android:id="@+id/cb_hot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/gray_dark"
+                        android:text="@string/hot"
+                        android:textColor="@color/planet_purple" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <CheckBox
+                        android:id="@+id/cb_cold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/gray_dark"
+                        android:text="@string/cold"
+                        android:textColor="@color/planet_purple" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_linear3"
+                android:layout_marginBottom="@dimen/d8"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <CheckBox
+                        android:id="@+id/cb_high_pressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/gray_dark"
+                        android:text="@string/low_pressure"
+                        android:textColor="@color/planet_purple" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <CheckBox
+                        android:id="@+id/cb_low_pressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/gray_dark"
+                        android:text="@string/high_pressure"
+                        android:textColor="@color/planet_purple" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/cb_toxic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_linear4"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/toxic"
+                android:textColor="@color/planet_purple" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_previous_add_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="@dimen/d16"
+        android:layout_marginStart="@dimen/d16"
+        android:background="@color/planet_purple"
+        android:text="@string/previous" />
+
+    <Button
+        android:id="@+id/btn_submit_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/d16"
+        android:layout_marginEnd="@dimen/d16"
+        android:background="@color/planet_purple"
+        android:text="@string/submit" />
+</FrameLayout>

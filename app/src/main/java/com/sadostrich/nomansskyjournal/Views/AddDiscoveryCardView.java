@@ -56,7 +56,6 @@ public class AddDiscoveryCardView extends FrameLayout implements View.OnClickLis
         if(listener != null) {
             switch (v.getId()) {
                 case R.id.add_planet_button:
-                    listener.onAddPlanet();
                     break;
             }
         }

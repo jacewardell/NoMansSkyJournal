@@ -1,121 +1,269 @@
 <resources>
-	<string name="app_name">NMS Origins</string>
-	<string name="action_settings">Settings</string>
-	<string name="section_format">Hello World from section: %1$d</string>
-	
-	<!-- Tab Strings -->
-	<string name="newest">Newest</string>
-	<string name="popular">Popular</string>
+    <string name="app_name">NMS Origins</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
-	<!-- Bottom tab Strings -->
-	<string name="community">Community</string>
-	<string name="friends">Friends</string>
-	<string name="profile">Profile</string>
+    <!-- Tab Strings -->
+    <string name="newest">Newest</string>
+    <string name="popular">Popular</string>
 
-	<!-- Plural Discovery Strings -->
-	<string name="discoveries">Discoveries</string>
-	<string name="solar_systems">Solar Systems</string>
-	<string name="planets">Planets</string>
-	<string name="animals">@string/title_fauna</string>
-	<string name="plants">@string/title_flora</string>
-	<string name="structures">Structures</string>
-	<string name="tools">Tools</string>
-	<string name="ships">Ships</string>
+    <!-- Bottom tab Strings -->
+    <string name="community">Community</string>
+    <string name="friends">Friends</string>
+    <string name="profile">Profile</string>
 
-	<!-- Fragment Extra Strings -->
-	<string name="extra_discovery">extra_discovery</string>
+    <!-- Plural Discovery Strings -->
+    <string name="discoveries">Discoveries</string>
+    <string name="solar_systems">Solar Systems</string>
+    <string name="planets">Planets</string>
+    <string name="animals">@string/title_fauna</string>
+    <string name="plants">@string/title_flora</string>
+    <string name="structures">Structures</string>
+    <string name="tools">Tools</string>
+    <string name="ships">Ships</string>
 
-	<!-- App bar titles -->
-	<string name="add_solar_system">Add Solar System</string>
-	<string name="add_star">Add Star</string>
-	<string name="add_planet">Add Planet</string>
-	<string name="add_fauna">Add Fauna</string>
-	<string name="add_flora">Add Flora</string>
-	<string name="add_structure">Add Structure</string>
-	<string name="add_tool">Add Tool</string>
-	<string name="add_ship">Add Ship</string>
+    <!-- App bar titles -->
+    <string name="add_solar_system">Add System</string>
+    <string name="add_star">Add Star</string>
+    <string name="add_station">Add Station</string>
+    <string name="add_planet">Add Planet</string>
+    <string name="add_fauna">Add Fauna</string>
+    <string name="add_flora">Add Flora</string>
+    <string name="add_structure">Add Structure</string>
+    <string name="add_item">Add Item</string>
+    <string name="add_ship">Add Ship</string>
 
-	<!-- Discovery Type Strings -->
-	<string name="solar_system">Solar System</string>
-	<string name="animal">@string/title_fauna</string>
-	<string name="plant">@string/title_flora</string>
-	<string name="structure">Structure</string>
-	<string name="tool">Tool</string>
-	<string name="ship">Ship</string>
+    <!-- Discovery Type Strings -->
+    <string name="solar_system">Solar System</string>
+    <string name="animal">@string/title_fauna</string>
+    <string name="plant">@string/title_flora</string>
+    <string name="structure">structure</string>
+    <string name="tool">Tool</string>
+    <string name="ship">ship</string>
 
-	<!-- Placeholders -->
-	<string name="button_placeholder">Button</string>
+    <!-- Placeholders -->
+    <string name="button_placeholder">Button</string>
     <string name="empty_discovery_placeholder">It looks like you haven\'t logged any
         {discoveries} yet. Click the bottom right button to begin your journey!</string>
-	<string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Sign in</string>
 
-	<!-- Content Descriptions -->
-	<string name="drawer_open">open drawer</string>
-	<string name="drawer_close">close drawer</string>
+    <!-- Content Descriptions -->
+    <string name="drawer_open">open drawer</string>
+    <string name="drawer_close">close drawer</string>
 
-	<!-- Strings related to login -->
-	<string name="prompt_email">Email</string>
-	<string name="prompt_password">Password (optional)</string>
-	<string name="action_sign_in">Sign in or register</string>
-	<string name="action_sign_in_short">Sign in</string>
-	<string name="error_invalid_email">This email address is invalid</string>
-	<string name="error_invalid_password">This password is too short</string>
-	<string name="error_incorrect_password">This password is incorrect</string>
-	<string name="error_field_required">This field is required</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-	<string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
-	<string name="interstitial_ad_sample">Interstitial Ad Sample</string>
-	<string name="start_level">Level 1</string>
-	<string name="next_level">Next Level</string>
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
 
-	<string name="discovery_type">extra_discovery_type</string>
-	<string name="discovery_add">extra_discovery_add</string>
-	<string name="discovery">extra_discovery</string>
-	<string name="discovered_by_colon">Discovered by:</string>
-	<string name="report_as_inappropriate">Report as inappropriate</string>
+    <!-- Add Discovery Activity/Fragment String -->
+    <string name="next">Next</string>
+    <string name="name">Name</string>
+    <string name="paste_youtube_url">Paste YouTube URL</string>
 
-	<!-- Menu strings -->
-	<string name="settings">Settings</string>
-	<string name="logout">Logout</string>
+    <!-- Activity/Fragment Extra Keys -->
+    <string name="extra_discovery_type">extra_discovery_type</string>
+    <string name="extra_discovery_add">extra_discovery_add</string>
+    <string name="extra_discovery">extra_discovery</string>
+    <string name="discovered_by_colon">Discovered by:</string>
+    <string name="report_as_inappropriate">Report as inappropriate</string>
 
-	<string-array name="drawer_options">
-		<item name="community_option">Community</item>
-		<item name="friend_option">Friends</item>
-		<item name="profile_option">Profile</item>
-	</string-array>
+    <!-- Menu strings -->
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 
-	<!-- -
-		This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
-		For more information, see https://support.google.com/admob/answer/3052638
-	<!- -->
-	<string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-	<string name="by_username">By: {username}</string>
-	<string name="time_ago">Time Ago</string>
-	<string name="star">star</string>
-	<string name="station">station</string>
-	<string name="number_placeholder">32</string>
-	<string name="system">system</string>
-	<string name="fauna">fauna</string>
-	<string name="flora">flora</string>
-	<string name="item">item</string>
+    <string-array name="drawer_options">
+        <item name="community_option">Community</item>
+        <item name="friend_option">Friends</item>
+        <item name="profile_option">Profile</item>
+    </string-array>
 
-	<!-- Title Case Discovery Names -->
-	<string name="title_system">System</string>
-	<string name="title_star">Star</string>
-	<string name="title_station">Station</string>
-	<string name="title_planet">Planet</string>
-	<string name="title_fauna">Fauna</string>
-	<string name="title_flora">Flora</string>
-	<string name="title_structure">Structure</string>
-	<string name="title_item">Item</string>
-	<string name="title_ship">Ship</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="by_username">By: {username}</string>
+    <string name="time_ago">Time Ago</string>
+    <string name="star">star</string>
+    <string name="station">station</string>
+    <string name="planet">planet</string>
+    <string name="number_placeholder">32</string>
+    <string name="system">system</string>
+    <string name="fauna">fauna</string>
+    <string name="flora">flora</string>
+    <string name="item">item</string>
 
-	<!-- Time Filter -->
-	<string name="today">TODAY</string>
-	<string name="week">WEEK</string>
-	<string name="month">MONTH</string>
-	<string name="all_time">ALL TIME</string>
+    <!-- Title Case Discovery Names -->
+    <string name="title_solar_system">Solar System</string>
+    <string name="title_system">System</string>
+    <string name="title_star">Star</string>
+    <string name="title_station">Station</string>
+    <string name="title_planet">Planet</string>
+    <string name="title_fauna">Fauna</string>
+    <string name="title_flora">Flora</string>
+    <string name="title_structure">Structure</string>
+    <string name="title_item">Item</string>
+    <string name="title_ship">Ship</string>
+
+    <!-- Time Filter Strings -->
+    <string name="today">TODAY</string>
+    <string name="week">WEEK</string>
+    <string name="month">MONTH</string>
+    <string name="all_time">ALL TIME</string>
+    <string name="description">Description</string>
+    <string name="tags">Tags</string>
+
+    <!-- Add Discoveries Strings -->
+    <string name="previous">Previous</string>
+    <string name="submit">Submit</string>
+    <string name="unknown">Unknown</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="label_type">Type:</string>
+    <string name="label_total_planets">Total Planets:</string>
+    <string name="label_life">Life:</string>
+    <string name="dangerous">Dangerous</string>
+    <string name="tag_total">{count} Tags Added</string>
+    <string name="show_tags">Show Tags</string>
+    <string name="add">Add</string>
+    <string name="label_stardate">Stardate:</string>
+    <string name="date_placeholder">08/06/2016</string>
+    <string name="label_size">Size:</string>
+    <string name="toxic">Toxic</string>
+    <string name="cold">Cold</string>
+    <string name="hot">Hot</string>
+    <string name="low_pressure">Low-Pressure</string>
+    <string name="high_pressure">High-Pressure</string>
+    <string name="label_temperature">Temperature:</string>
+    <string name="label_resources">Resources:</string>
+    <string name="starting_planet">Starting Planet</string>
+    <string name="label_required_suit_upgrades">Required  Suit Upgrades:</string>
+    <string name="land">Land</string>
+    <string name="sky">Sky</string>
+    <string name="cave">Cave</string>
+    <string name="ocean">Ocean</string>
+    <string name="river">River</string>
+    <string name="lake">Lake</string>
+    <string name="label_terrain">Terrain:</string>
+    <string name="label_behavior">Behavior:</string>
+    <string name="label_properties">Properties:</string>
+    <string name="poisonous">Poisonous</string>
+    <string name="resources">Resources</string>
+    <string name="carnivorous">Carnivorous</string>
+    <string name="label_trading">Trading:</string>
+    <string name="label_has_save">Has Save:</string>
+    <string name="label_inhabitants">Inhabitants:</string>
+    <string name="traders">Traders</string>
+    <string name="scavengers">Scavengers</string>
+    <string name="scientists">Scientists</string>
+    <string name="militant">Militant</string>
+    <string name="hunters">Hunters</string>
+    <string name="requires_blueprint">Requires Blueprint</string>
+    <string name="label_rarity">Rarity:</string>
+    <string name="error_add_disc_name_missing">Discoveries must have a name. Please provide one to continue.</string>
+
+    <!-- String Arrays -->
+    <string-array name="array_life_options">
+        <item>Unknown</item>
+        <item>@string/yes</item>
+        <item>@string/no</item>
+    </string-array>
+
+    <string-array name="array_discovery_sizes">
+        <item>Tiny</item>
+        <item>Small</item>
+        <item>Average</item>
+        <item>Big</item>
+        <item>Huge</item>
+    </string-array>
+
+    <string-array name="array_star_types">
+        <item>Sun</item>
+        <item>Blackhole</item>
+        <item>Wormhole</item>
+    </string-array>
+
+    <string-array name="array_temperatures">
+        <item>Extreme Cold</item>
+        <item>Very Cold</item>
+        <item>Cold</item>
+        <item>Moderately Cold</item>
+        <item>Temperate</item>
+        <item>Moderate Heat</item>
+        <item>Very Hot</item>
+        <item>Extreme Heat</item>
+        <item>Hellish</item>
+    </string-array>
+
+    <string-array name="array_resources">
+        <item>@string/unknown</item>
+        <item>None</item>
+        <item>Sparse</item>
+        <item>Medium</item>
+        <item>Rich</item>
+    </string-array>
+
+    <string-array name="array_starting_planet">
+        <item>@string/yes</item>
+        <item>@string/no</item>
+    </string-array>
+
+    <string-array name="array_fauna_sizes">
+        <item>Tiny</item>
+        <item>Small</item>
+        <item>Average</item>
+        <item>Big</item>
+        <item>Huge</item>
+        <item>Monstrous</item>
+    </string-array>
+
+    <string-array name="array_fauna_behavior">
+        <item>Shy</item>
+        <item>Passive</item>
+        <item>Friendly</item>
+        <item>Hostile</item>
+        <item>Predator</item>
+    </string-array>
+
+    <string-array name="array_structure_type">
+        <item>Unknown</item>
+        <item>Alien Settlement</item>
+        <item>Monolith</item>
+        <item>Portal</item>
+        <item>Ruin</item>
+        <item>Relic</item>
+        <item>Henge</item>
+    </string-array>
+
+    <string-array name="array_item_type">
+        <item>@string/unknown</item>
+        <item>Weapon</item>
+        <item>Upgrade</item>
+        <item>Component</item>
+        <item>Consumable</item>
+        <item>Treasure</item>
+    </string-array>
+
+    <string-array name="array_rarity">
+        <item>Common</item>
+        <item>Uncommon</item>
+        <item>Rare</item>
+        <item>Super Rare</item>
+        <item>Epic</item>
+        <item>Legendary</item>
+    </string-array>
 </resources>

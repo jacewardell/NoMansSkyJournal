@@ -28,12 +28,22 @@
     <color name="normal_background">#FFFFFFFF</color>
     <color name="dim_background">#80000000</color>
 	<color name="system_purple">#33165b</color>
+	<color name="system_purple_dark">#220f3e</color>
 	<color name="star_yellow">#d69c31</color>
+	<color name="star_yellow_dark">#c08a26</color>
 	<color name="station_green">#66be7a</color>
+	<color name="station_green_dark">#4db364</color>
 	<color name="planet_purple">#573da0</color>
+	<color name="planet_purple_dark">#473181</color>
 	<color name="fauna_red">#e05c4d</color>
+	<color name="fauna_red_dark">#d93826</color>
 	<color name="flora_blue">#4693cb</color>
+	<color name="flora_blue_dark">#327db3</color>
 	<color name="structure_green">#5db39e</color>
-	<color name="ship_gray">#848a88</color>
+	<color name="structure_green_dark">#499c87</color>
 	<color name="item_red">#bb082e</color>
+	<color name="item_red_dark">#930625</color>
+	<color name="ship_gray">#848a88</color>
+	<color name="ship_gray_dark">#707574</color>
+	<color name="gray_dark">@color/ship_gray_dark</color>
 </resources>

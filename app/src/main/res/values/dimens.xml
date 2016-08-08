@@ -29,7 +29,10 @@
 	<dimen name="ts2">2sp</dimen>
 	<dimen name="ts4">4sp</dimen>
 	<dimen name="ts8">8sp</dimen>
+	<dimen name="ts12">12sp</dimen>
 	<dimen name="ts16">16sp</dimen>
+	<dimen name="ts18">18sp</dimen>
+	<dimen name="ts20">20sp</dimen>
 	<dimen name="ts24">24sp</dimen>
 	<dimen name="ts32">32sp</dimen>
 	<dimen name="ts64">64sp</dimen>
@@ -50,5 +53,4 @@
 	<!-- Custom Sizes -->
 	<dimen name="mini_fab_diameter">40dp</dimen>
 	<dimen name="text_margin">16dp</dimen>
-	<dimen name="ts12">12sp</dimen>
 </resources>
