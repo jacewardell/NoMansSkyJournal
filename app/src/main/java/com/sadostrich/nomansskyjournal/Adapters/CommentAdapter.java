@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sadostrich.nomansskyjournal.Activities.ViewDiscoveryActivity;
 import com.sadostrich.nomansskyjournal.Interfaces.ICommentVhListener;
 import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
 import com.sadostrich.nomansskyjournal.R;
@@ -21,10 +22,10 @@ import java.util.List;
 public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
 	private final List<DiscoveryComment> mItems;
-	private ICommentVhListener mListener;
+	private ViewDiscoveryActivity mListener;
 
 	public CommentAdapter(@NonNull List<DiscoveryComment> items,
-			ICommentVhListener listener) {
+			ViewDiscoveryActivity listener) {
 		super();
 
 		mItems = items;
@@ -42,7 +43,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
 	@Override
 	public void onBindViewHolder(CommentViewHolder holder, int position) {
-		holder.setData(mItems.get(position));
+		holder.setData(mListener.getApplicationContext(), mItems.get(position));
 	}
 
 	@Override

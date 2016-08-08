@@ -23,8 +23,10 @@ import android.widget.EditText;
 
 import com.sadostrich.nomansskyjournal.Adapters.CommentAdapter;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
+import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
 import com.sadostrich.nomansskyjournal.Interfaces.ICommentVhListener;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryDetailView;
+import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
 import com.sadostrich.nomansskyjournal.Models.User;
@@ -32,7 +34,6 @@ import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Views.DiscoveryDetailView;
 import com.sadostrich.nomansskyjournal.modals.FullPageImageModal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,6 +69,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
 
     private Discovery mDiscovery;
     private CommentAdapter mCommentAdapter;
+    private NMSOriginsService nmsOriginsService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,31 +84,51 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
 
         // Init views
         initViews();
+        initRetrofit();
         // TODO create test comments
         createTestComments();
         initCommentsAdapter();
     }
 
+    private void initRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        nmsOriginsService = retrofit.create(NMSOriginsService.class);
+    }
+
     private void createTestComments() {
-        List<DiscoveryComment> comments = new ArrayList<>();
+//        List<DiscoveryComment> comments = new ArrayList<>();
+//
+//        User user = new User("123", "Bob Zudusky", "2016-08-01T13:25.000-07:00", false, false);
+//
+//        DiscoveryComment dc = new DiscoveryComment();
+//        dc.setUser(user);
+//        dc.setTimeAgo("4 days ago");
+//        dc.setReportsCount(0);
+//        dc.setComment("Nice one slick!\nYou find all on your own or did your mommy help you?");
+//        comments.add(dc);
+//
+//        dc = new DiscoveryComment();
+//        dc.setUser(user);
+//        dc.setTimeAgo("5 days ago");
+//        dc.setReportsCount(0);
+//        dc.setComment("I dare you to report me!!!\n\nCHUMP");
+//        comments.add(dc);
+//
+//        mDiscovery.setComments(comments);
 
-        User user = new User("123", "Bob Zudusky", "2016-08-01T13:25.000-07:00", false, false);
+        nmsOriginsService.getDiscoveryComments(NMSOriginsServiceHelper.createGetCommentsRequestBody(mDiscovery)).enqueue(new Callback<List<DiscoveryComment>>() {
+            @Override
+            public void onResponse(Call<List<DiscoveryComment>> call, Response<List<DiscoveryComment>> response) {
+                Log.d(TAG, "onResponse: ");
+                mDiscovery.setComments(response.body());
+                mCommentAdapter.notifyDataSetChanged();
+            }
 
-        DiscoveryComment dc = new DiscoveryComment();
-        dc.setUser(user);
-        dc.setTimeAgo("4 days ago");
-        dc.setReportsCount(0);
-        dc.setComment("Nice one slick!\nYou find all on your own or did your mommy help you?");
-        comments.add(dc);
-
-        dc = new DiscoveryComment();
-        dc.setUser(user);
-        dc.setTimeAgo("5 days ago");
-        dc.setReportsCount(0);
-        dc.setComment("I dare you to report me!!!\n\nCHUMP");
-        comments.add(dc);
-
-        mDiscovery.setComments(comments);
+            @Override
+            public void onFailure(Call<List<DiscoveryComment>> call, Throwable t) {
+                Log.d(TAG, "onFailure: ");
+            }
+        });
     }
 
     @Override
@@ -288,9 +310,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
         Log.d(TAG, "@ onUpVoteClicked(): Discovery = " + discovery.getName());
         // TODO up vote the given discovery
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
-        nmsOriginsService.likeDiscovery(discovery).enqueue(new Callback<Void>() {
+        nmsOriginsService.likeDiscovery(Authentication.getInstance().getCookie(), discovery).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d(TAG, "onResponse: ");

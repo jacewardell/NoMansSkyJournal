@@ -3,6 +3,7 @@ package com.sadostrich.nomansskyjournal.Data;
 import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigBaseObject;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
+import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
 import com.squareup.picasso.Request;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -22,6 +24,10 @@ import retrofit2.http.POST;
 public interface NMSOriginsService {
     //	String BASE_URL = "https://www.nmsorigins.com/";
     String BASE_URL = "https://dev.nmsorigins.com/";
+
+    /////////////////////////////////////////////////////////
+    // Constants
+    /////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////
     // Request Placeholders
@@ -61,5 +67,9 @@ public interface NMSOriginsService {
 
     @Headers("Content-Type:application/json;charset=UTF-8")
     @POST("discoveries/vote")
-    Call<Void> likeDiscovery(@Body Discovery discovery);
+    Call<Void> likeDiscovery(@Header("Cookie") String cookie, @Body Discovery discovery);
+
+    @Headers("Content-Type:application/json;charset=UTF-8")
+    @POST("discoveries/comments")
+    Call<List<DiscoveryComment>> getDiscoveryComments(@Body RequestBody getCommentsQuery);
 }

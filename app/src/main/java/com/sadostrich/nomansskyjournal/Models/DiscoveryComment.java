@@ -1,5 +1,7 @@
 package com.sadostrich.nomansskyjournal.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -9,8 +11,13 @@ import java.io.Serializable;
  */
 public class DiscoveryComment implements Serializable {
 
+	@SerializedName("_id")
+	private String id;
+	@SerializedName("_user")
 	private User mUser;
+	@SerializedName("createdAt")
 	private String mTimeAgo;
+	@SerializedName("text")
 	private String mComment;
 	private int mReportsCount;
 
@@ -37,7 +44,7 @@ public class DiscoveryComment implements Serializable {
 	}
 
 	public String getComment() {
-		return mComment;
+		return mComment.replace("<p>", "").replace("</p>", "");
 	}
 
 	public void setComment(String comment) {

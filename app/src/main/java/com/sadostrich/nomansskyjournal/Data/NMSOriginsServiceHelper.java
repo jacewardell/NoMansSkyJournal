@@ -2,6 +2,8 @@ package com.sadostrich.nomansskyjournal.Data;
 
 import android.support.annotation.NonNull;
 
+import com.sadostrich.nomansskyjournal.Models.Discovery;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,17 +52,15 @@ public class NMSOriginsServiceHelper {
         return createGetDiscoveriesBodyHashMap("", "score", -1, PAGE_SIZE);
     }
 
-    public static RequestBody createGetDiscoveriesBodyHashMap(String query, String sortKey, int
-            sortNum, int limit) {
-        String bodyString = "{\"query\":{" + query + "},\"sort\":{\"" + sortKey + "\":" + sortNum
-                + "},\"limit\":" + limit + "}";
+    public static RequestBody createGetDiscoveriesBodyHashMap(String query, String sortKey, int sortNum, int limit) {
+        String bodyString = "{\"query\":{" + query + "},\"sort\":{\"" + sortKey + "\":" + sortNum + "},\"limit\":" + limit + "}";
 
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
         return body;
     }
 
-    public static RequestBody createSaveDiscoveryBodyHashMap(String type, Map<String, Object> properties,
-                                                             List<String> tags, String discoveredAt, String name, String youtubeUrl, String description) {
+    public static RequestBody createSaveDiscoveryBodyHashMap(String type, Map<String, Object> properties, List<String> tags, String discoveredAt,
+                                                             String name, String youtubeUrl, String description) {
         String bodyString = "{\"type\":\"" + type + "\",\"_images\":[]," +
                 " \"properties\":{" + createSaveDiscoveryPropertyString(properties) + "},\"tags\":[" + createSaveDiscoveryTagString(tags) + "]," +
                 " \"discoveredAt\":\"" + discoveredAt + "\",\"name\":\"" + name + "\"," +
@@ -110,5 +110,12 @@ public class NMSOriginsServiceHelper {
         }
 
         return tagsString;
+    }
+
+    public static RequestBody createGetCommentsRequestBody(Discovery discovery) {
+        String bodyString = "{\"query\":{\"_discovery\":\"" + discovery.getId() + "\"},\"limit\":50,\"page\":0}";
+
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
+        return body;
     }
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     private String id, username, createdAt;
+	private Avatar avatar;
 	private boolean mod, admin;
 
 	public User(String id, String username, String createdAt, boolean mod, boolean admin) {
