@@ -43,7 +43,6 @@ public class MyDiscoveryRecyclerViewAdapter
 	@Override
 	public void onBindViewHolder(final DiscoveryViewHolder holder, int position) {
 		holder.setData(mValues.get(position));
-		Log.d(TAG, "@ onBindViewHolder: " + mValues.get(position).getName());
 	}
 
 	@Override

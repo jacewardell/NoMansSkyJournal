@@ -100,7 +100,7 @@
 			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
-			android:id="@+id/animal_fab"
+			android:id="@+id/fauna_fab"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
@@ -112,7 +112,7 @@
 			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
-			android:id="@+id/plant_fab"
+			android:id="@+id/flora_fab"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
@@ -136,7 +136,7 @@
 			android:visibility="invisible"/>
 
 		<android.support.design.widget.FloatingActionButton
-			android:id="@+id/tool_fab"
+			android:id="@+id/item_fab"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"

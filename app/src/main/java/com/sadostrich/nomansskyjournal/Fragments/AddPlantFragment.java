@@ -1,4 +1,4 @@
-package com.example.sadostrich.Fragments;
+package com.sadostrich.nomansskyjournal.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;

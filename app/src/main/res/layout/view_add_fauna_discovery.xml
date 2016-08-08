@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/d16">
+
+    <LinearLayout
+        android:id="@+id/layout_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/d8"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/d4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/d4"
+                android:text="@string/label_size"
+                android:textColor="@color/fauna_red"
+                android:textSize="@dimen/ts16" />
+
+            <Spinner
+                android:id="@+id/spinner_fauna_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/fauna_red" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d4"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/d4"
+                android:layout_marginStart="@dimen/d8"
+                android:text="@string/label_behavior"
+                android:textColor="@color/fauna_red"
+                android:textSize="@dimen/ts16" />
+
+            <Spinner
+                android:id="@+id/spinner_fauna_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d8"
+                android:layout_weight="1"
+                android:backgroundTint="@color/fauna_red" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_required_suit_upgrades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_linear1"
+        android:text="@string/label_terrain"
+        android:textColor="@color/fauna_red"
+        android:textSize="@dimen/ts16" />
+
+    <LinearLayout
+        android:id="@+id/layout_linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_required_suit_upgrades"
+        android:layout_marginBottom="@dimen/d8"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_land"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/land"
+                android:textColor="@color/fauna_red" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_sky"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/sky"
+                android:textColor="@color/fauna_red" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_linear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_linear3"
+        android:layout_marginBottom="@dimen/d8"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_cave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/cave"
+                android:textColor="@color/fauna_red" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_ocean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/ocean"
+                android:textColor="@color/fauna_red" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_linear5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_linear4"
+        android:layout_marginBottom="@dimen/d8"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_river"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/river"
+                android:textColor="@color/fauna_red" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_lake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/gray_dark"
+                android:text="@string/lake"
+                android:textColor="@color/fauna_red" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/fauna_red"
+        android:text="@string/submit" />
+
+    <Button
+        android:id="@+id/btn_previous_add_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/fauna_red"
+        android:text="@string/previous" />
+
+</RelativeLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/d16">
+
+    <LinearLayout
+        android:id="@+id/layout_type_planet_count_spinners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/d16"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/d4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/d4"
+                android:text="@string/label_size"
+                android:textColor="@color/station_green"
+                android:textSize="@dimen/ts16" />
+
+            <Spinner
+                android:id="@+id/spinner_station_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/station_green"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d4"
+            android:layout_weight="1"
+            android:orientation="vertical"/>
+    </LinearLayout>
+
+    <com.sadostrich.nomansskyjournal.Views.LifeSpinnerItem
+        android:id="@+id/station_life_spinner_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_type_planet_count_spinners"
+        android:layout_marginBottom="@dimen/d16" />
+
+    <Button
+        android:id="@+id/btn_submit_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/station_green"
+        android:text="@string/submit" />
+
+    <Button
+        android:id="@+id/btn_previous_add_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/station_green"
+        android:text="@string/previous" />
+
+</RelativeLayout>

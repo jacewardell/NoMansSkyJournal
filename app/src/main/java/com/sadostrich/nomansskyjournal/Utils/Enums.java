@@ -1,5 +1,10 @@
 package com.sadostrich.nomansskyjournal.Utils;
 
+import android.content.Context;
+import android.support.annotation.StringRes;
+
+import com.sadostrich.nomansskyjournal.R;
+
 /**
  * Class to contain all enums that will be used within the app
  * <p/>
@@ -8,21 +13,43 @@ package com.sadostrich.nomansskyjournal.Utils;
 public class Enums {
 
     public enum DiscoveryType {
-        SOLAR_SYSTEM("Solar System"), PLANET("Planet"), ANIMAL("Animal"), PLANT("Plant");
+        SOLAR_SYSTEM(R.string.system),
+        STAR(R.string.star),
+        STATION(R.string.station),
+        PLANET(R.string.planet),
+        FAUNA(R.string.fauna),
+        FLORA(R.string.flora),
+        STRUCTURE(R.string.structure),
+        ITEM(R.string.item),
+        SHIP(R.string.ship);
 
-        String friendlyName;
+        int nameRes;
 
-        private DiscoveryType(String friendlyName) {
-            this.friendlyName = friendlyName;
+        DiscoveryType(@StringRes int nameRes) {
+            this.nameRes = nameRes;
         }
 
-        public String getPluralizedString() {
-            return friendlyName + "s";
+        public int getNameRes() {
+            return nameRes;
         }
 
-        @Override
-        public String toString() {
-            return friendlyName;
+        public String getNameString(Context context) {
+            return context.getResources().getString(nameRes);
+        }
+    }
+
+    public enum SystemType {
+        UNARY("Singular"), BINARY("Binary"), TERNARY("Triple"), QUATERNARY("Quadruple"), QUINARY("Quintuple"), SENARY("Sextuple"), SEPTENARY
+                ("Septuple");
+
+        private final String nonsensicalWebString;
+
+        SystemType(String nonsensicalWebString) {
+            this.nonsensicalWebString = nonsensicalWebString;
+        }
+
+        public String getNonsensicalWebString() {
+            return nonsensicalWebString;
         }
     }
 

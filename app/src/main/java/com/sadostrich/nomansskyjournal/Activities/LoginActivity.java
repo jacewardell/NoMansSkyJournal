@@ -186,9 +186,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			@Override
 			public void onResponse(Call<Authentication> call, Response<Authentication> response) {
 				Authentication auth = response.body();
-
 				if (auth != null && auth.getId() != null && !auth.getId().isEmpty()) {
 					Authentication.setInstance(auth);
+					auth.setCookie(response.headers());
 					goToHomePage();
 				} else {
 					// Show login error message

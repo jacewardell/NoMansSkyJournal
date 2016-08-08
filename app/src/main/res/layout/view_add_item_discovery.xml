@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/d16">
+
+            <LinearLayout
+                android:id="@+id/layout_linear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/d16"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/d4"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/d4"
+                        android:text="@string/label_type"
+                        android:textColor="@color/item_red"
+                        android:textSize="@dimen/ts16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_item_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/item_red" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d4"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/d4"
+                        android:layout_marginStart="@dimen/d8"
+                        android:text="@string/label_rarity"
+                        android:textColor="@color/item_red"
+                        android:textSize="@dimen/ts16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_item_rarity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/d8"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/item_red" />
+                </LinearLayout>
+            </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cb_item_requires_blueprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout_linear1"
+                    android:buttonTint="@color/gray_dark"
+                    android:text="@string/requires_blueprint"
+                    android:textColor="@color/item_red" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_previous_add_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="@dimen/d16"
+        android:layout_marginStart="@dimen/d16"
+        android:background="@color/item_red"
+        android:text="@string/previous" />
+
+    <Button
+        android:id="@+id/btn_submit_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d48"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/d16"
+        android:layout_marginEnd="@dimen/d16"
+        android:background="@color/item_red"
+        android:text="@string/submit" />
+</FrameLayout>

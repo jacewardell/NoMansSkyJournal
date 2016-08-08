@@ -1,92 +1,122 @@
 <resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-	<!-- Base application theme. -->
-	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-		<!-- Customize your theme here. -->
-		<item name="colorPrimary">@color/primary</item>
-		<item name="colorPrimaryDark">@color/primary_dark</item>
-		<item name="colorAccent">@color/accent</item>
+    <style name="add_system_spinner">
+        <item name="android:background">@color/system_purple_dark</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
-		<!-- ViewPager Indicator Styles -->
-		<item name="vpiCirclePageIndicatorStyle">@style/NeutralCirclePageIndicator</item>
-	</style>
+    <style name="TextAppearance.CollapsingToolbar.Title.Collapsed"
+           parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
 
-	<style name="AppTheme.NoActionBar">
-		<item name="windowActionBar">false</item>
-		<item name="windowNoTitle">true</item>
-	</style>
+    <style name="TextAppearance.CollapsingToolbar.Title.Expanded"
+           parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
 
-	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <!--||||||||||||||||||||||||||||||||||||||
+    |||||          Window Themes         |||||
+    |||||||||||||||||||||||||||||||||||||| -->
+    <style name="ImageFullScreen" parent="android:Theme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/CustomAnimations.scale</item>
+    </style>
 
-	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="GenericProgressBackground">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+    </style>
 
-
-	<style name="TextAppearance.CollapsingToolbar.Title.Collapsed"
-		   parent="android:TextAppearance.DeviceDefault.Small">
-		<item name="android:textSize">16sp</item>
-		<item name="android:textStyle">bold</item>
-		<item name="android:textColor">@android:color/white</item>
-	</style>
-
-	<style name="TextAppearance.CollapsingToolbar.Title.Expanded"
-		   parent="android:TextAppearance.DeviceDefault.Small">
-		<item name="android:textSize">16sp</item>
-		<item name="android:textStyle">bold</item>
-		<item name="android:textColor">@android:color/white</item>
-	</style>
-
-
-	<!--||||||||||||||||||||||||||||||||||||||
-	|||||          Window Themes         |||||
-	|||||||||||||||||||||||||||||||||||||| -->
-	<style name="ImageFullScreen" parent="android:Theme">
-		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowFullscreen">true</item>
-		<item name="android:windowIsFloating">false</item>
-		<item name="android:windowAnimationStyle">@style/CustomAnimations.scale</item>
-	</style>
-
-	<style name="GenericProgressBackground">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">match_parent</item>
-		<item name="android:background">@android:color/transparent</item>
-		<item name="android:gravity">center</item>
-	</style>
-
-	<style name="GenericProgressIndicator">
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:indeterminate">true</item>
-	</style>
+    <style name="GenericProgressIndicator">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminate">true</item>
+    </style>
 
 
-	<!--||||||||||||||||||||||||||||||||||||||
-	|||||           Animations           |||||
-	|||||||||||||||||||||||||||||||||||||| -->
-	<style name="CustomAnimations"/>
+    <!--||||||||||||||||||||||||||||||||||||||
+    |||||           Animations           |||||
+    |||||||||||||||||||||||||||||||||||||| -->
+    <style name="CustomAnimations"/>
 
-	<style name="CustomAnimations.grow">
-		<item name="android:windowEnterAnimation">@anim/grow_in</item>
-		<item name="android:windowExitAnimation">@anim/grow_out</item>
-	</style>
+    <style name="CustomAnimations.grow">
+        <item name="android:windowEnterAnimation">@anim/grow_in</item>
+        <item name="android:windowExitAnimation">@anim/grow_out</item>
+    </style>
 
-	<style name="CustomAnimations.scale">
-		<item name="android:windowEnterAnimation">@anim/scale_in_full</item>
-		<item name="android:windowExitAnimation">@anim/scale_out_full</item>
-	</style>
+    <style name="CustomAnimations.scale">
+        <item name="android:windowEnterAnimation">@anim/scale_in_full</item>
+        <item name="android:windowExitAnimation">@anim/scale_out_full</item>
+    </style>
 
 
-	<!--||||||||||||||||||||||||||||||||||||||
-	|||||   ViewPager Indicator Styles   |||||
-	|||||||||||||||||||||||||||||||||||||| -->
-	<style name="NeutralCirclePageIndicator">
-		<item name="fillColor">@color/text_icons</item>
-		<item name="strokeColor">@color/primary</item>
-		<item name="strokeWidth">2dp</item>
-		<item name="radius">5dp</item>
-		<item name="isCentered">true</item>
-		<item name="snap">true</item>
-		<item name="android:padding">@dimen/d8</item>
-	</style>
+    <!--||||||||||||||||||||||||||||||||||||||
+    |||||   ViewPager Indicator Styles   |||||
+    |||||||||||||||||||||||||||||||||||||| -->
+    <style name="NeutralCirclePageIndicator">
+        <item name="fillColor">@color/text_icons</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="radius">5dp</item>
+        <item name="isCentered">true</item>
+        <item name="snap">true</item>
+        <item name="android:padding">@dimen/d8</item>
+    </style>
+
+    <style name="SystemDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/system_purple</item>
+    </style>
+
+    <style name="StarDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/star_yellow</item>
+    </style>
+
+    <style name="StationDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/station_green</item>
+    </style>
+
+    <style name="PlanetDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/planet_purple</item>
+    </style>
+
+    <style name="FaunaDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/fauna_red</item>
+    </style>
+
+    <style name="FloraDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/flora_blue</item>
+    </style>
+
+    <style name="StructureDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/structure_green</item>
+    </style>
+
+    <style name="ItemDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/item_red</item>
+    </style>
+
+    <style name="ShipDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/ship_gray</item>
+    </style>
 
 </resources>
