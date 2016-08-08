@@ -10,6 +10,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,6 +84,11 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
             throw new IllegalArgumentException("You must pass a Discovery object to this " + "activity!");
         }
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         // Init views
         initViews();
         initRetrofit();
@@ -123,6 +129,13 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO handle action bar menu item clicked
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
