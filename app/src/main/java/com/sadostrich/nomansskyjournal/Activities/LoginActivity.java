@@ -7,12 +7,14 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -31,6 +33,7 @@ import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
 import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.SharedPreferencesHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,8 +168,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
         //
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
 
         //        Observable<Authentication> observable =
 
@@ -181,6 +184,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Authentication auth = response.body();
                     Authentication.setInstance(auth);
                     auth.setCookie(response.headers());
+
+                    SharedPreferencesHelper.saveLoginInfo(LoginActivity.this, email, password);
+
                     goToHomePage();
                 } else {
                     // Show login error message

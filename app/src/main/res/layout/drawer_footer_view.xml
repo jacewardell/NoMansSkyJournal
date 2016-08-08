@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d2"
+        android:background="@android:drawable/divider_horizontal_bright"/>
 
     <TextView
         android:id="@+id/tv_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/d4"
+        android:layout_marginStart="@dimen/d16"
+        android:layout_marginTop="@dimen/d4"
+        android:text="@string/settings"
         android:textSize="@dimen/ts16"
-        android:text="@string/settings"/>
+        android:visibility="gone"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:background="@android:drawable/divider_horizontal_bright"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/ts16"
-        android:text="@string/logout"/>
+        android:layout_marginBottom="@dimen/d8"
+        android:layout_marginStart="@dimen/d16"
+        android:layout_marginTop="@dimen/d8"
+        android:padding="@dimen/d4"
+        android:text="@string/logout"
+        android:textSize="@dimen/ts16"/>
 </LinearLayout>
