@@ -287,7 +287,9 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
                 properties, tags, discoveredAt, discoveryName, youtubeUrl, description)).enqueue(new Callback<Discovery>() {
             @Override
             public void onResponse(Call<Discovery> call, Response<Discovery> response) {
-                Log.d(TAG, "onResponse: ");
+                if (response != null && response.body() != null && response.code() == 200) {
+                    Log.d(TAG, "onResponse: ");
+                }
             }
 
             @Override
@@ -306,7 +308,9 @@ public class AddDiscoveryActivity extends AppCompatActivity implements AddDiscov
                 properties, tags, discoveredAt, name, youtubeUrl, description)).enqueue(new Callback<Discovery>() {
             @Override
             public void onResponse(Call<Discovery> call, Response<Discovery> response) {
-                Log.d(TAG, "onResponse: ");
+                if (response != null && response.body() != null && response.code() == 200) {
+                    Log.d(TAG, "onResponse: ");
+                }
             }
 
             @Override

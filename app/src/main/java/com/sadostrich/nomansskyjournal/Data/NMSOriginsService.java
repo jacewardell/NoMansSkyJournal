@@ -43,6 +43,10 @@ public interface NMSOriginsService {
     Call<Authentication> login(@Body HashMap<String, String> loginQuery);
 
     @Headers("Content-Type:application/json;charset=UTF-8")
+    @POST("auth/register")
+    Call<Authentication> register(@Body RequestBody loginQuery);
+
+    @Headers("Content-Type:application/json;charset=UTF-8")
     @POST("discoveries/find")
     Call<List<Discovery>> findDiscoveries(@Body RequestBody findDiscoveriesQuery);
 

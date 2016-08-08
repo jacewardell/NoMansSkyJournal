@@ -181,6 +181,18 @@
     <string name="requires_blueprint">Requires Blueprint</string>
     <string name="label_rarity">Rarity:</string>
     <string name="error_add_disc_name_missing">Discoveries must have a name. Please provide one to continue.</string>
+    <string name="registration_option">No Account? Register Here!</string>
+    <string name="username">Username</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="registration_terms">By registering, I agree with the terms and conditions found on www.nmsorigins.com</string>
+    <string name="register">Register</string>
+    <string name="error_terms_and_conditions">You must agree to the terms and conditions to create an account.</string>
+    <string name="error_registration">Your registration information is invalid. Please review and submit the information again.</string>
+    <string name="error_login">Username or password were incorrect. Please try again.</string>
+    <string name="registration_confirmation">You will receive an E-Mail to activate your account.  Please check your junk folder in case you can\'t find it in your inbox.</string>
+    <string name="registration_successful">Registration Successful</string>
 
     <string name="add_comment">Add Comment</string>
     <string name="hint_enter_comment">Enter Comment</string>

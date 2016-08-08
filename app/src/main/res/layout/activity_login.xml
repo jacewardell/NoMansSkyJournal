@@ -78,8 +78,17 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
+                android:text="@string/action_sign_in_short"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/d4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/registration_option"
+                android:padding="@dimen/d8"
+                android:layout_gravity="center"
+                android:onClick="showRegistrationPage"/>
 
         </LinearLayout>
     </ScrollView>

@@ -112,6 +112,14 @@ public class NMSOriginsServiceHelper {
         return tagsString;
     }
 
+    public static RequestBody getRegistrationRequestBody(String username, String email, String password, String passwordConfirm, String dateString) {
+        String bodyString = "{\"username\":\"" + username + "\",\"email\":\"" + email + "\",\"password\":\"" + password + "\"," +
+                "\"password2\":\"" + passwordConfirm + "\",\"termsAndConditions\":{\"accepted\":true,\"acceptanceDate\":\"" + dateString + "\"}}";
+
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"), bodyString);
+        return body;
+    }
+
     public static RequestBody createGetCommentsRequestBody(Discovery discovery) {
         String bodyString = "{\"query\":{\"_discovery\":\"" + discovery.getId() + "\"},\"limit\":50,\"page\":0}";
 
