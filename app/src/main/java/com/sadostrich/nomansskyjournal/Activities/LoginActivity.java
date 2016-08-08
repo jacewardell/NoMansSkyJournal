@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{"foo@example.com:hello", "bar@example.com:world"};
     private static final String TAG = "LoginActivity";
-    private static final int REGISTRATION = 0;
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -328,16 +327,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void showRegistrationPage(View view) {
         Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-        startActivityForResult(intent, REGISTRATION);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REGISTRATION) {
-            attemptLogin();
-        }
+        startActivity(intent);
     }
 
     private interface ProfileQuery {

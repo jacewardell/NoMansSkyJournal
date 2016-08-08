@@ -1,7 +1,9 @@
 package com.sadostrich.nomansskyjournal.Activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -75,7 +77,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     if (response != null && response.body() != null) {
                         View contentView = findViewById(android.R.id.content);
                         if (contentView != null) {
-                            Snackbar.make(contentView, R.string.registration_confirmation, Snackbar.LENGTH_LONG).show();
+                            showSuccessfulRegistrationsDialog();
                         }
                     } else {
 
@@ -94,6 +96,16 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }
         Log.d(TAG, "registerTheUser: ");
+    }
+
+    private void showSuccessfulRegistrationsDialog() {
+        new AlertDialog.Builder(RegistrationActivity.this).setTitle(R.string.registration_successful).setMessage(R.string.registration_confirmation)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).show();
     }
 
     private boolean isValidRegistration(String username, String email, String password, String passwordConfirm) {
