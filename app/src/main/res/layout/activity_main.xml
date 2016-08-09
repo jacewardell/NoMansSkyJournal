@@ -35,7 +35,8 @@
 				android:id="@+id/tabs"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				app:tabMode="scrollable"/>
+				app:tabGravity="center"
+				app:tabMode="fixed"/>
 
 			<com.sadostrich.nomansskyjournal.Views.SpinnerBarView
 				android:layout_width="match_parent"
