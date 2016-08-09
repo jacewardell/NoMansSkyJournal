@@ -661,6 +661,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private void showProgressBar(int visibility) {
 		progressBarContainer.setVisibility(visibility);
+		progressBarContainer.setClickable(visibility == View.VISIBLE);
 		mainFab.setEnabled(visibility == View.INVISIBLE);
 	}
 
