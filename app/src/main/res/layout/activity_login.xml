@@ -83,11 +83,10 @@
 	</ScrollView>
 
 	<!-- Login progress -->
-	<RelativeLayout
+	<FrameLayout
 		android:id="@+id/layout_login_progress"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:background="@color/modal_bg_dark"
 		android:clickable="true"
 		android:visibility="gone">
@@ -97,8 +96,8 @@
 			style="?android:attr/progressBarStyleLarge"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
+			android:layout_gravity="center"
 			android:indeterminate="true"
 			android:indeterminateDrawable="@drawable/progress_spinner"/>
-	</RelativeLayout>
+	</FrameLayout>
 </RelativeLayout>

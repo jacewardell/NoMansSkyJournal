@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v4.widget.DrawerLayout
 	android:id="@+id/main_drawer"
 	android:layout_width="match_parent"
@@ -30,7 +29,6 @@
 				android:background="?attr/colorPrimary"
 				app:layout_scrollFlags="scroll|enterAlways"
 				app:popupTheme="@style/AppTheme.PopupOverlay">
-
 			</android.support.v7.widget.Toolbar>
 
 			<android.support.design.widget.TabLayout
@@ -42,7 +40,6 @@
 			<com.sadostrich.nomansskyjournal.Views.SpinnerBarView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
-
 		</android.support.design.widget.AppBarLayout>
 
 		<android.support.v4.view.ViewPager
@@ -57,11 +54,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_system"
-			app:backgroundTint="@color/system_purple"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_system"
+			android:visibility="invisible"
+			app:backgroundTint="@color/system_purple"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/star_fab"
@@ -69,11 +66,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_star"
-			app:backgroundTint="@color/star_yellow"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_star"
+			android:visibility="invisible"
+			app:backgroundTint="@color/star_yellow"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/station_fab"
@@ -81,11 +78,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_station"
-			app:backgroundTint="@color/station_green"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_station"
+			android:visibility="invisible"
+			app:backgroundTint="@color/station_green"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/planet_fab"
@@ -93,11 +90,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_planet"
-			app:backgroundTint="@color/planet_purple"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_planet"
+			android:visibility="invisible"
+			app:backgroundTint="@color/planet_purple"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/fauna_fab"
@@ -105,11 +102,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_fauna"
-			app:backgroundTint="@color/fauna_red"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_fauna"
+			android:visibility="invisible"
+			app:backgroundTint="@color/fauna_red"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/flora_fab"
@@ -117,11 +114,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_flora"
-			app:backgroundTint="@color/flora_blue"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_flora"
+			android:visibility="invisible"
+			app:backgroundTint="@color/flora_blue"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/structure_fab"
@@ -129,11 +126,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_structure"
-			app:backgroundTint="@color/structure_green"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_structure"
+			android:visibility="invisible"
+			app:backgroundTint="@color/structure_green"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/item_fab"
@@ -141,11 +138,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_item"
-			app:backgroundTint="@color/item_red"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
+			android:src="@drawable/ic_item"
+			android:visibility="invisible"
+			app:backgroundTint="@color/item_red"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/ship_fab"
@@ -153,12 +150,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/mini_fab_margin"
-			android:src="@drawable/ic_ship"
-			app:backgroundTint="@color/ship_gray"
-			app:fabSize="mini"
 			android:alpha="0"
-			android:visibility="invisible"/>
-
+			android:src="@drawable/ic_ship"
+			android:visibility="invisible"
+			app:backgroundTint="@color/ship_gray"
+			app:fabSize="mini"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/fab"
@@ -175,21 +171,24 @@
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/fab_margin"
 			android:alpha="0"/>
-
 	</android.support.design.widget.CoordinatorLayout>
 
 	<FrameLayout
 		android:id="@+id/layout_progress_bar_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="@color/dim_background">
+		android:background="@color/modal_bg_dark"
+		android:clickable="true"
+		android:visibility="gone">
 
 		<ProgressBar
 			android:id="@+id/progress_bar_main"
-			android:layout_width="@dimen/d64"
-			android:layout_height="@dimen/d64"
+			style="?android:attr/progressBarStyleLarge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:indeterminate="true"/>
+			android:indeterminate="true"
+			android:indeterminateDrawable="@drawable/progress_spinner"/>
 	</FrameLayout>
 
 	<include
