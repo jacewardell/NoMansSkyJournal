@@ -6,7 +6,9 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -349,8 +351,13 @@ public class MainActivity extends AppCompatActivity implements
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
 				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
 
-				// tODO notify user of error fetching 'new' discoveries
-				// TODO flag to try again?
+				// Notify user of error fetching 'new' discoveries
+				CoordinatorLayout cl = (CoordinatorLayout) findViewById(
+						R.id.main_content);
+				if (cl != null) {
+					Snackbar.make(cl, R.string.error_get_discoveries,
+							Snackbar.LENGTH_LONG).show();
+				}
 			}
 		});
 	}
@@ -382,8 +389,13 @@ public class MainActivity extends AppCompatActivity implements
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
 				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
 
-				// tODO notify user of error fetching 'popular' discoveries
-				// TODO flag to try again?
+				// Notify user of error fetching 'popular' discoveries
+				CoordinatorLayout cl = (CoordinatorLayout) findViewById(
+						R.id.main_content);
+				if (cl != null) {
+					Snackbar.make(cl, R.string.error_get_discoveries,
+							Snackbar.LENGTH_LONG).show();
+				}
 			}
 		});
 	}
