@@ -19,21 +19,22 @@ import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.R;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of Discoveries.
  * <p/>
  * Activities containing this fragment MUST implement the {@link IDiscoveryListener} interface.
  */
 public class NewDiscoveriesFragment extends Fragment implements
 		SwipeRefreshLayout.OnRefreshListener {
+
 	private static final String TAG = "NewDiscoveriesFragment";
 
-	// TODO: Customize parameter argument names
 	private static final String ARG_COLUMN_COUNT = "column-count";
-	// TODO: Customize parameters
+
+
 	private int mColumnCount = 2;
 	private IDiscoveryListener mListener;
-	private MyDiscoveryRecyclerViewAdapter adapter;
-	private RecyclerView recyclerView;
+	private MyDiscoveryRecyclerViewAdapter mAdapter;
+	private RecyclerView mRecyclerView;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
@@ -43,7 +44,6 @@ public class NewDiscoveriesFragment extends Fragment implements
 	}
 
 	// TODO: Customize parameter initialization
-	@SuppressWarnings("unused")
 	public static NewDiscoveriesFragment newInstance(int columnCount) {
 		NewDiscoveriesFragment fragment = new NewDiscoveriesFragment();
 		Bundle args = new Bundle();
@@ -62,7 +62,6 @@ public class NewDiscoveriesFragment extends Fragment implements
 			throw new RuntimeException(context.toString()
 											   + " must implement "
 											   + "OnListFragmentInteractionListener");
-
 		}
 	}
 
@@ -83,21 +82,20 @@ public class NewDiscoveriesFragment extends Fragment implements
 		// Set the adapter
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
-			recyclerView = (RecyclerView) view;
-			recyclerView.addItemDecoration(new GridSpacingItemDecoration());
+			mRecyclerView = (RecyclerView) view;
+			mRecyclerView.addItemDecoration(new GridSpacingItemDecoration());
 			if (mColumnCount <= 1) {
-				recyclerView.setLayoutManager(new LinearLayoutManager(context));
+				mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 			} else {
-				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+				mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
 
 			Log.d(TAG, "@ onCreateView: adapter initialized");
-			adapter =
+			mAdapter =
 					new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getNewDiscoveries(),
 													   mListener);
 
-			Log.d(TAG, "@ onCreateView: recyclerView.setAdapter()");
-			recyclerView.setAdapter(adapter);
+			mRecyclerView.setAdapter(mAdapter);
 		}
 		return view;
 	}
@@ -109,18 +107,16 @@ public class NewDiscoveriesFragment extends Fragment implements
 	}
 
 	public void notifyDataSetChanged() {
-		if (adapter == null) {
-			Log.d(TAG, "@ notifyDataSetChanged: adapter initialized");
-			adapter = new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getNewDiscoveries(),
-														 mListener);
+		if (mAdapter == null) {
+			mAdapter = new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getNewDiscoveries(),
+														  mListener);
 		}
-		Log.d(TAG, "@ notifyDataSetChanged: adapter.notifyDataSetChanged()");
-		Log.d(TAG, "@ notifyDataSetChanged: " + Cache.getInstance().getNewDiscoveries().size());
-		adapter.notifyDataSetChanged();
+		mAdapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void onRefresh() {
 		Log.d(TAG, "@ onRefresh: ");
 	}
+
 }

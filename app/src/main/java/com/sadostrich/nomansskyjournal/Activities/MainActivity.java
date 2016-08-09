@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -46,7 +47,9 @@ import com.sadostrich.nomansskyjournal.Views.SpinnerBarView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements
 		View.OnClickListener, IDiscoveryListener, AdapterView.OnItemClickListener {
 
 	private static final String TAG = "MainActivity";
+	private static final int NEW_DISCOVERIES_FRAG_INDEX = 0;
+	private static final int POPULAR_DISCOVERIES_FRAG_INDEX = 1;
 
 	Retrofit retrofit;
 	/**
@@ -103,8 +108,7 @@ public class MainActivity extends AppCompatActivity implements
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),
-				this);
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		viewPager.setAdapter(mSectionsPagerAdapter);
@@ -201,9 +205,15 @@ public class MainActivity extends AppCompatActivity implements
 
 		drawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
 				drawerLayout, /* DrawerLayout object */
-				toolbar, /* nav drawer icon to replace 'Up' caret */
-				R.string.drawer_open, /* "open drawer" description */
-				R.string.drawer_close /* "close drawer" description */) {
+				toolbar, /*
+							 * nav drawer icon to replace 'Up' caret
+							 */
+				R.string.drawer_open, /*
+										 * "open drawer" description
+										 */
+				R.string.drawer_close /*
+										 * "close drawer" description
+										 */) {
 
 			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
@@ -299,14 +309,6 @@ public class MainActivity extends AppCompatActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		// TODO onResume(): check if need to get discoveries!
-
-	}
-
 	/////////////////////////////////////////////////////////
 	// PlanetFragment.OnFragmentInteractionListener
 	/////////////////////////////////////////////////////////
@@ -332,19 +334,23 @@ public class MainActivity extends AppCompatActivity implements
 					Response<List<Discovery>> response) {
 				if (response != null && response.body() != null
 						&& response.code() == 200) {
+					// Set new discoveries to cache
 					Cache.getInstance().setNewDiscoveries(response.body());
-					final NewDiscoveriesFragment newDiscoveriesFragment = (NewDiscoveriesFragment) mSectionsPagerAdapter
-							.getItem(0);
-					Log.d(TAG, "@ onResponse: " + newDiscoveriesFragment);
-					newDiscoveriesFragment.notifyDataSetChanged();
 
+					// Notify NewDiscoveriesFragment in adapter
+					mSectionsPagerAdapter.notifyFragment(NEW_DISCOVERIES_FRAG_INDEX);
+
+					// Hide loading
 					showProgressBar(View.INVISIBLE);
 				}
 			}
 
 			@Override
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
-				Log.e(TAG, "response");
+				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
+
+				// tODO notify user of error fetching 'new' discoveries
+				// TODO flag to try again?
 			}
 		});
 	}
@@ -361,18 +367,23 @@ public class MainActivity extends AppCompatActivity implements
 					Response<List<Discovery>> response) {
 				if (response != null && response.body() != null
 						&& response.code() == 200) {
+					// Set popular discoveries to cache
 					Cache.getInstance().setPopularDiscoveries(response.body());
-					PopularDiscoveriesFragment popularDiscoveriesFragment = (PopularDiscoveriesFragment) mSectionsPagerAdapter
-							.getItem(1);
-					popularDiscoveriesFragment.notifyDataSetChanged();
 
+					// Notify PopularDiscoveriesFragment in adapter
+					mSectionsPagerAdapter.notifyFragment(POPULAR_DISCOVERIES_FRAG_INDEX);
+
+					// Hide loading
 					showProgressBar(View.INVISIBLE);
 				}
 			}
 
 			@Override
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
-				Log.e(TAG, "response");
+				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
+
+				// tODO notify user of error fetching 'popular' discoveries
+				// TODO flag to try again?
 			}
 		});
 	}
@@ -662,7 +673,7 @@ public class MainActivity extends AppCompatActivity implements
 	}
 
 	/////////////////////////////////////////////////////////
-	// TODO Fragment ViewPager Adapter
+	// Fragment ViewPager Adapter
 	/////////////////////////////////////////////////////////
 
 	/**
@@ -670,28 +681,41 @@ public class MainActivity extends AppCompatActivity implements
 	 * one of the sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
-		private IDiscoveryListener listener;
 
-		public SectionsPagerAdapter(FragmentManager fm, IDiscoveryListener listener) {
+		private final Map<Integer, Fragment> mFrags;
+
+		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
-			this.listener = listener;
+			mFrags = new HashMap<>();
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-			Log.d(TAG, "@ getItem: " + position);
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
 			switch (position) {
-			case 0:
-				return NewDiscoveriesFragment.newInstance(2);
+			case NEW_DISCOVERIES_FRAG_INDEX:
+				Fragment newDisFrag = NewDiscoveriesFragment.newInstance(2);
+				mFrags.put(position, newDisFrag);
+				return newDisFrag;
 
-			case 1:
-				return PopularDiscoveriesFragment.newInstance(2);
+			case POPULAR_DISCOVERIES_FRAG_INDEX:
+				Fragment popDisFrag = PopularDiscoveriesFragment.newInstance(2);
+				mFrags.put(position, popDisFrag);
+				return popDisFrag;
 
+			default:
+				Fragment newDisFragDef = NewDiscoveriesFragment.newInstance(2);
+				mFrags.put(position, newDisFragDef);
+				return newDisFragDef;
 			}
-			return NewDiscoveriesFragment.newInstance(2);
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			super.destroyItem(container, position, object);
+			mFrags.remove(position);
 		}
 
 		@Override
@@ -703,13 +727,39 @@ public class MainActivity extends AppCompatActivity implements
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
-			case 0:
+			case NEW_DISCOVERIES_FRAG_INDEX:
 				return getResources().getString(R.string.newest);
-			case 1:
+			case POPULAR_DISCOVERIES_FRAG_INDEX:
 				return getResources().getString(R.string.popular);
 			}
 			return null;
 		}
+
+		/**
+		 * @param position
+		 *            Insure this is the position of the current fragment only!
+		 */
+		public void notifyFragment(int position) {
+			Fragment frag = mFrags.get(position);
+			if (frag == null) {
+				Log.w(TAG, "@ notifyFragment(): Frag at position <" + position
+						+ "> is NULL!");
+
+			} else {
+				Log.i(TAG, "@ notifyFragment(): Notifying frag at position: " + position);
+
+				switch (position) {
+				case NEW_DISCOVERIES_FRAG_INDEX:
+					((NewDiscoveriesFragment) frag).notifyDataSetChanged();
+					break;
+
+				case POPULAR_DISCOVERIES_FRAG_INDEX:
+					((PopularDiscoveriesFragment) frag).notifyDataSetChanged();
+					break;
+				}
+			}
+		}
+
 	}
 
 }

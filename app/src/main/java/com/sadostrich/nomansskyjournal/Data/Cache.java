@@ -1,43 +1,80 @@
 package com.sadostrich.nomansskyjournal.Data;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO JavaDoc
+ * Caches list of Discoveries.
+ * 
  * <p/>
  * Created by Jace Wardell on 7/30/16.
  */
 public class Cache {
-	private static Cache instance = new Cache();
 
-	private final List<Discovery> newDiscoveries = new ArrayList<>();
+	private static final String TAG = "Cache";
 
-	private final List<Discovery> popularDiscoveries = new ArrayList<>();
+	/* Data Lists */
+	private final List<Discovery> mNewDiscoveries;
+	private final List<Discovery> mPopularDiscoveries;
 
+	/**
+	 * The <i>singleton</i> instance of this cache.
+	 */
+	private static Cache sInstance;
+
+	/**
+	 * @return The <i>singleton</i> instance of this cache.
+	 */
 	public static Cache getInstance() {
-		return instance;
+		if (sInstance == null) {
+			sInstance = new Cache();
+		}
+		return sInstance;
 	}
 
-	public List<Discovery> getNewDiscoveries() {
-		return newDiscoveries;
+	/**
+	 * Default private constructor.
+	 */
+	private Cache() {
+		mNewDiscoveries = new ArrayList<>();
+		mPopularDiscoveries = new ArrayList<>();
 	}
 
-	public void setNewDiscoveries(
-			List<Discovery> discoveries) {
-		this.newDiscoveries.clear();
-		this.newDiscoveries.addAll(discoveries);
+	/////////////////////////////////////////////////////////
+	// New Discoveries
+	/////////////////////////////////////////////////////////
+
+	public @NonNull List<Discovery> getNewDiscoveries() {
+		return mNewDiscoveries;
 	}
 
-	public List<Discovery> getPopularDiscoveries() {
-		return popularDiscoveries;
+	public void setNewDiscoveries(@NonNull List<Discovery> discoveries) {
+		Log.d(TAG, "@ setNewDiscoveries(): Setting <" + discoveries.size()
+				+ "> new discoveries...");
+
+		mNewDiscoveries.clear();
+		mNewDiscoveries.addAll(discoveries);
 	}
 
-	public void setPopularDiscoveries(
-			List<Discovery> discoveries) {
-		this.popularDiscoveries.clear();
-		this.popularDiscoveries.addAll(discoveries);
+	/////////////////////////////////////////////////////////
+	// Popular Discoveries
+	/////////////////////////////////////////////////////////
+
+	public @NonNull List<Discovery> getPopularDiscoveries() {
+		return mPopularDiscoveries;
 	}
+
+	public void setPopularDiscoveries(@NonNull List<Discovery> discoveries) {
+		Log.d(TAG, "@ setPopularDiscoveries(): Setting <" + discoveries.size()
+				+ "> popular discoveries...");
+
+		mPopularDiscoveries.clear();
+		mPopularDiscoveries.addAll(discoveries);
+	}
+
 }
