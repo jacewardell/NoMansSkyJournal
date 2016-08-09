@@ -322,6 +322,7 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
     public void onUpVoteClicked(Discovery discovery) {
         Log.d(TAG, "@ onUpVoteClicked(): Discovery = " + discovery.getName());
         // TODO up vote the given discovery
+        mDetailView.toggleUpvoteArrow();
 
         nmsOriginsService.likeDiscovery(Authentication.getInstance().getCookie(), discovery).enqueue(new Callback<Void>() {
             @Override
