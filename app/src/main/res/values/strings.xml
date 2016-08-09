@@ -3,6 +3,7 @@
 	<string name="action_settings">Settings</string>
 	<string name="section_format">Hello World from section: %1$d</string>
 	<string name="prompt_double_tap_zoom_out">Double tap to zoom out</string>
+	<string name="loading_dot_dot_dot">Loading&#8230;</string>
 
 	<!-- Tab Strings -->
 	<string name="newest">Newest</string>

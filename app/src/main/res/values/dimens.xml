@@ -12,6 +12,7 @@
     <dimen name="d4">4dp</dimen>
     <dimen name="d5">5dp</dimen>
     <dimen name="d8">8dp</dimen>
+    <dimen name="d12">12dp</dimen>
     <dimen name="d16">16dp</dimen>
     <dimen name="d20">20dp</dimen>
     <dimen name="d24">24dp</dimen>

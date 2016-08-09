@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -45,6 +46,7 @@ import com.sadostrich.nomansskyjournal.R;
 import com.sadostrich.nomansskyjournal.Utils.Enums;
 import com.sadostrich.nomansskyjournal.Utils.SharedPreferencesHelper;
 import com.sadostrich.nomansskyjournal.Views.BottomTabsView;
+import com.sadostrich.nomansskyjournal.Views.SmallLoadingOverlay;
 import com.sadostrich.nomansskyjournal.Views.SpinnerBarView;
 import com.squareup.picasso.Picasso;
 
@@ -71,10 +73,9 @@ public class MainActivity extends AppCompatActivity implements
 
 	Retrofit retrofit;
 	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
-	 * derivative, which will keep every loaded fragment in memory. If this
-	 * becomes too memory intensive, it may be best to switch to a
+	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
+	 * sections. We use a {@link FragmentPagerAdapter} derivative, which will keep every loaded
+	 * fragment in memory. If this becomes too memory intensive, it may be best to switch to a
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements
 	private TextView drawerUsername;
 	private ArrayList<FloatingActionButton> subFabs;
 	private View progressBarContainer;
+	private SmallLoadingOverlay smallLoadingOverlay;
 
 	private double circleRadius;
 	private Point screenCenter;
@@ -107,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements
 
 		getViewRefs();
 		setSupportActionBar(toolbar);
+		ViewCompat.setElevation(smallLoadingOverlay,
+								getResources().getDimension(R.dimen.d24));
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -160,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements
 		toolFab = (FloatingActionButton) findViewById(R.id.item_fab);
 		shipFab = (FloatingActionButton) findViewById(R.id.ship_fab);
 
+		smallLoadingOverlay = (SmallLoadingOverlay) findViewById(
+				R.id.small_loading_overlay_bottom);
 		progressBarContainer = findViewById(R.id.layout_progress_bar_container);
 	}
 
@@ -206,14 +212,14 @@ public class MainActivity extends AppCompatActivity implements
 		}
 
 		drawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
-				drawerLayout, /* DrawerLayout object */
-				toolbar, /*
+												 drawerLayout, /* DrawerLayout object */
+												 toolbar, /*
 							 * nav drawer icon to replace 'Up' caret
 							 */
-				R.string.drawer_open, /*
+												 R.string.drawer_open, /*
 										 * "open drawer" description
 										 */
-				R.string.drawer_close /*
+												 R.string.drawer_close /*
 										 * "close drawer" description
 										 */) {
 
@@ -336,6 +342,11 @@ public class MainActivity extends AppCompatActivity implements
 					Response<List<Discovery>> response) {
 				if (response != null && response.body() != null
 						&& response.code() == 200) {
+					// TODO add only the new discoveries to cache
+					// do not allow duplicates
+
+					// TODO notify frag the # of new items added to cache (for the adapter)
+
 					// Set new discoveries to cache
 					Cache.getInstance().setNewDiscoveries(response.body());
 
@@ -351,12 +362,14 @@ public class MainActivity extends AppCompatActivity implements
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
 				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
 
+				// TODO notify frag adapter of error
+
 				// Notify user of error fetching 'new' discoveries
 				CoordinatorLayout cl = (CoordinatorLayout) findViewById(
 						R.id.main_content);
 				if (cl != null) {
 					Snackbar.make(cl, R.string.error_get_discoveries,
-							Snackbar.LENGTH_LONG).show();
+								  Snackbar.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -374,6 +387,11 @@ public class MainActivity extends AppCompatActivity implements
 					Response<List<Discovery>> response) {
 				if (response != null && response.body() != null
 						&& response.code() == 200) {
+					// TODO add only the new discoveries to cache
+					// do not allow duplicates
+
+					// TODO notify frag the # of new items added to cache (for the adapter)
+
 					// Set popular discoveries to cache
 					Cache.getInstance().setPopularDiscoveries(response.body());
 
@@ -389,12 +407,14 @@ public class MainActivity extends AppCompatActivity implements
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
 				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
 
+				// TODO notify frag adapter of error
+
 				// Notify user of error fetching 'popular' discoveries
 				CoordinatorLayout cl = (CoordinatorLayout) findViewById(
 						R.id.main_content);
 				if (cl != null) {
 					Snackbar.make(cl, R.string.error_get_discoveries,
-							Snackbar.LENGTH_LONG).show();
+								  Snackbar.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -418,70 +438,78 @@ public class MainActivity extends AppCompatActivity implements
 	public void onClick(View v) {
 		fabExpanded = !fabExpanded;
 		switch (v.getId()) {
-		case R.id.fab:
-			if (fabExpanded) {
-				expandFabs();
-			} else {
+			case R.id.fab:
+				if (fabExpanded) {
+					expandFabs();
+				} else {
+					collapseFabs();
+				}
+				break;
+
+			case R.id.solar_systems_fab:
 				collapseFabs();
-			}
-			break;
+				startAddDiscoveryActivity(Enums.DiscoveryType.SOLAR_SYSTEM);
+				break;
 
-		case R.id.solar_systems_fab:
-			collapseFabs();
-			startAddDiscoveryActivity(Enums.DiscoveryType.SOLAR_SYSTEM);
-			break;
+			case R.id.star_fab:
+				collapseFabs();
+				startAddDiscoveryActivity(Enums.DiscoveryType.STAR);
+				break;
 
-		case R.id.star_fab:
-			collapseFabs();
-			startAddDiscoveryActivity(Enums.DiscoveryType.STAR);
-			break;
+			case R.id.station_fab:
+				collapseFabs();
+				startAddDiscoveryActivity(Enums.DiscoveryType.STATION);
+				break;
 
-		case R.id.station_fab:
-			collapseFabs();
-			startAddDiscoveryActivity(Enums.DiscoveryType.STATION);
-			break;
+			case R.id.planet_fab:
+				collapseFabs();
+				startAddDiscoveryActivity(Enums.DiscoveryType.PLANET);
+				break;
 
-		case R.id.planet_fab:
-			collapseFabs();
-			startAddDiscoveryActivity(Enums.DiscoveryType.PLANET);
-			break;
+			case R.id.fauna_fab:
+				collapseFabs();
+				startAddDiscoveryActivity(Enums.DiscoveryType.FAUNA);
+				break;
 
-		case R.id.fauna_fab:
-			collapseFabs();
-			startAddDiscoveryActivity(Enums.DiscoveryType.FAUNA);
-			break;
-
-		case R.id.flora_fab:
-			startAddDiscoveryActivity(Enums.DiscoveryType.FLORA);
-			collapseFabs();
-			break;
-
-		case R.id.structure_fab:
-			startAddDiscoveryActivity(Enums.DiscoveryType.STRUCTURE);
-			collapseFabs();
-			break;
-
-		case R.id.item_fab:
-			startAddDiscoveryActivity(Enums.DiscoveryType.ITEM);
-			collapseFabs();
-			break;
-
-		case R.id.ship_fab:
-			startAddDiscoveryActivity(Enums.DiscoveryType.SHIP);
-			collapseFabs();
-			break;
-
-		default:
-			if (!fabExpanded) {
+			case R.id.flora_fab:
+				startAddDiscoveryActivity(Enums.DiscoveryType.FLORA);
 				collapseFabs();
 				break;
-			}
+
+			case R.id.structure_fab:
+				startAddDiscoveryActivity(Enums.DiscoveryType.STRUCTURE);
+				collapseFabs();
+				break;
+
+			case R.id.item_fab:
+				startAddDiscoveryActivity(Enums.DiscoveryType.ITEM);
+				collapseFabs();
+				break;
+
+			case R.id.ship_fab:
+				startAddDiscoveryActivity(Enums.DiscoveryType.SHIP);
+				collapseFabs();
+				break;
+
+			default:
+				if (!fabExpanded) {
+					collapseFabs();
+					break;
+				}
 		}
 	}
 
 	/////////////////////////////////////////////////////////
 	// View Animation & Update Methods
 	/////////////////////////////////////////////////////////
+
+	public void showSmallOverlay() {
+		smallLoadingOverlay.show();
+	}
+
+	public void hideSmallOverlay() {
+		smallLoadingOverlay.hide();
+	}
 
 	private void startAddDiscoveryActivity(@StringRes Enums.DiscoveryType discoveryType) {
 		Bundle bundle = new Bundle();
@@ -528,40 +556,40 @@ public class MainActivity extends AppCompatActivity implements
 
 		for (FloatingActionButton subFab : subFabs) {
 			switch (subFab.getId()) {
-			case R.id.solar_systems_fab:
-				animateFab(solarSystemFab, 0, expand);
-				break;
+				case R.id.solar_systems_fab:
+					animateFab(solarSystemFab, 0, expand);
+					break;
 
-			case R.id.star_fab:
-				animateFab(starFab, 1, expand);
-				break;
+				case R.id.star_fab:
+					animateFab(starFab, 1, expand);
+					break;
 
-			case R.id.station_fab:
-				animateFab(stationFab, 2, expand);
+				case R.id.station_fab:
+					animateFab(stationFab, 2, expand);
 
-			case R.id.planet_fab:
-				animateFab(planetFab, 3, expand);
-				break;
+				case R.id.planet_fab:
+					animateFab(planetFab, 3, expand);
+					break;
 
-			case R.id.fauna_fab:
-				animateFab(animalFab, 4, expand);
-				break;
+				case R.id.fauna_fab:
+					animateFab(animalFab, 4, expand);
+					break;
 
-			case R.id.flora_fab:
-				animateFab(plantFab, 5, expand);
-				break;
+				case R.id.flora_fab:
+					animateFab(plantFab, 5, expand);
+					break;
 
-			case R.id.structure_fab:
-				animateFab(structureFab, 6, expand);
-				break;
+				case R.id.structure_fab:
+					animateFab(structureFab, 6, expand);
+					break;
 
-			case R.id.item_fab:
-				animateFab(toolFab, 7, expand);
-				break;
+				case R.id.item_fab:
+					animateFab(toolFab, 7, expand);
+					break;
 
-			case R.id.ship_fab:
-				animateFab(shipFab, 8, expand);
-				break;
+				case R.id.ship_fab:
+					animateFab(shipFab, 8, expand);
+					break;
 			}
 		}
 	}
@@ -591,30 +619,30 @@ public class MainActivity extends AppCompatActivity implements
 		fab.animate().x(xPos).y(yPos).alpha(alpha)
 				.setInterpolator(new AccelerateDecelerateInterpolator())
 				.setDuration(duration).setListener(new Animator.AnimatorListener() {
-					@Override
-					public void onAnimationStart(Animator animation) {
-						if (position != -1) {
-							fab.setVisibility(View.VISIBLE);
-						}
-					}
+			@Override
+			public void onAnimationStart(Animator animation) {
+				if (position != -1) {
+					fab.setVisibility(View.VISIBLE);
+				}
+			}
 
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						if (position == -1) {
-							fab.setVisibility(View.GONE);
-						}
-					}
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				if (position == -1) {
+					fab.setVisibility(View.GONE);
+				}
+			}
 
-					@Override
-					public void onAnimationCancel(Animator animation) {
+			@Override
+			public void onAnimationCancel(Animator animation) {
 
-					}
+			}
 
-					@Override
-					public void onAnimationRepeat(Animator animation) {
+			@Override
+			public void onAnimationRepeat(Animator animation) {
 
-					}
-				});
+			}
+		});
 	}
 
 	private void showProgressBar(int visibility) {
@@ -640,6 +668,13 @@ public class MainActivity extends AppCompatActivity implements
 		startActivity(intent);
 	}
 
+	@Override
+	public void onLoadMoreDiscoveries() {
+		// TODO load more discoveries!
+
+		Log.w(TAG, "@ onLoadMoreDiscoveries(): Load more foo!");
+	}
+
 	// @Override
 	// public void onAddPlanet() {
 	// Bundle bundle = new Bundle();
@@ -661,20 +696,20 @@ public class MainActivity extends AppCompatActivity implements
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int titleRes = R.string.community;
 		switch (position) {
-		case 0:
-			// Show the community discoveries
-			titleRes = R.string.discoveries;
-			break;
+			case 0:
+				// Show the community discoveries
+				titleRes = R.string.discoveries;
+				break;
 
-		case 1:
-			// Show friend's discoveries
-			titleRes = R.string.friends;
-			break;
+			case 1:
+				// Show friend's discoveries
+				titleRes = R.string.friends;
+				break;
 
-		case 2:
-			// Show your discoveries
-			titleRes = R.string.profile;
-			break;
+			case 2:
+				// Show your discoveries
+				titleRes = R.string.profile;
+				break;
 		}
 
 		drawerLayout.closeDrawers();
@@ -689,8 +724,8 @@ public class MainActivity extends AppCompatActivity implements
 	/////////////////////////////////////////////////////////
 
 	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
+	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the
+	 * sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -707,20 +742,20 @@ public class MainActivity extends AppCompatActivity implements
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
 			switch (position) {
-			case NEW_DISCOVERIES_FRAG_INDEX:
-				Fragment newDisFrag = NewDiscoveriesFragment.newInstance(2);
-				mFrags.put(position, newDisFrag);
-				return newDisFrag;
+				case NEW_DISCOVERIES_FRAG_INDEX:
+					Fragment newDisFrag = NewDiscoveriesFragment.newInstance(2);
+					mFrags.put(position, newDisFrag);
+					return newDisFrag;
 
-			case POPULAR_DISCOVERIES_FRAG_INDEX:
-				Fragment popDisFrag = PopularDiscoveriesFragment.newInstance(2);
-				mFrags.put(position, popDisFrag);
-				return popDisFrag;
+				case POPULAR_DISCOVERIES_FRAG_INDEX:
+					Fragment popDisFrag = PopularDiscoveriesFragment.newInstance(2);
+					mFrags.put(position, popDisFrag);
+					return popDisFrag;
 
-			default:
-				Fragment newDisFragDef = NewDiscoveriesFragment.newInstance(2);
-				mFrags.put(position, newDisFragDef);
-				return newDisFragDef;
+				default:
+					Fragment newDisFragDef = NewDiscoveriesFragment.newInstance(2);
+					mFrags.put(position, newDisFragDef);
+					return newDisFragDef;
 			}
 		}
 
@@ -739,17 +774,17 @@ public class MainActivity extends AppCompatActivity implements
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
-			case NEW_DISCOVERIES_FRAG_INDEX:
-				return getResources().getString(R.string.newest);
-			case POPULAR_DISCOVERIES_FRAG_INDEX:
-				return getResources().getString(R.string.popular);
+				case NEW_DISCOVERIES_FRAG_INDEX:
+					return getResources().getString(R.string.newest);
+				case POPULAR_DISCOVERIES_FRAG_INDEX:
+					return getResources().getString(R.string.popular);
 			}
 			return null;
 		}
 
 		/**
 		 * @param position
-		 *            Insure this is the position of the current fragment only!
+		 * 		Insure this is the position of the current fragment only!
 		 */
 		public void notifyFragment(int position) {
 			Fragment frag = mFrags.get(position);
@@ -761,13 +796,13 @@ public class MainActivity extends AppCompatActivity implements
 				Log.i(TAG, "@ notifyFragment(): Notifying frag at position: " + position);
 
 				switch (position) {
-				case NEW_DISCOVERIES_FRAG_INDEX:
-					((NewDiscoveriesFragment) frag).notifyDataSetChanged();
-					break;
+					case NEW_DISCOVERIES_FRAG_INDEX:
+						((NewDiscoveriesFragment) frag).notifyDataSetChanged();
+						break;
 
-				case POPULAR_DISCOVERIES_FRAG_INDEX:
-					((PopularDiscoveriesFragment) frag).notifyDataSetChanged();
-					break;
+					case POPULAR_DISCOVERIES_FRAG_INDEX:
+						((PopularDiscoveriesFragment) frag).notifyDataSetChanged();
+						break;
 				}
 			}
 		}

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -83,7 +84,9 @@ public class NewDiscoveriesFragment extends Fragment implements
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			mRecyclerView = (RecyclerView) view;
+			mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 			mRecyclerView.addItemDecoration(new GridSpacingItemDecoration());
+
 			if (mColumnCount <= 1) {
 				mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 			} else {

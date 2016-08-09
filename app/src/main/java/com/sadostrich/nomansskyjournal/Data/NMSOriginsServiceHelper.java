@@ -27,7 +27,7 @@ public class NMSOriginsServiceHelper {
     public static final String ITEM = "item";
     public static final String SHIP = "ship";
 
-    private static final int PAGE_SIZE = 20;
+    private static final int PAGE_SIZE = 200;
 
     @NonNull
     public static HashMap<String, String> getLoginBodyHashMap(String email, String password) {
