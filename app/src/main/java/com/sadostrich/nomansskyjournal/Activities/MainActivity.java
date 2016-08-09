@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements
 	private static final int POPULAR_DISCOVERIES_FRAG_INDEX = 1;
 
 	Retrofit retrofit;
+	NMSOriginsService nmsOriginsService;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
 	 * sections. We use a {@link FragmentPagerAdapter} derivative, which will keep every loaded
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements
 	private Point screenCenter;
 	private TextView btnSettings, btnLogout;
 	// private BottomTabsView bottomTabsView;
+
+	/* TODO Paging Discoveries */
+	private int mPageNew, mPagePopular;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,10 +142,10 @@ public class MainActivity extends AppCompatActivity implements
 
 		retrofit = new Retrofit.Builder().baseUrl(NMSOriginsService.BASE_URL)
 				.addConverterFactory(GsonConverterFactory.create()).build();
-		NMSOriginsService nmsOriginsService = retrofit.create(NMSOriginsService.class);
+		nmsOriginsService = retrofit.create(NMSOriginsService.class);
 
-		getNewDiscoveries(nmsOriginsService);
-		getPopularDiscoveries(nmsOriginsService);
+		getNewDiscoveries(false);
+		getPopularDiscoveries(false);
 	}
 
 	private void getViewRefs() {
@@ -330,9 +334,11 @@ public class MainActivity extends AppCompatActivity implements
 	// API Methods
 	/////////////////////////////////////////////////////////
 
-	private void getNewDiscoveries(NMSOriginsService nmsOriginsService) {
+	private void getNewDiscoveries(final boolean getNextPage) {
 		// Show loading
 		showProgressBar(View.VISIBLE);
+
+		// TODO paging discoveries query
 
 		Call<List<Discovery>> findDiscoveriesCall = nmsOriginsService.findDiscoveries(
 				NMSOriginsServiceHelper.createGetNewDiscoveriesRequestBody());
@@ -342,19 +348,26 @@ public class MainActivity extends AppCompatActivity implements
 					Response<List<Discovery>> response) {
 				if (response != null && response.body() != null
 						&& response.code() == 200) {
-					// TODO add only the new discoveries to cache
-					// do not allow duplicates
+					if (!getNextPage) {
+						// Set new discoveries to cache
+						Cache.getInstance().setNewDiscoveries(response.body());
 
-					// TODO notify frag the # of new items added to cache (for the adapter)
-
-					// Set new discoveries to cache
-					Cache.getInstance().setNewDiscoveries(response.body());
+					} else {
+						Cache.getInstance().addNewDiscoveries(response.body());
+					}
 
 					// Notify NewDiscoveriesFragment in adapter
-					mSectionsPagerAdapter.notifyFragment(NEW_DISCOVERIES_FRAG_INDEX);
+					mSectionsPagerAdapter.notifyFragment(NEW_DISCOVERIES_FRAG_INDEX, response
+							.body().size());
 
-					// Hide loading
-					showProgressBar(View.INVISIBLE);
+					if (!getNextPage) {
+						// Hide loading
+						showProgressBar(View.INVISIBLE);
+
+					} else {
+						// Hide small loading overlay
+						hideSmallOverlay();
+					}
 				}
 			}
 
@@ -362,7 +375,7 @@ public class MainActivity extends AppCompatActivity implements
 			public void onFailure(Call<List<Discovery>> call, Throwable t) {
 				Log.e(TAG, "@ onFailure(): EXCEPTION = " + t.toString());
 
-				// TODO notify frag adapter of error
+				// TODO notify frag RV adapter of error
 
 				// Notify user of error fetching 'new' discoveries
 				CoordinatorLayout cl = (CoordinatorLayout) findViewById(
@@ -375,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements
 		});
 	}
 
-	private void getPopularDiscoveries(NMSOriginsService nmsOriginsService) {
+	private void getPopularDiscoveries(boolean getNextPage) {
 		// Show loading
 		showProgressBar(View.VISIBLE);
 
@@ -396,7 +409,8 @@ public class MainActivity extends AppCompatActivity implements
 					Cache.getInstance().setPopularDiscoveries(response.body());
 
 					// Notify PopularDiscoveriesFragment in adapter
-					mSectionsPagerAdapter.notifyFragment(POPULAR_DISCOVERIES_FRAG_INDEX);
+					mSectionsPagerAdapter.notifyFragment(POPULAR_DISCOVERIES_FRAG_INDEX, response
+							.body().size());
 
 					// Hide loading
 					showProgressBar(View.INVISIBLE);
@@ -786,7 +800,7 @@ public class MainActivity extends AppCompatActivity implements
 		 * @param position
 		 * 		Insure this is the position of the current fragment only!
 		 */
-		public void notifyFragment(int position) {
+		public void notifyFragment(int position, int numItemsAdded) {
 			Fragment frag = mFrags.get(position);
 			if (frag == null) {
 				Log.w(TAG, "@ notifyFragment(): Frag at position <" + position
@@ -797,11 +811,11 @@ public class MainActivity extends AppCompatActivity implements
 
 				switch (position) {
 					case NEW_DISCOVERIES_FRAG_INDEX:
-						((NewDiscoveriesFragment) frag).notifyDataSetChanged();
+						((NewDiscoveriesFragment) frag).notifyDataSetChanged(numItemsAdded);
 						break;
 
 					case POPULAR_DISCOVERIES_FRAG_INDEX:
-						((PopularDiscoveriesFragment) frag).notifyDataSetChanged();
+						((PopularDiscoveriesFragment) frag).notifyDataSetChanged(numItemsAdded);
 						break;
 				}
 			}

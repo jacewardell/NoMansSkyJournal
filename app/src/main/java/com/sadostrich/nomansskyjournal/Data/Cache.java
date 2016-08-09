@@ -61,6 +61,10 @@ public class Cache {
 		mNewDiscoveries.addAll(discoveries);
 	}
 
+	public void addNewDiscoveries(@NonNull List<Discovery> discoveries) {
+		mNewDiscoveries.addAll(discoveries);
+	}
+
 	/////////////////////////////////////////////////////////
 	// Popular Discoveries
 	/////////////////////////////////////////////////////////
@@ -74,6 +78,10 @@ public class Cache {
 				+ "> popular discoveries...");
 
 		mPopularDiscoveries.clear();
+		mPopularDiscoveries.addAll(discoveries);
+	}
+
+	public void addPopularDiscoveries(@NonNull List<Discovery> discoveries) {
 		mPopularDiscoveries.addAll(discoveries);
 	}
 

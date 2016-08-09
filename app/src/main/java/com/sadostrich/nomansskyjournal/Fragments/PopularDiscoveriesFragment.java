@@ -99,7 +99,7 @@ public class PopularDiscoveriesFragment extends Fragment {
 		mListener = null;
 	}
 
-	public void notifyDataSetChanged() {
+	public void notifyDataSetChanged(int numItemsAdded) {
 		if (adapter == null) {
 			adapter = new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getPopularDiscoveries(),
 														 mListener);

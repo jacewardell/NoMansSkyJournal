@@ -109,7 +109,7 @@ public class NewDiscoveriesFragment extends Fragment implements
 		mListener = null;
 	}
 
-	public void notifyDataSetChanged() {
+	public void notifyDataSetChanged(int numItemsAdded) {
 		if (mAdapter == null) {
 			mAdapter = new MyDiscoveryRecyclerViewAdapter(Cache.getInstance().getNewDiscoveries(),
 														  mListener);
