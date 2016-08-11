@@ -1,80 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".Activities.MainActivity">
+<android.support.v4.widget.DrawerLayout
+	android:id="@+id/main_drawer"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@android:color/white"
+	android:fitsSystemWindows="true">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top"
-        android:theme="@style/AppTheme.AppBarOverlay">
+	<android.support.design.widget.CoordinatorLayout
+		android:id="@+id/main_content"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".Activities.MainActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:layout_scrollFlags="scroll|enterAlways">
+		<android.support.design.widget.AppBarLayout
+			android:id="@+id/appbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/appbar_padding_top"
+			android:theme="@style/AppTheme.AppBarOverlay">
 
-        </android.support.v7.widget.Toolbar>
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				android:background="?attr/colorPrimary"
+				app:layout_scrollFlags="scroll|enterAlways"
+				app:popupTheme="@style/AppTheme.PopupOverlay">
+			</android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+			<android.support.design.widget.TabLayout
+				android:id="@+id/tabs"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:tabGravity="center"
+				app:tabMode="fixed"/>
 
-    </android.support.design.widget.AppBarLayout>
+			<com.sadostrich.nomansskyjournal.Views.SpinnerBarView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone"/>
+		</android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+		<android.support.v4.view.ViewPager
+			android:id="@+id/main_activity_viewpager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <com.sadostrich.nomansskyjournal.Views.BottomTabsView
-        android:id="@+id/bottom_tabs_view"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"/>
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/solar_systems_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_system"
+			android:visibility="gone"
+			app:backgroundTint="@color/system_purple"
+			app:fabSize="mini"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/planet_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_zoom"/>
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/star_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_star"
+			android:visibility="gone"
+			app:backgroundTint="@color/star_yellow"
+			app:fabSize="mini"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/animal_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_zoom"/>
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/station_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_station"
+			android:visibility="gone"
+			app:backgroundTint="@color/station_green"
+			app:fabSize="mini"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/plant_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_zoom"/>
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/planet_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_planet"
+			android:visibility="gone"
+			app:backgroundTint="@color/planet_purple"
+			app:fabSize="mini"/>
 
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/fauna_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_fauna"
+			android:visibility="gone"
+			app:backgroundTint="@color/fauna_red"
+			app:fabSize="mini"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/plus"/>
-</android.support.design.widget.CoordinatorLayout>
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/flora_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_flora"
+			android:visibility="gone"
+			app:backgroundTint="@color/flora_blue"
+			app:fabSize="mini"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/structure_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_structure"
+			android:visibility="gone"
+			app:backgroundTint="@color/structure_green"
+			app:fabSize="mini"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/item_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_item"
+			android:visibility="gone"
+			app:backgroundTint="@color/item_red"
+			app:fabSize="mini"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/ship_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/mini_fab_margin"
+			android:alpha="0"
+			android:src="@drawable/ic_ship"
+			android:visibility="gone"
+			app:backgroundTint="@color/ship_gray"
+			app:fabSize="mini"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/fab_margin"
+			android:visibility="gone"
+			android:src="@drawable/plus"/>
+
+		<com.sadostrich.nomansskyjournal.Views.AddDiscoveryCardView
+			android:id="@+id/add_discovery_card_view"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="@dimen/fab_margin"
+			android:alpha="0"/>
+	</android.support.design.widget.CoordinatorLayout>
+
+	<com.sadostrich.nomansskyjournal.Views.SmallLoadingOverlay
+		android:id="@+id/small_loading_overlay_bottom"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/d12"
+		android:gravity="center_horizontal|bottom"
+		android:visibility="gone"/>
+
+	<FrameLayout
+		android:id="@+id/layout_progress_bar_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/modal_bg_dark"
+		android:clickable="true"
+		android:visibility="gone">
+
+		<ProgressBar
+			android:id="@+id/progress_bar_main"
+			style="?android:attr/progressBarStyleLarge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:indeterminate="true"
+			android:indeterminateDrawable="@drawable/progress_spinner"/>
+	</FrameLayout>
+
+	<include
+		android:id="@+id/drawer_layout_content"
+		layout="@layout/drawer_layout_content"/>
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			android:columnCount="4"
+			android:padding="@dimen/d16">
+
+	<TextView
+		android:id="@+id/tv_add_discovery_solar_system"
+		android:layout_columnWeight="1"
+		android:layout_marginBottom="@dimen/d8"
+		android:layout_marginRight="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/solar_system"/>
+
+	<TextView
+		android:id="@+id/tv_add_discovery_planet"
+		android:layout_columnWeight="1"
+		android:layout_marginBottom="@dimen/d8"
+		android:layout_marginRight="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/title_planet"/>
+
+	<TextView
+		android:id="@+id/tv_add_discovery_animal"
+		android:layout_columnWeight="1"
+		android:layout_marginBottom="@dimen/d8"
+		android:layout_marginRight="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/animal"/>
+
+	<TextView
+		android:id="@+id/tv_add_discovery_plant"
+		android:layout_columnWeight="1"
+		android:layout_marginBottom="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/plant"/>
+
+	<TextView
+		android:id="@+id/tv_add_discovery_structure"
+		android:layout_columnWeight="1"
+		android:layout_marginRight="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/structure"/>
+
+	<TextView
+		android:id="@+id/tv_add_discovery_tool"
+		android:layout_columnWeight="1"
+		android:layout_marginRight="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/tool"/>
+
+	<TextView
+		android:id="@+id/tv_add_discovery_ship"
+		android:layout_columnWeight="1"
+		android:layout_marginBottom="@dimen/d8"
+		android:gravity="center"
+		android:text="@string/ship"/>
+
+</GridLayout>

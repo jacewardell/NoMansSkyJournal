@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 xmlns:android="http://schemas.android.com/apk/res/android"
+			 xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<android.support.v7.widget.CardView
+		android:id="@+id/card_cardview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:cardBackgroundColor="@android:color/background_light">
+
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<ImageView
+				android:id="@+id/img_discovery_grid_image"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/d192"/>
+
+			<ImageView
+				android:id="@+id/img_discovery_grid_type"
+				android:layout_width="@dimen/d32"
+				android:layout_height="@dimen/d32"
+				android:layout_alignStart="@+id/img_discovery_grid_image"
+				android:layout_alignTop="@+id/img_discovery_grid_image"
+				android:background="@color/star_yellow"
+				android:padding="@dimen/d4"
+				android:src="@drawable/ic_star"
+				android:text="@string/star"
+				android:textAllCaps="true"
+				android:textColor="@color/primary_light"/>
+
+			<TextView
+				android:id="@+id/tv_discovery_grid_comment_count"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignEnd="@+id/img_discovery_grid_image"
+				android:layout_alignTop="@+id/img_discovery_grid_image"
+				android:background="@color/accent"
+				android:padding="@dimen/d4"
+				android:text="@string/number_placeholder"
+				android:textColor="@color/primary_light"/>
+
+			<FrameLayout
+				android:id="@+id/discovery_grid_bottom_bar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/d64"
+				android:layout_alignBottom="@+id/img_discovery_grid_image"
+				android:alpha="0.80"
+				android:background="@color/primary_dark"/>
+
+			<TextView
+				android:id="@+id/tv_discovery_grid_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_above="@+id/tv_discovery_grid_username"
+				android:layout_marginEnd="@dimen/d16"
+				android:layout_marginStart="@dimen/d16"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:text="@string/animal"
+				android:textAllCaps="true"
+				android:textColor="@color/accent"
+				android:textSize="@dimen/ts16"/>
+
+			<TextView
+				android:id="@+id/tv_discovery_grid_username"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignBottom="@+id/img_discovery_grid_image"
+				android:layout_marginBottom="@dimen/d16"
+				android:layout_marginEnd="@dimen/d16"
+				android:layout_marginStart="@dimen/d16"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:text="@string/by_username"
+				android:textColor="@color/primary_light"/>
+
+			<ProgressBar
+				android:id="@+id/pb_discovery_grid_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"/>
+
+			<!--<TextView-->
+			<!--android:id="@+id/tv_discovery_grid_time_ago"-->
+			<!--android:layout_width="wrap_content"-->
+			<!--android:layout_height="wrap_content"-->
+			<!--android:layout_toEndOf="@+id/tv_discovery_grid_username"-->
+			<!--android:layout_alignBottom="@+id/img_discovery_grid_image"-->
+			<!--android:layout_alignEnd="@+id/img_discovery_grid_image"-->
+			<!--android:gravity="right"-->
+			<!--android:layout_marginBottom="@dimen/d16"-->
+			<!--android:layout_marginEnd="@dimen/d16"-->
+			<!--android:ellipsize="end"-->
+			<!--android:maxLines="1"-->
+			<!--android:text="@string/time_ago"-->
+			<!--android:textColor="@color/primary_light"/>-->
+
+		</RelativeLayout>
+	</android.support.v7.widget.CardView>
+</FrameLayout>

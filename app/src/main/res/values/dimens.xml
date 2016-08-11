@@ -6,23 +6,54 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <!-- All sizes -->
+    <dimen name="d.5">0.5dp</dimen>
     <dimen name="d1">1dp</dimen>
     <dimen name="d2">2dp</dimen>
     <dimen name="d4">4dp</dimen>
+    <dimen name="d5">5dp</dimen>
     <dimen name="d8">8dp</dimen>
+    <dimen name="d12">12dp</dimen>
     <dimen name="d16">16dp</dimen>
+    <dimen name="d20">20dp</dimen>
+    <dimen name="d24">24dp</dimen>
     <dimen name="d32">32dp</dimen>
+    <dimen name="d48">48dp</dimen>
     <dimen name="d64">64dp</dimen>
+    <dimen name="d96">96dp</dimen>
     <dimen name="d128">128dp</dimen>
+    <dimen name="d192">192dp</dimen>
     <dimen name="d256">256dp</dimen>
     <dimen name="d512">512dp</dimen>
     <dimen name="d1024">1024dp</dimen>
 
+    <!-- Text sizes -->
+    <dimen name="ts.5">0.5sp</dimen>
+    <dimen name="ts1">1sp</dimen>
+    <dimen name="ts2">2sp</dimen>
+    <dimen name="ts4">4sp</dimen>
+    <dimen name="ts8">8sp</dimen>
+    <dimen name="ts12">12sp</dimen>
+    <dimen name="ts16">16sp</dimen>
+    <dimen name="ts18">18sp</dimen>
+    <dimen name="ts20">20sp</dimen>
+    <dimen name="ts24">24sp</dimen>
+    <dimen name="ts32">32sp</dimen>
+    <dimen name="ts64">64sp</dimen>
+    <dimen name="ts128">128sp</dimen>
+    <dimen name="ts256">256sp</dimen>
+    <dimen name="ts512">512sp</dimen>
+    <dimen name="ts1024">1024sp</dimen>
+
     <!-- Margin/Padding Sizes-->
+    <dimen name="mini_fab_margin">22dp</dimen>
 
     <!-- Image/Icon Sizes-->
     <dimen name="discovery_banner_height">@dimen/d128</dimen>
-    <dimen name="login_banner_height">@dimen/d128</dimen>
+    <dimen name="login_banner_height">@dimen/d64</dimen>
 
     <!-- Text Sizes-->
+
+    <!-- Custom Sizes -->
+    <dimen name="mini_fab_diameter">40dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/layout_root_discovery_detail"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@drawable/bg_primary_gradient"
+	android:paddingBottom="?attr/actionBarSize">
+
+	<TextView
+		android:id="@+id/tv_discovery_name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_marginTop="@dimen/d16"
+		android:layout_marginStart="@dimen/d16"
+		android:layout_marginRight="@dimen/d8"
+		android:layout_marginBottom="@dimen/d4"
+		android:layout_toLeftOf="@+id/tv_time"
+		android:ellipsize="end"
+		android:maxLines="2"
+		android:textColor="@color/text_gray"
+		android:textSize="20sp"
+		tools:text="BLOBULUS ARTIMITUS"/>
+
+	<TextView
+		android:id="@+id/tv_time"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/d16"
+		android:drawablePadding="@dimen/d8"
+		android:maxLines="1"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentEnd="true"
+		android:layout_marginTop="@dimen/d16"
+		android:textColor="@color/text_primary_light"
+		android:textSize="16sp"
+		tools:text="A DAY AGO"/>
+
+	<TextView
+		android:id="@+id/tv_discovered_by_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentStart="true"
+		android:layout_below="@+id/tv_discovery_name"
+		android:layout_marginBottom="@dimen/d8"
+		android:layout_marginEnd="@dimen/d4"
+		android:layout_marginStart="@dimen/d16"
+		android:maxLines="1"
+		android:paddingBottom="@dimen/d8"
+		android:text="@string/discovered_by_colon"
+		android:textColor="@color/text_primary_light"
+		android:textSize="16sp"/>
+
+	<TextView
+		android:id="@+id/tv_discovered_by_user"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignBaseline="@+id/tv_discovered_by_label"
+		android:layout_marginEnd="@dimen/d16"
+		android:layout_toEndOf="@+id/tv_discovered_by_label"
+		android:maxLines="1"
+		android:paddingBottom="@dimen/d8"
+		android:textColor="@color/color_state_light_to_primary"
+		android:textSize="16sp"
+		tools:text="[TPG] Roobean"/>
+
+	<FrameLayout
+		android:id="@+id/layout_images"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/d256"
+		android:layout_below="@+id/tv_discovered_by_label">
+
+		<android.support.v4.view.ViewPager
+			android:id="@+id/view_pager_images"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<com.sadostrich.nomansskyjournal.Views.CirclePageIndicator
+			android:id="@+id/indicator_images"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal|bottom"
+			android:layout_marginBottom="@dimen/d16"/>
+	</FrameLayout>
+
+	<TextView
+		android:id="@+id/tv_type"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentStart="true"
+		android:layout_below="@+id/layout_images"
+		android:layout_marginEnd="@dimen/d16"
+		android:background="@drawable/bg_bot_right_corner_trim"
+		android:drawablePadding="@dimen/d8"
+		android:maxLines="1"
+		android:paddingBottom="@dimen/d8"
+		android:paddingEnd="@dimen/d16"
+		android:paddingStart="@dimen/d16"
+		android:paddingTop="@dimen/d8"
+		android:textColor="@color/text_icons"
+		android:textSize="16sp"
+		tools:text="FAUNA"/>
+
+	<TextView
+		android:id="@+id/tv_num_views"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/tv_type"
+		android:layout_marginEnd="@dimen/d16"
+		android:layout_toEndOf="@+id/tv_type"
+		android:drawablePadding="@dimen/d8"
+		android:maxLines="1"
+		android:paddingBottom="@dimen/d8"
+		android:paddingEnd="@dimen/d16"
+		android:paddingStart="@dimen/d16"
+		android:paddingTop="@dimen/d8"
+		android:textColor="@color/text_primary_light"
+		android:textSize="16sp"
+		tools:text="104 VIEWS"/>
+
+	<com.sadostrich.nomansskyjournal.Views.OctagonLayout
+		android:id="@+id/layout_num_up_votes"
+		android:layout_width="@dimen/d48"
+		android:layout_height="@dimen/d48"
+		android:layout_alignBottom="@+id/tv_type"
+		android:layout_alignParentEnd="true"
+		android:layout_marginEnd="@dimen/d4"
+		android:background="#00000000">
+
+		<TextView
+			android:id="@+id/tv_num_votes"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:gravity="center"
+			android:maxLines="1"
+			android:textColor="@color/text_icons"
+			android:textSize="16sp"
+			tools:text="23"/>
+	</com.sadostrich.nomansskyjournal.Views.OctagonLayout>
+
+	<com.sadostrich.nomansskyjournal.Views.OctagonLayout
+		android:id="@+id/layout_btn_up_vote"
+		android:layout_width="@dimen/d32"
+		android:layout_height="@dimen/d32"
+		android:layout_alignBottom="@+id/tv_type"
+		android:layout_marginBottom="@dimen/d8"
+		android:layout_marginEnd="@dimen/d4"
+		android:layout_toStartOf="@+id/layout_num_up_votes"
+		android:background="#00000000"
+		android:clickable="true"
+		app:asButton="true"
+		app:octagon_color="@color/text_icons"
+		app:octagon_color_pressed="@color/item_red">
+
+		<ImageView
+			android:id="@+id/iv_arrow_up"
+			android:layout_width="@dimen/d24"
+			android:layout_height="@dimen/d24"
+			android:layout_centerInParent="true"
+			android:contentDescription="@string/cont_desc_up_vote_discovery"
+			android:src="@drawable/ic_arrow_up"
+			android:tint="@color/item_red"/>
+	</com.sadostrich.nomansskyjournal.Views.OctagonLayout>
+
+	<RelativeLayout
+		android:id="@+id/layout_discovery_details"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/tv_type"
+		android:background="@color/toolbar_light_trans"
+		android:padding="@dimen/d16">
+
+		<com.sadostrich.nomansskyjournal.Views.DynamicLinearLayout
+			android:id="@+id/layout_dynamic_tags"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_marginBottom="@dimen/d8"/>
+
+		<TextView
+			android:id="@+id/tv_discovery_desc"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/layout_dynamic_tags"
+			android:textColor="@color/text_gray"
+			android:textSize="16sp"
+			tools:text="The rare and mythical Blobulus Aritimitus. Blob for short. Legend says it has the power to eat anything in its path and sucks the living matter from any living creature which then he adds to his size. The more he eats the bigger he gets."/>
+
+		<!--<TextView-->
+			<!--android:id="@+id/tv_btn_report"-->
+			<!--android:layout_width="wrap_content"-->
+			<!--android:layout_height="wrap_content"-->
+			<!--android:layout_alignParentEnd="true"-->
+			<!--android:layout_below="@+id/tv_discovery_desc"-->
+			<!--android:layout_marginBottom="@dimen/d16"-->
+			<!--android:layout_marginTop="@dimen/d16"-->
+			<!--android:drawablePadding="@dimen/d4"-->
+			<!--android:text="@string/report_as_inappropriate"-->
+			<!--android:textColor="@color/color_state_accent_to_light"-->
+			<!--android:textSize="16sp"/>-->
+	</RelativeLayout>
+
+	<View
+		android:id="@+id/divider_h_bottom"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/d1"
+		android:layout_below="@+id/layout_discovery_details"
+		android:background="@color/text_icons"/>
+</RelativeLayout>

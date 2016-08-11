@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Duration = 1 means that one rotation will be done in 1 second. Leave it!
+    If you want to speed up the rotation, increase 'toDegrees' value.
+    For example, 1080 will be three times faster revolution.
+    Make the value a multiply of 360, or the ring animates clunky.
+-->
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+		android:duration="1"
+		android:fromDegrees="0"
+		android:pivotX="50%"
+		android:pivotY="50%"
+		android:toDegrees="4320">
+
+	<shape
+		android:innerRadiusRatio="3"
+		android:shape="ring"
+		android:thicknessRatio="32"
+		android:useLevel="false">
+		<size
+			android:width="48dip"
+			android:height="48dip"/>
+
+		<gradient
+			android:centerColor="@color/primary"
+			android:centerY="0.50"
+			android:endColor="@color/primary"
+			android:startColor="#88ffffff"
+			android:type="sweep"
+			android:useLevel="false"/>
+	</shape>
+</rotate>

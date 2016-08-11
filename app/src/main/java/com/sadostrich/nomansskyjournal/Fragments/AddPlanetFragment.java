@@ -32,6 +32,7 @@ public class AddPlanetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // TODO: replace this layout res
         View rootView = inflater.inflate(R.layout.discovery_card, container, false);
 //
 //        ListView addPlanetListView = (ListView) rootView.findViewById(R.id.add_planet_listview);

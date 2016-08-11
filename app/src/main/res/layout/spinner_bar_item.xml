@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d48"
+    android:background="@color/primary"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/container_img_spinner_bar_item"
+        android:layout_width="@dimen/d48"
+        android:layout_height="match_parent"
+        android:background="@color/system_purple">
+
+        <ImageView
+            android:id="@+id/img_spinner_bar_item"
+            android:layout_width="@dimen/d32"
+            android:layout_height="@dimen/d32"
+            android:layout_gravity="center"
+            android:padding="@dimen/d4"
+            android:src="@drawable/ic_system" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_spinner_bar_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/d16"
+        android:paddingStart="@dimen/d16"
+        android:text="@string/solar_system"
+        android:textAllCaps="true"
+        android:textColor="@color/primary_light"
+        android:textSize="@dimen/ts12" />
+
+</LinearLayout>

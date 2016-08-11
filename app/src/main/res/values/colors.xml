@@ -1,11 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#D32F2F</color>
-    <color name="primary_dark">#B71C1C</color>
-    <color name="primary_light">#FFCDD2</color>
-    <color name="text_icons">#FFFFFF</color>
-    <color name="accent">#009688</color>
-    <color name="primary_text">#212121</color>
-    <color name="seconday_text">#727272</color>
-    <color name="divider">#B6B6B6</color>
+	<color name="primary">#0F4362</color>
+	<color name="primary_dark">#170f31</color>
+	<color name="primary_light">#e9f5fc</color>
+	<color name="text_icons">#FFFFFF</color>
+	<color name="accent">#dd4b41</color>
+	<color name="primary_text">#212121</color>
+	<color name="seconday_text">#727272</color>
+	<color name="divider">#B6B6B6</color>
+
+	<color name="toolbar_dark">#0A0B1F</color>
+	<color name="toolbar_dark_semi_trans">#600A0B1F</color>
+	<color name="toolbar_light_trans">#600A1122</color>
+	<color name="toolbar_grad_center">#1B1D53</color>
+	<color name="text_primary_light">#63A6B4</color>
+	<color name="text_gray">#DBDEE6</color>
+	<color name="bg_tag">#3F2830</color>
+	<color name="modal_bg_dark">#CC000000</color>
+
+	<!--<color name="primary">#D32F2F</color>-->
+	<!--<color name="primary_dark">#B71C1C</color>-->
+	<!--<color name="primary_light">#FFCDD2</color>-->
+	<!--<color name="text_icons">#FFFFFF</color>-->
+	<!--<color name="accent">#009688</color>-->
+	<!--<color name="primary_text">#212121</color>-->
+	<!--<color name="seconday_text">#727272</color>-->
+	<!--<color name="divider">#B6B6B6</color>-->
+
+    <color name="normal_background">#FFFFFFFF</color>
+    <color name="dim_background">#80000000</color>
+	<color name="system_purple">#33165b</color>
+	<color name="system_purple_dark">#220f3e</color>
+	<color name="star_yellow">#d69c31</color>
+	<color name="star_yellow_dark">#c08a26</color>
+	<color name="station_green">#66be7a</color>
+	<color name="station_green_dark">#4db364</color>
+	<color name="planet_purple">#573da0</color>
+	<color name="planet_purple_dark">#473181</color>
+	<color name="fauna_red">#e05c4d</color>
+	<color name="fauna_red_dark">#d93826</color>
+	<color name="flora_blue">#4693cb</color>
+	<color name="flora_blue_dark">#327db3</color>
+	<color name="structure_green">#5db39e</color>
+	<color name="structure_green_dark">#499c87</color>
+	<color name="item_red">#bb082e</color>
+	<color name="item_red_dark">#930625</color>
+	<color name="ship_gray">#848a88</color>
+	<color name="ship_gray_dark">#707574</color>
+	<color name="gray_dark">@color/ship_gray_dark</color>
+
+	<!-- Page Indicators -->
+	<color name="default_page_indicator_fill_color">@color/text_icons</color>
+	<color name="default_page_indicator_page_color">#00000000</color>
+	<color name="default_page_indicator_stroke_color">@color/primary</color>
 </resources>

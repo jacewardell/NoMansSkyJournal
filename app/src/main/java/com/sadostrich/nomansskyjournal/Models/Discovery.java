@@ -1,202 +1,238 @@
 package com.sadostrich.nomansskyjournal.Models;
 
-import com.sadostrich.nomansskyjournal.Utils.Formatter;
+import android.support.annotation.NonNull;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Class that will be inherited and that represents any one of the user's discoveries
+ * Class that will be inherited and that represents any one of the user's
+ * discoveries
  * <p/>
  * Created by jacewardell on 7/2/15.
  */
 public class Discovery implements Serializable {
-    private User user;
-    private String date, commonName, scientificName, description, story, imageUrl;
-    private List<String> tags;
-    private int timesFlagged;
-    
+	@SerializedName("_id")
+	private String id;
+	@SerializedName("_discoveredBy")
+	private User user;
+	private String type;
+	private DiscoveryProperties properties;
+	private String description, name, discoveredAt;
+	private List<String> tags;
+	private int timesFlagged, commentCount, score, views;
+	@SerializedName("_images")
+	private List<DiscoveryImage> image;
 
-    public Discovery() {
-        this.user = new User();
-        date = getCurrentDate();
-        commonName = scientificName = description = story = imageUrl = "";
-    }
+	// TODO need to store list of comments?
+	private final List<DiscoveryComment> mComments = new ArrayList<>();
 
-    /**
-     * Sets the variables according to the parameters
-     *
-     * @param user user
-     * @param commonName     common name
-     * @param scientificName scientific name
-     * @param description    description
-     * @param story          story
-     * @param imageUrl       image url
-     */
-    public Discovery(User user, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.user = user;
-        this.date = getCurrentDate();
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.description = description;
-        this.story = story;
-        this.imageUrl = imageUrl;
-    }
+	public Discovery() {
+		// this.user = new User();
+		// date = getCurrentDate();
+		// commonName = name = description = story = imageUrl = "";
+	}
 
-    /**
-     * Sets the variables according to the parameters
-     *
-     * @param user user
-     * @param date           date
-     * @param commonName     common name
-     * @param scientificName scientific name
-     * @param description    description
-     * @param story          story
-     * @param imageUrl       image url
-     */
-    public Discovery(User user, String date, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.user = user;
-        this.date = date;
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.description = description;
-        this.story = story;
-        this.imageUrl = imageUrl;
-    }
+	/**
+	 * Sets the variables according to the parameters
+	 *
+	 * @param user
+	 *            user
+	 * @param commonName
+	 *            common name
+	 * @param name
+	 *            scientific name
+	 * @param description
+	 *            description
+	 * @param story
+	 *            story
+	 * @param imageUrl
+	 *            image url
+	 */
+	public Discovery(User user, String commonName, String name, String description,
+			String story, String imageUrl) {
+		// this.user = user;
+		// this.date = getCurrentDate();
+		// this.commonName = commonName;
+		// this.name = name;
+		// this.description = description;
+		// this.story = story;
+		// this.imageUrl = imageUrl;
+	}
 
-    /**s
-     * Sets the variables according to the parameters
-     *
-     * @param user user
-     * @param date           date
-     * @param commonName     common name
-     * @param scientificName scientific name
-     * @param description    description
-     * @param story          story
-     * @param imageUrl       image url
-     */
-    public Discovery(User user, Date date, String commonName, String scientificName, String description, String story, String imageUrl) {
-        this.user = user;
-        this.date = Formatter.dateFormat.format(date);
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.description = description;
-        this.story = story;
-        this.imageUrl = imageUrl;
-    }
+	/**
+	 * Sets the variables according to the parameters
+	 *
+	 * @param user
+	 *            user
+	 * @param date
+	 *            date
+	 * @param commonName
+	 *            common name
+	 * @param name
+	 *            scientific name
+	 * @param description
+	 *            description
+	 * @param story
+	 *            story
+	 * @param imageUrl
+	 *            image url
+	 */
+	public Discovery(User user, String date, String commonName, String name,
+			String description, String story, String imageUrl) {
+		// this.user = user;
+		// this.date = date;
+		// this.commonName = commonName;
+		// this.name = name;
+		// this.description = description;
+		// this.story = story;
+		// this.imageUrl = imageUrl;
+	}
 
-    /**
-     * Returns the date the discovery was made
-     *
-     * @return date
-     */
-    public String getDate() {
-        return date;
-    }
+	/**
+	 * s Sets the variables according to the parameters
+	 *
+	 * @param user
+	 *            user
+	 * @param date
+	 *            date
+	 * @param commonName
+	 *            common name
+	 * @param name
+	 *            scientific name
+	 * @param description
+	 *            description
+	 * @param story
+	 *            story
+	 * @param imageUrl
+	 *            image url
+	 */
+	public Discovery(User user, Date date, String commonName, String name,
+			String description, String story, String imageUrl) {
+		// this.user = user;
+		// this.date = Formatter.dateFormat.format(date);
+		// this.commonName = commonName;
+		// this.name = name;
+		// this.description = description;
+		// this.story = story;
+		// this.imageUrl = imageUrl;
+	}
 
-    /**
-     * Sets the date the discovery was made
-     *
-     * @param date discovered
-     */
-    public void setDate(String date) {
-        this.date = date;
-    }
+	public String getId() {
+		return id;
+	}
 
-    private String getCurrentDate() {
-        Calendar cal = Calendar.getInstance();
-        return Formatter.dateFormat.format(cal.getTime());
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    /**
-     * Returns the discovery's scientific name
-     *
-     * @return scientificName
-     */
-    public String getScientificName() {
-        return scientificName;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    /**
-     * Sets the discovery's scientific name
-     *
-     * @param scientificName assigned by game
-     */
-    public void setScientificName(String scientificName) {
-        this.scientificName = scientificName;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    /**
-     * Returns the user-given name
-     *
-     * @return commonName
-     */
-    public String getCommonName() {
-        return commonName;
-    }
+	public String getType() {
+		return type;
+	}
 
-    /**
-     * Sets the user-given name,
-     *
-     * @param commonName given by user
-     */
-    public void setCommonName(String commonName) {
-        this.commonName = commonName;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    /**
-     * Returns the discovery's description
-     *
-     * @return description
-     */
-    public String getDescription() {
-        return description;
-    }
+	public DiscoveryProperties getProperties() {
+		return properties;
+	}
 
-    /**
-     * Sets the discovery's description
-     *
-     * @param description of discovery
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setProperties(DiscoveryProperties properties) {
+		this.properties = properties;
+	}
 
-    /**
-     * Returns the story of when the discovery was made
-     *
-     * @return story
-     */
-    public String getStory() {
-        return story;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * Sets the story of when the discovery was made
-     *
-     * @param story when discovered
-     */
-    public void setStory(String story) {
-        this.story = story;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    /**
-     * Returns the url of the discovery's image
-     *
-     * @return imageUrl
-     */
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Sets the url of the discovery's image
-     *
-     * @param imageUrl of discovery
-     */
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDiscoveredAt() {
+		return discoveredAt;
+	}
+
+	public void setDiscoveredAt(String discoveredAt) {
+		this.discoveredAt = discoveredAt;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public int getTimesFlagged() {
+		return timesFlagged;
+	}
+
+	public void setTimesFlagged(int timesFlagged) {
+		this.timesFlagged = timesFlagged;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
+	public List<DiscoveryImage> getImage() {
+		return image;
+	}
+
+	public void setImage(List<DiscoveryImage> image) {
+		this.image = image;
+	}
+
+	public List<DiscoveryComment> getComments() {
+		return mComments;
+	}
+
+	public void setComments(@NonNull List<DiscoveryComment> comments) {
+		mComments.clear();
+		mComments.addAll(comments);
+	}
+
 }
