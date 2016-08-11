@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sadostrich.nomansskyjournal.Data.NMSOriginsService;
@@ -11,7 +12,10 @@ import com.sadostrich.nomansskyjournal.Data.NMSOriginsServiceHelper;
 import com.sadostrich.nomansskyjournal.Interfaces.IDiscoveryListener;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import javax.crypto.interfaces.PBEKey;
 
 /**
  * Created by jacewardell on 4/7/16.
@@ -19,10 +23,11 @@ import com.squareup.picasso.Picasso;
 public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 
 	private View itemView;
-	private ImageView discoveryImage;
-	private TextView discoveryCommentCount, discoveryName, discoveryUsername;
+	private ImageView tvDiscoveryImage;
+	private TextView tvDiscoveryCommentCount, tvDiscoveryName, tvDiscoveryUsername;
 	private Discovery discovery;
-	private ImageView discoveryType;
+	private ImageView imgDiscoveryType;
+	private ProgressBar pbDiscoveryImage;
 
 	private IDiscoveryListener discoveryListener;
 
@@ -46,17 +51,18 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 
 	private void getViewRefs(View itemView) {
 		this.itemView = itemView;
-		discoveryImage = (ImageView) itemView.findViewById(R.id
+		tvDiscoveryImage = (ImageView) itemView.findViewById(R.id
 																   .img_discovery_grid_image);
-		discoveryType =
+		imgDiscoveryType =
 				(ImageView) itemView.findViewById(R.id.img_discovery_grid_type);
-		discoveryCommentCount =
+		tvDiscoveryCommentCount =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_comment_count);
-		discoveryName =
+		tvDiscoveryName =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_name);
-		discoveryUsername =
+		tvDiscoveryUsername =
 				(TextView) itemView.findViewById(R.id.tv_discovery_grid_username);
 		//		itemView.findViewById(R.id.tv_discovery_grid_time_ago);
+		pbDiscoveryImage = (ProgressBar) itemView.findViewById(R.id.pb_discovery_grid_image);
 	}
 
 	public void setListener(IDiscoveryListener listener) {
@@ -66,13 +72,25 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 	public void setData(Discovery discovery) {
 		this.discovery = discovery;
 
+		pbDiscoveryImage.setVisibility(View.VISIBLE);
+
 		Picasso.with(itemView.getContext())
 				.load(discovery.getImage().get(0).getFileUrl().getCarouselThumb()).fit()
-				.centerCrop()
-				.into(discoveryImage);
+				.centerCrop().error(android.R.drawable.stat_notify_error)
+				.into(tvDiscoveryImage, new Callback() {
+					@Override
+					public void onSuccess() {
+						pbDiscoveryImage.setVisibility(View.GONE);
+					}
+
+					@Override
+					public void onError() {
+						pbDiscoveryImage.setVisibility(View.GONE);
+					}
+				});
 		setDiscoveryType();
-		discoveryCommentCount.setText("" + discovery.getCommentCount());
-		discoveryName.setText(discovery.getName());
+		tvDiscoveryCommentCount.setText("" + discovery.getCommentCount());
+		tvDiscoveryName.setText(discovery.getName());
 		setDiscoveryUsername();
 	}
 
@@ -124,14 +142,14 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 		if (colorRes == -1) {
 			colorRes = android.R.color.black;
 		}
-		discoveryType.setBackgroundColor(itemView.getResources().getColor(colorRes));
+		imgDiscoveryType.setBackgroundColor(itemView.getResources().getColor(colorRes));
 
 		if (imageRes == -1) {
-			discoveryType.setVisibility(View.GONE);
+			imgDiscoveryType.setVisibility(View.GONE);
 			return;
 		}
-		discoveryType.setVisibility(View.VISIBLE);
-		discoveryType.setImageDrawable(itemView.getResources().getDrawable(imageRes));
+		imgDiscoveryType.setVisibility(View.VISIBLE);
+		imgDiscoveryType.setImageDrawable(itemView.getResources().getDrawable(imageRes));
 	}
 
 	private void setDiscoveryUsername() {
@@ -144,7 +162,7 @@ public class DiscoveryViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			byUsername = byUsername.replace(NMSOriginsService.USERNAME, "N/A");
 		}
-		discoveryUsername.setText(byUsername);
+		tvDiscoveryUsername.setText(byUsername);
 	}
 
 }

@@ -37,6 +37,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent"/>
         <activity android:name=".Activities.RegistrationActivity"/>
+
         <activity
             android:name=".Activities.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

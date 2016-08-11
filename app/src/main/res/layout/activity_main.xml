@@ -40,7 +40,8 @@
 
 			<com.sadostrich.nomansskyjournal.Views.SpinnerBarView
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"/>
+				android:layout_height="wrap_content"
+				android:visibility="gone"/>
 		</android.support.design.widget.AppBarLayout>
 
 		<android.support.v4.view.ViewPager
@@ -57,7 +58,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_system"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/system_purple"
 			app:fabSize="mini"/>
 
@@ -69,7 +70,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_star"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/star_yellow"
 			app:fabSize="mini"/>
 
@@ -81,7 +82,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_station"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/station_green"
 			app:fabSize="mini"/>
 
@@ -93,7 +94,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_planet"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/planet_purple"
 			app:fabSize="mini"/>
 
@@ -105,7 +106,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_fauna"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/fauna_red"
 			app:fabSize="mini"/>
 
@@ -117,7 +118,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_flora"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/flora_blue"
 			app:fabSize="mini"/>
 
@@ -129,7 +130,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_structure"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/structure_green"
 			app:fabSize="mini"/>
 
@@ -141,7 +142,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_item"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/item_red"
 			app:fabSize="mini"/>
 
@@ -153,7 +154,7 @@
 			android:layout_margin="@dimen/mini_fab_margin"
 			android:alpha="0"
 			android:src="@drawable/ic_ship"
-			android:visibility="invisible"
+			android:visibility="gone"
 			app:backgroundTint="@color/ship_gray"
 			app:fabSize="mini"/>
 
@@ -163,6 +164,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|bottom"
 			android:layout_margin="@dimen/fab_margin"
+			android:visibility="gone"
 			android:src="@drawable/plus"/>
 
 		<com.sadostrich.nomansskyjournal.Views.AddDiscoveryCardView

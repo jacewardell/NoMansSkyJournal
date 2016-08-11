@@ -15,7 +15,7 @@ public class SharedPreferencesHelper {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         editor.putString(USERNAME, username);
         editor.putString(PASSWORD, password);
-        editor.commit();
+        editor.apply();
     }
 
     public static String[] getLoginInfo(Context context) {

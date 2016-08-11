@@ -44,7 +44,7 @@ public class DiscoveryComment implements Serializable {
 	}
 
 	public String getComment() {
-		return mComment.replace("<p>", "").replace("</p>", "");
+		return mComment;
 	}
 
 	public void setComment(String comment) {

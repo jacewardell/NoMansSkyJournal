@@ -38,17 +38,17 @@
 		android:textSize="@dimen/ts16"
 		tools:text="3 days ago"/>
 
-	<TextView
-		android:id="@+id/tv_btn_report"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentEnd="true"
-		android:layout_marginEnd="@dimen/d8"
-		android:layout_marginTop="@dimen/d8"
-		android:maxLines="1"
-		android:text="@string/report"
-		android:textColor="@color/color_state_accent_to_light"
-		android:textSize="@dimen/ts16"/>
+	<!--<TextView-->
+		<!--android:id="@+id/tv_btn_report"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:layout_alignParentEnd="true"-->
+		<!--android:layout_marginEnd="@dimen/d8"-->
+		<!--android:layout_marginTop="@dimen/d8"-->
+		<!--android:maxLines="1"-->
+		<!--android:text="@string/report"-->
+		<!--android:textColor="@color/color_state_accent_to_light"-->
+		<!--android:textSize="@dimen/ts16"/>-->
 
 	<TextView
 		android:id="@+id/tv_comment"
@@ -58,7 +58,7 @@
 		android:layout_marginBottom="@dimen/d16"
 		android:layout_marginEnd="@dimen/d16"
 		android:layout_marginStart="@dimen/d24"
-		android:layout_marginTop="@dimen/d16"
+		android:layout_marginTop="@dimen/d4"
 		android:textColor="@color/text_icons"
 		android:textSize="@dimen/ts16"
 		tools:text="Super cool discovery man\n awesome yo"/>

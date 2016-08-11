@@ -2,6 +2,7 @@ package com.sadostrich.nomansskyjournal.Views;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -47,17 +48,17 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        itemView.findViewById(R.id.tv_btn_report).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.onReportCommentClicked(mComment);
-
-                } else {
-                    Log.w(TAG, "Report comment clicked but no listener set!");
-                }
-            }
-        });
+//        itemView.findViewById(R.id.tv_btn_report).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mListener != null) {
+//                    mListener.onReportCommentClicked(mComment);
+//
+//                } else {
+//                    Log.w(TAG, "Report comment clicked but no listener set!");
+//                }
+//            }
+//        });
     }
 
     public void setListener(ICommentVhListener listener) {
@@ -74,7 +75,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
 
         mTvUserName.setText(comment.getUser().getUsername());
         mTvTimeAgo.setText(Formatter.calculateTimeAgo(context, comment.getTimeAgo()));
-        mTvComment.setText(comment.getComment());
+        mTvComment.setText(Html.fromHtml(comment.getComment()));
     }
 
 }

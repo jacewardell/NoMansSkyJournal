@@ -5,7 +5,6 @@ import com.sadostrich.nomansskyjournal.Models.ConfigObjects.ConfigBaseObject;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.Models.DiscoveryComment;
 import com.sadostrich.nomansskyjournal.Models.Report;
-import com.squareup.picasso.Request;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -23,8 +21,8 @@ import retrofit2.http.POST;
  * Created by jacewardell on 5/10/16.
  */
 public interface NMSOriginsService {
-    //	String BASE_URL = "https://www.nmsorigins.com/";
-    String BASE_URL = "https://dev.nmsorigins.com/";
+    String BASE_URL = "https://www.nmsorigins.com/";
+//    String BASE_URL = "https://dev.nmsorigins.com/";
 
     /////////////////////////////////////////////////////////
     // Constants

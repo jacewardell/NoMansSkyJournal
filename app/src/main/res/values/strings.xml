@@ -97,9 +97,9 @@
 	<string name="logout">Logout</string>
 
 	<string-array name="drawer_options">
-		<item name="community_option">Community</item>
-		<item name="friend_option">Friends</item>
-		<item name="profile_option">Profile</item>
+		<item name="community_option">Home</item>
+		<!--<item name="friend_option">Friends</item>-->
+		<!--<item name="profile_option">Profile</item>-->
 	</string-array>
 
 	<!-- -

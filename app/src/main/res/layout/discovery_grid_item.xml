@@ -79,6 +79,12 @@
 				android:text="@string/by_username"
 				android:textColor="@color/primary_light"/>
 
+			<ProgressBar
+				android:id="@+id/pb_discovery_grid_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"/>
+
 			<!--<TextView-->
 			<!--android:id="@+id/tv_discovery_grid_time_ago"-->
 			<!--android:layout_width="wrap_content"-->

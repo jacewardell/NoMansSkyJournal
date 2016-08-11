@@ -24,6 +24,7 @@ import com.sadostrich.nomansskyjournal.Models.Authentication;
 import com.sadostrich.nomansskyjournal.Models.Discovery;
 import com.sadostrich.nomansskyjournal.Models.DiscoveryImage;
 import com.sadostrich.nomansskyjournal.R;
+import com.sadostrich.nomansskyjournal.Utils.Formatter;
 import com.sadostrich.nomansskyjournal.Utils.IconUtil;
 
 import java.util.ArrayList;
@@ -53,7 +54,8 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
     private static final String TAG = "DiscoveryDetailView";
 
     private RelativeLayout mLayout;
-    private TextView mTvName, mTvUser, mTvType, mTvTime, mTvNumViews, mTvNumVotes, mTvDesc, mTvBtnReport;
+    private TextView mTvName, mTvUser, mTvType, mTvTime, mTvNumViews, mTvNumVotes, mTvDesc;
+//    private TextView mTvBtnReport;
     private ImageView mImgUpvoteArrow;
     private ViewPager mViewPager;
     private CirclePageIndicator mPageIndicator;
@@ -122,7 +124,7 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
         mTvNumVotes = (TextView) mLayout.findViewById(R.id.tv_num_votes);
         mImgUpvoteArrow = (ImageView) mLayout.findViewById(R.id.iv_arrow_up);
         mTvDesc = (TextView) mLayout.findViewById(R.id.tv_discovery_desc);
-        mTvBtnReport = (TextView) mLayout.findViewById(R.id.tv_btn_report);
+//        mTvBtnReport = (TextView) mLayout.findViewById(R.id.tv_btn_report);
         mViewPager = (ViewPager) mLayout.findViewById(R.id.view_pager_images);
         mPageIndicator = (CirclePageIndicator) mLayout.findViewById(R.id.indicator_images);
         mDyLayoutTags = (DynamicLinearLayout) mLayout.findViewById(R.id.layout_dynamic_tags);
@@ -131,12 +133,12 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
     private void setClickListeners() {
         mTvUser.setOnClickListener(this);
         mLayout.findViewById(R.id.layout_btn_up_vote).setOnClickListener(this);
-        mTvBtnReport.setOnClickListener(this);
+//        mTvBtnReport.setOnClickListener(this);
     }
 
     private void setIconsToViews(Context context) {
         Drawable icon = IconUtil.getIconWithTintList(context, R.drawable.ic_bell, R.dimen.d16, R.color.color_state_accent_to_light, R.color.accent);
-        mTvBtnReport.setCompoundDrawables(null, null, icon, null);
+//        mTvBtnReport.setCompoundDrawables(null, null, icon, null);
     }
 
     private void setupViewPager() {
@@ -255,7 +257,8 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
         // TODO Time since added (amount of time elapsed since now)
         // Format: "2016-08-02T01:23:37.866"
         // mTvTime.setText(mDiscovery.getDiscoveredAt());
-        mTvTime.setVisibility(View.GONE);
+//        mTvTime.setVisibility(View.GONE);
+        mTvTime.setText(Formatter.calculateTimeAgo(getContext(), mDiscovery.getDiscoveredAt()));
 
         // Number of views
         String numViews = getContext().getResources().getString(R.string.views).toUpperCase();
@@ -312,9 +315,9 @@ public class DiscoveryDetailView extends RelativeLayout implements View.OnClickL
                 mListener.onUpVoteClicked(mDiscovery);
                 break;
 
-            case R.id.tv_btn_report:
-                mListener.onReportInappropriate(mDiscovery);
-                break;
+//            case R.id.tv_btn_report:
+//                mListener.onReportInappropriate(mDiscovery);
+//                break;
         }
     }
 

@@ -161,6 +161,9 @@ public class ViewDiscoveryActivity extends AppCompatActivity implements IDiscove
         // The CollapsingToolbarLayout that will act as the comments header.
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(getResources().getString(R.string.comments).toUpperCase());
+        int titleColor = getResources().getColor(android.R.color.white);
+        mCollapsingToolbarLayout.setExpandedTitleColor(titleColor);
+        mCollapsingToolbarLayout.setCollapsedTitleTextColor(titleColor);
 
         mAddCommentFAB = (FloatingActionButton) findViewById(R.id.fab_add_comment);
         if (mAddCommentFAB != null) {
