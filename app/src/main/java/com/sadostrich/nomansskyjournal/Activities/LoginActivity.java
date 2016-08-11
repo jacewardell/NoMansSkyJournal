@@ -64,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
 		});
 
 		// TODO Remove test login creds!
-		mEmailView.setText("xixdubyxix");
-		mPasswordView.setText("password");
+//		mEmailView.setText("xixdubyxix");
+//		mPasswordView.setText("password");
 		Log.w(TAG, "@ onCreate(): Setting test login creds. Remove before release!");
 
 		Button emailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
