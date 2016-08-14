@@ -75,10 +75,41 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:layout_marginTop="@dimen/d4"
 				android:onClick="showRegistrationPage"
 				android:padding="@dimen/d8"
 				android:text="@string/registration_option"/>
+
+			<Button
+				android:id="@+id/btn_steam_sign_in"
+				style="?android:textAppearanceSmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/d8"
+				android:layout_marginLeft="@dimen/activity_horizontal_margin"
+				android:layout_marginRight="@dimen/activity_horizontal_margin"
+				android:text="@string/sign_in_steam"
+				android:textStyle="bold"/>
+
+			<Button
+				android:id="@+id/btn_twitter_sign_in"
+				style="?android:textAppearanceSmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/activity_horizontal_margin"
+				android:layout_marginRight="@dimen/activity_horizontal_margin"
+				android:text="@string/sign_in_twitter"
+				android:textStyle="bold"/>
+
+			<Button
+				android:id="@+id/btn_reddit_sign_in"
+				style="?android:textAppearanceSmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/activity_horizontal_margin"
+				android:layout_marginRight="@dimen/activity_horizontal_margin"
+				android:text="@string/sign_in_reddit"
+				android:textStyle="bold"/>
+
 		</LinearLayout>
 	</ScrollView>
 

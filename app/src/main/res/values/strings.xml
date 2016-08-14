@@ -204,6 +204,9 @@
 	<string name="cancel">Cancel</string>
 	<string name="post">Post</string>
 	<string name="title_registration">Registration</string>
+	<string name="sign_in_steam">Steam Sign In</string>
+	<string name="sign_in_twitter">Twitter Sign In</string>
+	<string name="sign_in_reddit">Reddit Sign In</string>
 
 
 	<!-- String Arrays -->
